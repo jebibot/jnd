@@ -38,6 +38,10 @@ export const metadata: Metadata = {
     "리그 오브 레전드",
     "League of Legends",
   ],
+  metadataBase: new URL("https://jnd.twitchgg.tv"),
+  alternates: {
+    canonical: "/",
+  },
 };
 
 export default async function RootLayout({ children }: PropsWithChildren) {

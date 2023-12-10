@@ -14,6 +14,9 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
   const p = await getPlayer(params.id);
   return {
     title: p.name,
+    alternates: {
+      canonical: `/p/${params.id}`,
+    },
   };
 }
 
