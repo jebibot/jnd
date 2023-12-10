@@ -31,7 +31,10 @@ export default function SidebarItem({ player }: { player: Player }) {
             alt={player.name}
           />
           {player.stream_start && (
-            <span className="flex absolute bottom-0 right-0 h-2 w-2 -mt-0.5 -mr-0.5">
+            <span
+              className="flex absolute bottom-0 right-0 h-2 w-2 -mt-0.5 -mr-0.5"
+              aria-label="방송 중"
+            >
               <span className="absolute h-full w-full rounded-full bg-red-400 dark:bg-red-500 opacity-75 animate-ping"></span>
               <span className="relative h-2 w-2 rounded-full bg-red-500 dark:bg-red-600"></span>
             </span>

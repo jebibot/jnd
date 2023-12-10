@@ -55,9 +55,10 @@ export default function SidebarMenu({
             </Link>
             <button
               className="p-1 rounded-md text-gray-700 dark:text-gray-400 hover:text-purple-600 dark:hover:text-white"
-              title="자세히 보기"
+              title={detailed ? "간략히" : "자세히"}
+              aria-label={detailed ? "간략히" : "자세히"}
               onClick={() => {
-                setDetailed((detailed) => !detailed);
+                setDetailed(!detailed);
               }}
             >
               <FontAwesomeIcon

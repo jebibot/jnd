@@ -23,51 +23,35 @@ type Match = {
   game: CurrentGameInfoDTO;
 };
 
-export async function getPlayers(): Promise<Player[]> {
-  const res = await fetch(
-    `${process.env.SUPABASE_URL}/rest/v1/players?select=id,name,pos,twitch,profile,title,game,stream_start,youtube,youtube_secondary,community,lol_nick,lol_rank,lol_secondary_nick,lol_secondary_rank&order=name.asc`,
-    {
-      headers: {
-        apikey: process.env.SUPABASE_ANON_KEY!,
-      },
-      next: { tags: ["players"] },
+async function fetchSupabase(path: string, tag: string, single = false) {
+  const res = await fetch(`${process.env.SUPABASE_URL}/rest/v1/${path}`, {
+    headers: {
+      ...(single ? { Accept: "application/vnd.pgrst.object+json" } : {}),
+      apikey: process.env.SUPABASE_ANON_KEY!,
     },
-  );
+    next: { tags: [tag] },
+  });
   if (!res.ok) {
-    throw new Error("Failed to fetch players");
+    throw new Error(`Failed to fetch ${tag}: ${res.status}`);
   }
   return res.json();
+}
+
+export async function getPlayers(): Promise<Player[]> {
+  return fetchSupabase(
+    `players?select=id,name,pos,twitch,profile,title,game,stream_start,youtube,youtube_secondary,community,lol_nick,lol_rank,lol_secondary_nick,lol_secondary_rank&order=name.asc`,
+    "players",
+  );
 }
 
 export async function getPlayer(id: string | number): Promise<Player> {
-  const res = await fetch(
-    `${process.env.SUPABASE_URL}/rest/v1/players?select=id,name,pos,twitch,profile,title,game,stream_start,youtube,youtube_secondary,community,lol_nick,lol_rank,lol_secondary_nick,lol_secondary_rank&id=eq.${id}`,
-    {
-      headers: {
-        Accept: "application/vnd.pgrst.object+json",
-        apikey: process.env.SUPABASE_ANON_KEY!,
-      },
-      next: { tags: ["players"] },
-    },
+  return fetchSupabase(
+    `players?select=id,name,pos,twitch,profile,title,game,stream_start,youtube,youtube_secondary,community,lol_nick,lol_rank,lol_secondary_nick,lol_secondary_rank&id=eq.${id}`,
+    "players",
+    true,
   );
-  if (!res.ok) {
-    throw new Error("Failed to fetch player");
-  }
-  return res.json();
 }
 
 export async function getLiveMatches(): Promise<Match[]> {
-  const res = await fetch(
-    `${process.env.SUPABASE_URL}/rest/v1/matches?select=id,game&stats=is.null`,
-    {
-      headers: {
-        apikey: process.env.SUPABASE_ANON_KEY!,
-      },
-      next: { tags: ["matches"] },
-    },
-  );
-  if (!res.ok) {
-    throw new Error("Failed to fetch matches");
-  }
-  return res.json();
+  return fetchSupabase(`matches?select=id,game&stats=is.null`, "matches");
 }

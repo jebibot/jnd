@@ -4,14 +4,12 @@ import { useEffect, useState } from "react";
 import { formatTimestamp } from "@/utils/util";
 
 export default function Timer({ start }: { start: number }) {
-  const [seconds, setSeconds] = useState(
-    Math.floor((Date.now() - start) / 1000),
-  );
+  const [seconds, setSeconds] = useState(0);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setSeconds(Math.floor((Date.now() - start) / 1000));
-    }, 1000);
+    const update = () => setSeconds(Math.floor((Date.now() - start) / 1000));
+    update();
+    const interval = setInterval(update, 1000);
     return () => clearInterval(interval);
   }, [start]);
 

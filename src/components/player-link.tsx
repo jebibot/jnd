@@ -13,20 +13,24 @@ export default function PlayerLink({
   ButtonHTMLAttributes<HTMLButtonElement> & { twitch: string }
 >) {
   const { selected, setSelected } = useContext(StreamContext);
+  const isSelected = selected.has(twitch);
 
   return (
     <button
       className={classNames(
         className,
-        selected.includes(twitch) && "text-purple-700 dark:text-purple-400",
+        isSelected && "text-purple-700 dark:text-purple-400",
       )}
       onClick={() => {
-        if (selected.includes(twitch)) {
-          setSelected((selected) => selected.filter((t) => t != twitch));
+        const newSet = new Set(selected);
+        if (isSelected) {
+          newSet.delete(twitch);
         } else {
-          setSelected((selected) => [...selected, twitch]);
+          newSet.add(twitch);
         }
+        setSelected(newSet);
       }}
+      aria-label="방송 선택"
       {...props}
     >
       {children}

@@ -81,6 +81,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                   ? "text-red-500 dark:text-red-600"
                   : "text-gray-400 dark:text-gray-600"
               }
+              aria-label={p.stream_start != null ? "방송 중" : "방송 종료"}
             >
               ●
             </span>{" "}

@@ -59,7 +59,6 @@ export default function Sidebar({ children }: PropsWithChildren) {
                       className="-m-2.5 p-2.5 text-white"
                       open={false}
                     >
-                      <span className="sr-only">사이드바 닫기</span>
                       <FontAwesomeIcon icon={faXmark} size="lg" />
                     </SidebarButton>
                   </div>

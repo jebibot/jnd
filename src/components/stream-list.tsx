@@ -27,11 +27,11 @@ export default function StreamList({ streams }: { streams: Player[] }) {
           {["multitwitch.tv", "multistre.am"].map((site) => (
             <a
               key={site}
-              href={`https://${site}/${selected.join("/")}`}
+              href={`https://${site}/${[...selected].join("/")}`}
               className={classNames(
                 "px-3 py-2 text-sm rounded-md shadow-sm font-semibold text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-600",
-                selected.length > 0 &&
-                  (selected.length < 9 || site === "multitwitch.tv")
+                selected.size > 0 &&
+                  (selected.size < 9 || site === "multitwitch.tv")
                   ? "bg-purple-600 dark:bg-purple-700 hover:bg-purple-500 dark:hover:bg-purple-600"
                   : "dark:text-gray-500 bg-purple-200 dark:bg-purple-950 pointer-events-none",
               )}
@@ -72,7 +72,7 @@ export default function StreamList({ streams }: { streams: Player[] }) {
             key={s.twitch}
             className={classNames(
               "flex flex-col items-center rounded-md overflow-hidden shadow-md border-2 dark:bg-slate-900",
-              selected.includes(s.twitch)
+              selected.has(s.twitch)
                 ? "border-purple-400 dark:border-purple-700"
                 : "border-transparent",
             )}
@@ -81,13 +81,13 @@ export default function StreamList({ streams }: { streams: Player[] }) {
               className="cursor-pointer"
               stream={s}
               onClick={() => {
-                if (selected.includes(s.twitch)) {
-                  setSelected((selected) =>
-                    selected.filter((t) => t !== s.twitch),
-                  );
+                const newSet = new Set(selected);
+                if (selected.has(s.twitch)) {
+                  newSet.delete(s.twitch);
                 } else {
-                  setSelected((selected) => [...selected, s.twitch]);
+                  newSet.add(s.twitch);
                 }
+                setSelected(newSet);
               }}
             />
             <a

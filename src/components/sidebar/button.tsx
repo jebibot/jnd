@@ -12,7 +12,12 @@ export default function SidebarButton({
 >) {
   const { setSidebarOpen } = useContext(SidebarContext);
   return (
-    <button type="button" onClick={() => setSidebarOpen(open)} {...props}>
+    <button
+      type="button"
+      onClick={() => setSidebarOpen(open)}
+      aria-label={`사이드바 ${open ? "열기" : "닫기"}`}
+      {...props}
+    >
       {children}
     </button>
   );

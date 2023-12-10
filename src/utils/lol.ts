@@ -575,7 +575,7 @@ export function getRank(rank: string | null) {
     return "Unranked";
   }
   const parts = rank.split(",");
-  return `${parts[0][0]}${parts[0].substring(1).toLowerCase()} ${parts[1]}`;
+  return `${parts[0][0]}${parts[0].slice(1).toLowerCase()} ${parts[1]}`;
 }
 
 export function getPoint(rank: string | null) {

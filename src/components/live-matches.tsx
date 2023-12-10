@@ -7,7 +7,7 @@ import {
   getPerkIcon,
   getSpellIcon,
 } from "@/utils/lol";
-import { getLiveMatches, getPlayers } from "@/utils/supabase";
+import { Player, getLiveMatches, getPlayers } from "@/utils/supabase";
 import { classNames } from "@/utils/util";
 import Nick from "./nick";
 import PlayerLink from "./player-link";
@@ -18,6 +18,17 @@ export default async function LiveMatches() {
     getLiveMatches(),
     getPlayers(),
   ]);
+
+  const playerMap: Record<string, Player> = {};
+  players.forEach((p) => {
+    if (p.lol_nick != null) {
+      playerMap[p.lol_nick] = p;
+    }
+    if (p.lol_secondary_nick != null) {
+      playerMap[p.lol_secondary_nick] = p;
+    }
+  });
+
   return matches.length > 0 ? (
     <div className="flex flex-col gap-4">
       {matches.map((match) => (
@@ -47,11 +58,7 @@ export default async function LiveMatches() {
                 {match.game.participants
                   .filter((p) => p.teamId === teamId)
                   .map((p) => {
-                    const player = players.find(
-                      (player) =>
-                        player.lol_nick === p.summonerName ||
-                        player.lol_secondary_nick === p.summonerName,
-                    );
+                    const player = playerMap[p.summonerName];
                     const mainPerk = PERKS[p.perks.perkIds[0]];
                     const subPerk = PERKS[p.perks.perkSubStyle];
                     const champion = CHAMPIONS[p.championId];
@@ -105,7 +112,8 @@ export default async function LiveMatches() {
                             >
                               {player.name}{" "}
                               {player.stream_start && (
-                                <span className="text-red-500 dark:text-red-600 text-xs">
+                                <span className="text-red-500 dark:text-red-600 text-xs"
+                                aria-label="방송 중">
                                   ●
                                 </span>
                               )}
