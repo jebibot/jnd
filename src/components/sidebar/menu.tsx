@@ -16,22 +16,7 @@ import Links from "../links";
 import Nick from "../nick";
 import { SidebarContext } from "./provider";
 import SimpleBarWrapper from "../simple-bar";
-
-const TIER_BORDER: Record<string, string> = {
-  SILVER: "border-gray-300 dark:border-gray-800",
-  GOLD: "border-yellow-300 dark:border-yellow-800",
-  PLATINUM: "border-blue-300 dark:border-blue-800",
-  EMERALD: "border-emerald-300 dark:border-emerald-800",
-  DIAMOND: "border-purple-300 dark:border-purple-800",
-};
-
-export function getTierBorder(rank: string | null) {
-  if (!rank) {
-    return "border-transparent";
-  }
-  const parts = rank.split(",");
-  return TIER_BORDER[parts[0]];
-}
+import SidebarItem from "./item";
 
 export default function SidebarMenu({
   players,
@@ -88,22 +73,7 @@ export default function SidebarMenu({
                   <li key={p.name}>
                     {detailed ? (
                       <div className="flex items-center gap-x-2 p-1 font-semibold text-gray-800 dark:text-gray-300">
-                        {p.profile && (
-                          <img
-                            className={classNames(
-                              "h-8 w-8 rounded-full mr-1 border-2",
-                              getTierBorder(p.lol_rank),
-                            )}
-                            src={p.profile.replace("300x300", "50x50")}
-                            alt={p.name}
-                          />
-                        )}
-                        {p.stream_start && (
-                          <span className="text-red-500 dark:text-red-600 text-xs">
-                            ●
-                          </span>
-                        )}
-                        <span className="break-keep">{p.name}</span>
+                        <SidebarItem player={p} />
                         {p.lol_nick && (
                           <Nick
                             nick={p.lol_nick}
@@ -128,22 +98,7 @@ export default function SidebarMenu({
                           "flex items-center gap-x-2 p-1 rounded-md font-semibold",
                         )}
                       >
-                        {p.profile && (
-                          <img
-                            className={classNames(
-                              "h-8 w-8 rounded-full mr-1 border-2",
-                              getTierBorder(p.lol_rank),
-                            )}
-                            src={p.profile.replace("300x300", "50x50")}
-                            alt={p.name}
-                          />
-                        )}
-                        <span className="break-keep">{p.name}</span>
-                        {p.stream_start && (
-                          <span className="text-red-500 dark:text-red-600 text-xs">
-                            ●
-                          </span>
-                        )}
+                        <SidebarItem player={p} />
                       </Link>
                     )}
                   </li>

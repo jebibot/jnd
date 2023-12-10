@@ -1,3 +1,5 @@
+import type { CurrentGameInfoDTO } from "twisted/dist/models-dto/spectator/current-game-info.dto";
+
 export type Player = {
   id: number;
   name: string;
@@ -14,6 +16,11 @@ export type Player = {
   lol_rank: string | null;
   lol_secondary_nick: string | null;
   lol_secondary_rank: string | null;
+};
+
+type Match = {
+  id: number;
+  game: CurrentGameInfoDTO;
 };
 
 export async function getPlayers(): Promise<Player[]> {
@@ -45,6 +52,22 @@ export async function getPlayer(id: string | number): Promise<Player> {
   );
   if (!res.ok) {
     throw new Error("Failed to fetch player");
+  }
+  return res.json();
+}
+
+export async function getLiveMatches(): Promise<Match[]> {
+  const res = await fetch(
+    `${process.env.SUPABASE_URL}/rest/v1/matches?select=id,game&stats=is.null`,
+    {
+      headers: {
+        apikey: process.env.SUPABASE_ANON_KEY!,
+      },
+      next: { tags: ["matches"] },
+    },
+  );
+  if (!res.ok) {
+    throw new Error("Failed to fetch matches");
   }
   return res.json();
 }

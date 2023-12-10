@@ -2,7 +2,7 @@
 
 import { Switch } from "@headlessui/react";
 import { useMemo, useState } from "react";
-import { getRank, getTierImage } from "@/utils/lol";
+import { getRank, getTierIcon } from "@/utils/lol";
 import { Player } from "@/utils/supabase";
 import { getChannelUrl } from "@/utils/twitch";
 import { classNames } from "@/utils/util";
@@ -70,7 +70,7 @@ export default function StreamList({ streams }: { streams: Player[] }) {
           <div
             key={s.twitch}
             className={classNames(
-              "flex flex-col items-center rounded-md overflow-hidden shadow shadow-md border-2 dark:bg-slate-900",
+              "flex flex-col items-center rounded-md overflow-hidden shadow-md border-2 dark:bg-slate-900",
               selected.includes(s.twitch)
                 ? "border-purple-400 dark:border-purple-700"
                 : "border-transparent",
@@ -106,7 +106,7 @@ export default function StreamList({ streams }: { streams: Player[] }) {
                 <div className="text-gray-700 dark:text-gray-300">
                   <img
                     className="inline align-middle w-4 h-4"
-                    src={getTierImage(s.lol_rank, s.pos)}
+                    src={getTierIcon(s.lol_rank, s.pos)}
                     alt={getRank(s.lol_rank)}
                     title={getRank(s.lol_rank)}
                   ></img>{" "}
