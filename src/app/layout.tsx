@@ -75,6 +75,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="py-4">{children}</div>
             <footer className="text-sm text-gray-400 dark:text-gray-600">
+              <a href="https://github.com/jebibot/jnd">GitHub</a> •{" "}
               본 사이트는 Twitch, YouTube, 자낳대, 인챈트 엔터테인먼트와 관련이
               없으며, 관련 상표는 각 소유자의 자산입니다. jnd.twitchgg.tv
               isn&apos;t endorsed by Riot Games and doesn&apos;t reflect the
