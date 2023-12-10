@@ -22,7 +22,7 @@ export default async function LiveMatches() {
     <div className="flex flex-col gap-4">
       {matches.map((match) => (
         <div
-          className="p-4 shadow-md dark:bg-slate-900 rounded-md mx-auto max-w-max"
+          className="p-4 mx-auto w-full max-w-[50rem] shadow-md dark:bg-slate-900 rounded-md"
           key={match.id}
         >
           <div className="mb-1">
@@ -33,12 +33,12 @@ export default async function LiveMatches() {
               ""
             )}
           </div>
-          <div className="flex flex-col sm:flex-row sm:justify-center gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {[100, 200].map((teamId) => (
               <div
                 key={teamId}
                 className={classNames(
-                  "flex flex-col gap-2 w-96 border-l-2 pl-2",
+                  "flex flex-col gap-2 border-l-2 pl-2",
                   teamId === 100
                     ? "border-blue-500 dark:border-blue-600"
                     : "border-red-500 dark:border-red-600",
