@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useContext, useMemo } from "react";
-import { POSITION, getShortRank } from "@/utils/lol";
+import { POSITION, getPoint, getRank, getShortRank } from "@/utils/lol";
 import { Player } from "@/utils/supabase";
 import { classNames } from "@/utils/util";
 import Links from "../links";
@@ -81,7 +81,12 @@ export default function SidebarMenu({
                             className="text-sm text-gray-600 dark:text-gray-400"
                           />
                         )}
-                        <span className="text-sm text-gray-600 dark:text-gray-400">
+                        <span
+                          className="text-sm text-gray-600 dark:text-gray-400"
+                          title={`${getRank(p.lol_rank)} ${getPoint(
+                            p.lol_rank,
+                          )}`}
+                        >
                           {getShortRank(p.lol_rank)}
                         </span>
                         <Links
