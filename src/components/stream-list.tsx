@@ -1,15 +1,16 @@
 "use client";
 
 import { Switch } from "@headlessui/react";
-import { useMemo, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import { getRank, getTierIcon } from "@/utils/lol";
 import { Player } from "@/utils/supabase";
 import { getChannelUrl } from "@/utils/twitch";
 import { classNames } from "@/utils/util";
+import { StreamContext } from "./stream-provider";
 import Thumbnail from "./thumbnail";
 
 export default function StreamList({ streams }: { streams: Player[] }) {
-  const [selected, setSelected] = useState<string[]>([]);
+  const { selected, setSelected } = useContext(StreamContext);
   const [showOnlyLol, setShowOnlyLol] = useState(false);
 
   const streamsList = useMemo(
@@ -81,9 +82,11 @@ export default function StreamList({ streams }: { streams: Player[] }) {
               stream={s}
               onClick={() => {
                 if (selected.includes(s.twitch)) {
-                  setSelected(selected.filter((t) => t !== s.twitch));
+                  setSelected((selected) =>
+                    selected.filter((t) => t !== s.twitch),
+                  );
                 } else {
-                  setSelected([...selected, s.twitch]);
+                  setSelected((selected) => [...selected, s.twitch]);
                 }
               }}
             />

@@ -8,9 +8,9 @@ import {
   getSpellIcon,
 } from "@/utils/lol";
 import { getLiveMatches, getPlayers } from "@/utils/supabase";
-import { getChannelUrl } from "@/utils/twitch";
 import { classNames } from "@/utils/util";
 import Nick from "./nick";
+import PlayerLink from "./player-link";
 import Timer from "./timer";
 
 export default async function LiveMatches() {
@@ -99,10 +99,9 @@ export default async function LiveMatches() {
                         </div>
                         <div className="ml-1 dark:text-gray-200">
                           {player && (
-                            <a
+                            <PlayerLink
                               className="font-semibold hover:text-purple-600 dark:hover:text-purple-300"
-                              href={getChannelUrl(player.twitch)}
-                              target="_blank"
+                              twitch={player.twitch}
                             >
                               {player.name}{" "}
                               {player.stream_start && (
@@ -110,7 +109,7 @@ export default async function LiveMatches() {
                                   ●
                                 </span>
                               )}
-                            </a>
+                            </PlayerLink>
                           )}
                           <Nick
                             className={classNames(
