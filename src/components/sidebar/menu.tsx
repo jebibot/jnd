@@ -74,7 +74,13 @@ export default function SidebarMenu({
                   <li key={p.name}>
                     {detailed ? (
                       <div className="flex items-center gap-x-2 p-1 font-semibold text-gray-800 dark:text-gray-300">
-                        <SidebarItem player={p} />
+                        <Link
+                          href={`/p/${p.id}`}
+                          className="flex items-center gap-x-2"
+                          prefetch={false}
+                        >
+                          <SidebarItem player={p} />
+                        </Link>
                         {p.lol_nick && (
                           <Nick
                             nick={p.lol_nick}
