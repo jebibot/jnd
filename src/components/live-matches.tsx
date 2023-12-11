@@ -14,21 +14,7 @@ import PlayerCheckbox from "./player-checkbox";
 import Timer from "./timer";
 
 export default async function LiveMatches() {
-  const [matches, players] = await Promise.all([
-    getLiveMatches(),
-    getPlayers(),
-  ]);
-
-  const playerMap: Record<string, Player> = {};
-  players.forEach((p) => {
-    if (p.lol_nick != null) {
-      playerMap[p.lol_nick] = p;
-    }
-    if (p.lol_secondary_nick != null) {
-      playerMap[p.lol_secondary_nick] = p;
-    }
-  });
-
+  const matches = await getLiveMatches();
   return matches.length > 0 ? (
     <div className="flex flex-col gap-4">
       {matches.map((match) => (
@@ -61,7 +47,11 @@ export default async function LiveMatches() {
                 {match.game.participants
                   .filter((p) => p.teamId === teamId)
                   .map((p) => {
-                    const player = playerMap[p.summonerName];
+                    const player = match.players.find(
+                      (player) =>
+                        p.summonerName === player.lol_nick ||
+                        p.summonerName === player.lol_secondary_nick,
+                    );
                     const mainPerk = PERKS[p.perks.perkIds[0]];
                     const subPerk = PERKS[p.perks.perkSubStyle];
                     const champion = CHAMPIONS[p.championId];
@@ -69,10 +59,7 @@ export default async function LiveMatches() {
                     const spell2 = SPELLS[p.spell2Id];
 
                     return (
-                      <div
-                        key={p.summonerName}
-                        className="flex items-center"
-                      >
+                      <div key={p.summonerName} className="flex items-center">
                         <img
                           className="w-8 h-8 rounded-full inline-block mr-1"
                           src={getChampionIcon(p.championId)}

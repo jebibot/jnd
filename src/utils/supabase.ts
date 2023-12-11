@@ -21,18 +21,19 @@ export type Player = {
 type Match = {
   id: number;
   game: CurrentGameInfoDTO;
+  players: Player[];
 };
 
-async function fetchSupabase(path: string, tag: string, single = false) {
+async function fetchSupabase(path: string, tags: string[], single = false) {
   const res = await fetch(`${process.env.SUPABASE_URL}/rest/v1/${path}`, {
     headers: {
       ...(single ? { Accept: "application/vnd.pgrst.object+json" } : {}),
       apikey: process.env.SUPABASE_ANON_KEY!,
     },
-    next: { tags: [tag] },
+    next: { tags },
   });
   if (!res.ok) {
-    throw new Error(`Failed to fetch ${tag}: ${res.status}`);
+    throw new Error(`Failed to fetch ${tags[0]}: ${res.status}`);
   }
   return res.json();
 }
@@ -40,18 +41,21 @@ async function fetchSupabase(path: string, tag: string, single = false) {
 export async function getPlayers(): Promise<Player[]> {
   return fetchSupabase(
     `players?select=id,name,pos,twitch,profile,title,game,stream_start,youtube,youtube_secondary,community,lol_nick,lol_rank,lol_secondary_nick,lol_secondary_rank&order=name.asc`,
-    "players",
+    ["players"],
   );
 }
 
 export async function getPlayer(id: string | number): Promise<Player> {
   return fetchSupabase(
     `players?select=id,name,pos,twitch,profile,title,game,stream_start,youtube,youtube_secondary,community,lol_nick,lol_rank,lol_secondary_nick,lol_secondary_rank&id=eq.${id}`,
-    "players",
+    ["players"],
     true,
   );
 }
 
 export async function getLiveMatches(): Promise<Match[]> {
-  return fetchSupabase(`matches?select=id,game&stats=is.null`, "matches");
+  return fetchSupabase(
+    `matches?select=id,game,players(name,twitch,stream_start,lol_nick,lol_secondary_nick)&stats=is.null`,
+    ["matches", "players"],
+  );
 }
