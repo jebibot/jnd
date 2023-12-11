@@ -56,7 +56,7 @@ export async function getPlayer(id: string | number): Promise<Player> {
 
 export async function getLiveMatches(): Promise<Match[]> {
   return fetchSupabase(
-    `matches?select=id,start,game,players(name,twitch,stream_start,lol_nick,lol_secondary_nick)&stats=is.null`,
+    `matches?select=id,start,game,players(name,twitch,stream_start,lol_nick,lol_secondary_nick)&stats=is.null&order=id.desc`,
     ["matches", "players"],
   );
 }
