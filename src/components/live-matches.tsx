@@ -71,24 +71,8 @@ export default async function LiveMatches() {
                     return (
                       <div
                         key={p.summonerName}
-                        className="flex items-center gap-0.5"
+                        className="flex items-center"
                       >
-                        <div className="flex flex-col items-center">
-                          <img
-                            className="w-6 h-6 inline-block mr-1"
-                            src={getPerkIcon(mainPerk)}
-                            title={mainPerk.name}
-                            alt={mainPerk.name}
-                            loading="lazy"
-                          />
-                          <img
-                            className="w-4 h-4 inline-block mr-1"
-                            src={getPerkIcon(subPerk)}
-                            title={subPerk.name}
-                            alt={subPerk.name}
-                            loading="lazy"
-                          />
-                        </div>
                         <img
                           className="w-8 h-8 rounded-full inline-block mr-1"
                           src={getChampionIcon(p.championId)}
@@ -108,6 +92,22 @@ export default async function LiveMatches() {
                             src={getSpellIcon(spell2)}
                             title={spell2.name}
                             alt={spell2.name}
+                            loading="lazy"
+                          />
+                        </div>
+                        <div className="flex flex-col items-center">
+                          <img
+                            className="w-6 h-6 inline-block mr-1"
+                            src={getPerkIcon(mainPerk)}
+                            title={mainPerk.name}
+                            alt={mainPerk.name}
+                            loading="lazy"
+                          />
+                          <img
+                            className="w-4 h-4 inline-block mr-1"
+                            src={getPerkIcon(subPerk)}
+                            title={subPerk.name}
+                            alt={subPerk.name}
                             loading="lazy"
                           />
                         </div>
