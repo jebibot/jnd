@@ -24,11 +24,7 @@ export default async function LiveMatches() {
         >
           <div className="mb-1">
             {QUEUES[match.game.gameQueueConfigId]} |{" "}
-            {match.game.gameStartTime ? (
-              <Timer start={match.game.gameStartTime} />
-            ) : (
-              ""
-            )}
+            <Timer start={new Date(match.start).getTime()} />
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {[100, 200].map((teamId) => (
