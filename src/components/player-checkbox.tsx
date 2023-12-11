@@ -17,7 +17,7 @@ export default function PlayerCheckbox({
     <label className="flex items-center">
       <input
         type="checkbox"
-        className="h-3 w-3 rounded border-gray-300 text-purple-600 focus:ring-1 focus:ring-purple-600"
+        className="h-3 w-3 rounded border-gray-300 bg-transparent text-purple-600 focus:ring-1 focus:ring-purple-600 focus:ring-offset-white dark:focus:ring-offset-black"
         checked={isSelected}
         onChange={(e) => {
           const checked = e.target.checked;
