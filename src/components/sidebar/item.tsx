@@ -28,7 +28,7 @@ export default function SidebarItem({ player }: { player: Player }) {
               getTierBorder(player.lol_rank),
             )}
             src={player.profile.replace("300x300", "50x50")}
-            alt={player.name}
+            alt=""
           />
           {player.stream_start && (
             <span

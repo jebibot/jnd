@@ -4,7 +4,9 @@ import { PropsWithChildren, createContext, useState } from "react";
 
 export const StreamContext = createContext({
   selected: new Set<string>(),
-  setSelected: (selected: Set<string> | ((selected: Set<string>) => Set<string>)) => {},
+  setSelected: (
+    selected: Set<string> | ((selected: Set<string>) => Set<string>),
+  ) => {},
 });
 
 export default function StreamProvider({ children }: PropsWithChildren) {

@@ -30,13 +30,13 @@ export default async function Page({ params }: { params: { id: string } }) {
             <img
               className="w-48 h-48 rounded-full"
               src={p.profile}
-              alt={p.name}
+              alt="프로필 사진"
             />
           </a>
         )}
         <div className="flex flex-col flex-1 min-w-[16rem] p-2 gap-3">
           <div className="flex flex-col md:flex-row flex-wrap gap-x-2 gap-y-1 md:items-baseline">
-            <div className="text-4xl font-bold">{p.name}</div>
+            <h1 className="text-4xl font-bold">{p.name}</h1>
             {p.lol_nick && (
               <Nick
                 nick={p.lol_nick}

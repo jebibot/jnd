@@ -49,6 +49,9 @@ export default async function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="ko" className="bg-gray-50 dark:bg-slate-950 dark:text-gray-50">
       <body>
+        <a href="#content" className="sr-only">
+          내용으로 건너뛰기
+        </a>
         <SidebarProvider>
           <Sidebar>
             <SidebarMenu players={players} />
@@ -70,9 +73,11 @@ export default async function RootLayout({ children }: PropsWithChildren) {
           </div>
         </SidebarProvider>
 
-        <main className="py-4 lg:pl-48">
+        <div className="py-4 lg:pl-48">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="py-4">{children}</div>
+            <main className="py-4" id="content">
+              {children}
+            </main>
             <footer className="text-sm text-gray-400 dark:text-gray-600">
               <a href="https://github.com/jebibot/jnd" target="_blank">
                 GitHub
@@ -86,7 +91,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
               Riot Games, Inc.
             </footer>
           </div>
-        </main>
+        </div>
       </body>
     </html>
   );

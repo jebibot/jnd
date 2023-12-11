@@ -21,6 +21,7 @@ export default function Links({
           title="트위치 채널"
         >
           <FontAwesomeIcon icon={faTwitch} />
+          <span className="sr-only">트위치 채널</span>
         </a>
       )}
       {player.youtube && (
@@ -30,6 +31,7 @@ export default function Links({
           title="유튜브 채널"
         >
           <FontAwesomeIcon icon={faYoutube} />
+          <span className="sr-only">유튜브 채널</span>
         </a>
       )}
       {player.youtube_secondary && (
@@ -43,11 +45,13 @@ export default function Links({
           title="다시보기 채널"
         >
           <FontAwesomeIcon icon={faYoutube} />
+          <span className="sr-only">다시보기 채널</span>
         </a>
       )}
       {player.community && (
         <a href={player.community} target="_blank" title="커뮤니티">
           <FontAwesomeIcon icon={faMessages} />
+          <span className="sr-only">커뮤니티</span>
         </a>
       )}
     </div>

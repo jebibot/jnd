@@ -22,11 +22,12 @@ export default function Thumbnail({
           .map((w) => `${getThumbnailUrl(stream.twitch, w)} ${w}w`)
           .join(", ")}
         src={getThumbnailUrl(stream.twitch, 440)}
-        alt={`${stream.name}의 방송`}
+        alt={`${stream.name}의 방송 썸네일`}
       />
       {stream.stream_start && (
         <div
           className="absolute top-0 right-0 m-2 p-1 text-white text-sm leading-none bg-gray-900/80"
+          role="timer"
           suppressHydrationWarning
         >
           {formatTimestamp(

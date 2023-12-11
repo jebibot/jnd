@@ -54,6 +54,7 @@ export default function SidebarMenu({
               <FontAwesomeIcon icon={faHouse} size="lg" fixedWidth />홈
             </Link>
             <button
+              type="button"
               className="p-1 rounded-md text-gray-700 dark:text-gray-400 hover:text-purple-600 dark:hover:text-white"
               title={detailed ? "간략히" : "자세히"}
               aria-label={detailed ? "간략히" : "자세히"}

@@ -14,6 +14,8 @@ export default function Timer({ start }: { start: number }) {
   }, [start]);
 
   return (
-    <span suppressHydrationWarning>{formatTimestamp(seconds * 1000)}</span>
+    <span role="timer" suppressHydrationWarning>
+      {formatTimestamp(seconds * 1000)}
+    </span>
   );
 }

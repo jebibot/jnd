@@ -10,7 +10,7 @@ import {
 import { Player, getLiveMatches, getPlayers } from "@/utils/supabase";
 import { classNames } from "@/utils/util";
 import Nick from "./nick";
-import PlayerLink from "./player-link";
+import PlayerCheckbox from "./player-checkbox";
 import Timer from "./timer";
 
 export default async function LiveMatches() {
@@ -55,6 +55,9 @@ export default async function LiveMatches() {
                     : "border-red-500 dark:border-red-600",
                 )}
               >
+                <div className="sr-only">
+                  {teamId === 100 ? "블루팀" : "레드팀"}
+                </div>
                 {match.game.participants
                   .filter((p) => p.teamId === teamId)
                   .map((p) => {
@@ -72,58 +75,53 @@ export default async function LiveMatches() {
                       >
                         <div className="flex flex-col items-center">
                           <img
+                            className="w-6 h-6 inline-block mr-1"
                             src={getPerkIcon(mainPerk)}
                             title={mainPerk.name}
                             alt={mainPerk.name}
-                            className="w-6 h-6 inline-block mr-1"
+                            loading="lazy"
                           />
                           <img
+                            className="w-4 h-4 inline-block mr-1"
                             src={getPerkIcon(subPerk)}
                             title={subPerk.name}
                             alt={subPerk.name}
-                            className="w-4 h-4 inline-block mr-1"
+                            loading="lazy"
                           />
                         </div>
                         <img
+                          className="w-8 h-8 rounded-full inline-block mr-1"
                           src={getChampionIcon(p.championId)}
                           title={champion}
                           alt={champion}
-                          className="w-8 h-8 rounded-full inline-block mr-1"
                         />
                         <div className="flex flex-col items-center gap-1">
                           <img
+                            className="w-4 h-4 rounded-full inline-block mr-1"
                             src={getSpellIcon(spell1)}
                             title={spell1.name}
                             alt={spell1.name}
-                            className="w-4 h-4 rounded-full inline-block mr-1"
+                            loading="lazy"
                           />
                           <img
+                            className="w-4 h-4 rounded-full inline-block mr-1"
                             src={getSpellIcon(spell2)}
                             title={spell2.name}
                             alt={spell2.name}
-                            className="w-4 h-4 rounded-full inline-block mr-1"
+                            loading="lazy"
                           />
                         </div>
-                        <div className="ml-1 dark:text-gray-200">
-                          {player && (
-                            <PlayerLink
-                              className="font-semibold hover:text-purple-600 dark:hover:text-purple-300"
-                              twitch={player.twitch}
-                            >
-                              {player.name}{" "}
-                              {player.stream_start && (
-                                <span className="text-red-500 dark:text-red-600 text-xs"
-                                aria-label="방송 중">
-                                  ●
-                                </span>
-                              )}
-                            </PlayerLink>
-                          )}
+                        <div className="ml-1 font-semibold dark:text-gray-200">
+                          {player &&
+                            (player.stream_start ? (
+                              <PlayerCheckbox twitch={player.twitch}>
+                                {player.name}
+                              </PlayerCheckbox>
+                            ) : (
+                              <>{player.name}</>
+                            ))}
                           <Nick
-                            className={classNames(
-                              "font-semibold",
-                              player && "text-xs",
-                            )}
+                            className={player && "text-xs"}
                             nick={p.summonerName}
                           />
                         </div>
