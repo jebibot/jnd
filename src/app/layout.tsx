@@ -74,7 +74,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
         </SidebarProvider>
 
         <div className="py-4 lg:pl-48">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
             <main className="py-4" id="content">
               {children}
             </main>

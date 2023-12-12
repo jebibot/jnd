@@ -100,6 +100,7 @@ export default function StreamList({ streams }: { streams: Player[] }) {
             >
               <Thumbnail
                 className="cursor-pointer"
+                sizes="(max-width: 768px) 46vw, (max-width: 1024px) 30vw, (max-width: 1280px) 26vw, 22vw"
                 stream={s}
                 role="checkbox"
                 tabIndex={0}

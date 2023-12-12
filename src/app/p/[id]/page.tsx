@@ -73,7 +73,7 @@ export default async function Page({ params }: { params: { id: string } }) {
           target="_blank"
           title="방송"
         >
-          <Thumbnail className="rounded" stream={p} />
+          <Thumbnail className="rounded" sizes="14rem" stream={p} />
           <div className="p-1">
             <span
               className={

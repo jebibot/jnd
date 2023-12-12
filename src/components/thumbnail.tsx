@@ -6,8 +6,9 @@ import { classNames, formatTimestamp } from "@/utils/util";
 export default function Thumbnail({
   stream,
   className,
+  sizes,
   ...props
-}: HTMLAttributes<HTMLDivElement> & { stream: Player }) {
+}: HTMLAttributes<HTMLDivElement> & { stream: Player; sizes?: string }) {
   return (
     <div
       className={classNames(
@@ -21,6 +22,7 @@ export default function Thumbnail({
         srcSet={[80, 276, 414, 552, 828, 1242, 1656]
           .map((w) => `${getThumbnailUrl(stream.twitch, w)} ${w}w`)
           .join(", ")}
+        sizes={sizes}
         src={getThumbnailUrl(stream.twitch, 440)}
         alt={`${stream.name}의 방송 썸네일`}
       />
