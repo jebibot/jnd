@@ -36,10 +36,12 @@ export default async function LiveMatches() {
                 {match.game.participants
                   .filter((p) => p.teamId === teamId)
                   .map((p) => {
+                    // @ts-expect-error
+                    const nick = p.riotId || p.summonerName;
                     const player = match.players.find(
                       (player) =>
-                        p.summonerName === player.lol_nick ||
-                        p.summonerName === player.lol_secondary_nick,
+                        nick === player.lol_nick ||
+                        nick === player.lol_secondary_nick,
                     );
                     const mainPerk = PERKS[p.perks.perkIds[0]];
                     const subPerk = PERKS[p.perks.perkSubStyle];
@@ -48,10 +50,7 @@ export default async function LiveMatches() {
                     const spell2 = SPELLS[p.spell2Id];
 
                     return (
-                      <div
-                        key={p.summonerName}
-                        className="flex items-center gap-1"
-                      >
+                      <div key={nick} className="flex items-center gap-1">
                         <Image
                           className="rounded-full inline-block"
                           width={32}
@@ -109,10 +108,7 @@ export default async function LiveMatches() {
                             ) : (
                               <>{player.name}</>
                             ))}
-                          <Nick
-                            className={player && "text-xs"}
-                            nick={p.summonerName}
-                          />
+                          <Nick className={player && "text-xs"} nick={nick} />
                         </div>
                       </div>
                     );
