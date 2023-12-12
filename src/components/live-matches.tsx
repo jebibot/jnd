@@ -1,13 +1,5 @@
-import {
-  CHAMPIONS,
-  PERKS,
-  QUEUES,
-  SPELLS,
-  getChampionIcon,
-  getPerkIcon,
-  getSpellIcon,
-} from "@/utils/lol";
-import { Player, getLiveMatches, getPlayers } from "@/utils/supabase";
+import { CHAMPIONS, PERKS, QUEUES, SPELLS, getIcon } from "@/utils/lol";
+import { getLiveMatches } from "@/utils/supabase";
 import { classNames } from "@/utils/util";
 import Nick from "./nick";
 import PlayerCheckbox from "./player-checkbox";
@@ -58,21 +50,21 @@ export default async function LiveMatches() {
                       <div key={p.summonerName} className="flex items-center">
                         <img
                           className="w-8 h-8 rounded-full inline-block mr-1"
-                          src={getChampionIcon(p.championId)}
-                          title={champion}
-                          alt={champion}
+                          src={getIcon("champion", champion)}
+                          title={champion.name}
+                          alt={champion.name}
                         />
                         <div className="flex flex-col items-center gap-1">
                           <img
                             className="w-4 h-4 rounded-full inline-block mr-1"
-                            src={getSpellIcon(spell1)}
+                            src={getIcon("spell", spell1)}
                             title={spell1.name}
                             alt={spell1.name}
                             loading="lazy"
                           />
                           <img
                             className="w-4 h-4 rounded-full inline-block mr-1"
-                            src={getSpellIcon(spell2)}
+                            src={getIcon("spell", spell2)}
                             title={spell2.name}
                             alt={spell2.name}
                             loading="lazy"
@@ -81,14 +73,14 @@ export default async function LiveMatches() {
                         <div className="flex flex-col items-center">
                           <img
                             className="w-6 h-6 inline-block mr-1"
-                            src={getPerkIcon(mainPerk)}
+                            src={getIcon("perk", mainPerk)}
                             title={mainPerk.name}
                             alt={mainPerk.name}
                             loading="lazy"
                           />
                           <img
                             className="w-4 h-4 inline-block mr-1"
-                            src={getPerkIcon(subPerk)}
+                            src={getIcon("perk", subPerk)}
                             title={subPerk.name}
                             alt={subPerk.name}
                             loading="lazy"

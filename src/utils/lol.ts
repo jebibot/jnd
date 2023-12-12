@@ -1,5 +1,7 @@
 type Item = { name: string; icon: string };
 
+const LOL_VERSION = "13.24";
+
 const RANK: Record<string, number> = {
   I: 1,
   II: 2,
@@ -8,529 +10,1027 @@ const RANK: Record<string, number> = {
 };
 
 // https://ddragon.leagueoflegends.com/cdn/13.24.1/data/ko_KR/champion.json
-// Object.fromEntries(Object.values(champion.data).map(c => [c.key, c.name]))
-export const CHAMPIONS: Record<number, string> = {
-  "1": "애니",
-  "2": "올라프",
-  "3": "갈리오",
-  "4": "트위스티드 페이트",
-  "5": "신 짜오",
-  "6": "우르곳",
-  "7": "르블랑",
-  "8": "블라디미르",
-  "9": "피들스틱",
-  "10": "케일",
-  "11": "마스터 이",
-  "12": "알리스타",
-  "13": "라이즈",
-  "14": "사이온",
-  "15": "시비르",
-  "16": "소라카",
-  "17": "티모",
-  "18": "트리스타나",
-  "19": "워윅",
-  "20": "누누와 윌럼프",
-  "21": "미스 포츈",
-  "22": "애쉬",
-  "23": "트린다미어",
-  "24": "잭스",
-  "25": "모르가나",
-  "26": "질리언",
-  "27": "신지드",
-  "28": "이블린",
-  "29": "트위치",
-  "30": "카서스",
-  "31": "초가스",
-  "32": "아무무",
-  "33": "람머스",
-  "34": "애니비아",
-  "35": "샤코",
-  "36": "문도 박사",
-  "37": "소나",
-  "38": "카사딘",
-  "39": "이렐리아",
-  "40": "잔나",
-  "41": "갱플랭크",
-  "42": "코르키",
-  "43": "카르마",
-  "44": "타릭",
-  "45": "베이가",
-  "48": "트런들",
-  "50": "스웨인",
-  "51": "케이틀린",
-  "53": "블리츠크랭크",
-  "54": "말파이트",
-  "55": "카타리나",
-  "56": "녹턴",
-  "57": "마오카이",
-  "58": "레넥톤",
-  "59": "자르반 4세",
-  "60": "엘리스",
-  "61": "오리아나",
-  "62": "오공",
-  "63": "브랜드",
-  "64": "리 신",
-  "67": "베인",
-  "68": "럼블",
-  "69": "카시오페아",
-  "72": "스카너",
-  "74": "하이머딩거",
-  "75": "나서스",
-  "76": "니달리",
-  "77": "우디르",
-  "78": "뽀삐",
-  "79": "그라가스",
-  "80": "판테온",
-  "81": "이즈리얼",
-  "82": "모데카이저",
-  "83": "요릭",
-  "84": "아칼리",
-  "85": "케넨",
-  "86": "가렌",
-  "89": "레오나",
-  "90": "말자하",
-  "91": "탈론",
-  "92": "리븐",
-  "96": "코그모",
-  "98": "쉔",
-  "99": "럭스",
-  "101": "제라스",
-  "102": "쉬바나",
-  "103": "아리",
-  "104": "그레이브즈",
-  "105": "피즈",
-  "106": "볼리베어",
-  "107": "렝가",
-  "110": "바루스",
-  "111": "노틸러스",
-  "112": "빅토르",
-  "113": "세주아니",
-  "114": "피오라",
-  "115": "직스",
-  "117": "룰루",
-  "119": "드레이븐",
-  "120": "헤카림",
-  "121": "카직스",
-  "122": "다리우스",
-  "126": "제이스",
-  "127": "리산드라",
-  "131": "다이애나",
-  "133": "퀸",
-  "134": "신드라",
-  "136": "아우렐리온 솔",
-  "141": "케인",
-  "142": "조이",
-  "143": "자이라",
-  "145": "카이사",
-  "147": "세라핀",
-  "150": "나르",
-  "154": "자크",
-  "157": "야스오",
-  "161": "벨코즈",
-  "163": "탈리야",
-  "164": "카밀",
-  "166": "아크샨",
-  "200": "벨베스",
-  "201": "브라움",
-  "202": "진",
-  "203": "킨드레드",
-  "221": "제리",
-  "222": "징크스",
-  "223": "탐 켄치",
-  "233": "브라이어",
-  "234": "비에고",
-  "235": "세나",
-  "236": "루시안",
-  "238": "제드",
-  "240": "클레드",
-  "245": "에코",
-  "246": "키아나",
-  "254": "바이",
-  "266": "아트록스",
-  "267": "나미",
-  "268": "아지르",
-  "350": "유미",
-  "360": "사미라",
-  "412": "쓰레쉬",
-  "420": "일라오이",
-  "421": "렉사이",
-  "427": "아이번",
-  "429": "칼리스타",
-  "432": "바드",
-  "497": "라칸",
-  "498": "자야",
-  "516": "오른",
-  "517": "사일러스",
-  "518": "니코",
-  "523": "아펠리오스",
-  "526": "렐",
-  "555": "파이크",
-  "711": "벡스",
-  "777": "요네",
-  "875": "세트",
-  "876": "릴리아",
-  "887": "그웬",
-  "888": "레나타 글라스크",
-  "895": "닐라",
-  "897": "크산테",
-  "902": "밀리오",
-  "910": "흐웨이",
-  "950": "나피리",
+// Object.fromEntries(Object.values(champion.data).map(c => [c.key, {name: c.name, icon: c.id}]))
+export const CHAMPIONS: Record<number, Item> = {
+  "1": {
+    name: "애니",
+    icon: "Annie",
+  },
+  "2": {
+    name: "올라프",
+    icon: "Olaf",
+  },
+  "3": {
+    name: "갈리오",
+    icon: "Galio",
+  },
+  "4": {
+    name: "트위스티드 페이트",
+    icon: "TwistedFate",
+  },
+  "5": {
+    name: "신 짜오",
+    icon: "XinZhao",
+  },
+  "6": {
+    name: "우르곳",
+    icon: "Urgot",
+  },
+  "7": {
+    name: "르블랑",
+    icon: "Leblanc",
+  },
+  "8": {
+    name: "블라디미르",
+    icon: "Vladimir",
+  },
+  "9": {
+    name: "피들스틱",
+    icon: "Fiddlesticks",
+  },
+  "10": {
+    name: "케일",
+    icon: "Kayle",
+  },
+  "11": {
+    name: "마스터 이",
+    icon: "MasterYi",
+  },
+  "12": {
+    name: "알리스타",
+    icon: "Alistar",
+  },
+  "13": {
+    name: "라이즈",
+    icon: "Ryze",
+  },
+  "14": {
+    name: "사이온",
+    icon: "Sion",
+  },
+  "15": {
+    name: "시비르",
+    icon: "Sivir",
+  },
+  "16": {
+    name: "소라카",
+    icon: "Soraka",
+  },
+  "17": {
+    name: "티모",
+    icon: "Teemo",
+  },
+  "18": {
+    name: "트리스타나",
+    icon: "Tristana",
+  },
+  "19": {
+    name: "워윅",
+    icon: "Warwick",
+  },
+  "20": {
+    name: "누누와 윌럼프",
+    icon: "Nunu",
+  },
+  "21": {
+    name: "미스 포츈",
+    icon: "MissFortune",
+  },
+  "22": {
+    name: "애쉬",
+    icon: "Ashe",
+  },
+  "23": {
+    name: "트린다미어",
+    icon: "Tryndamere",
+  },
+  "24": {
+    name: "잭스",
+    icon: "Jax",
+  },
+  "25": {
+    name: "모르가나",
+    icon: "Morgana",
+  },
+  "26": {
+    name: "질리언",
+    icon: "Zilean",
+  },
+  "27": {
+    name: "신지드",
+    icon: "Singed",
+  },
+  "28": {
+    name: "이블린",
+    icon: "Evelynn",
+  },
+  "29": {
+    name: "트위치",
+    icon: "Twitch",
+  },
+  "30": {
+    name: "카서스",
+    icon: "Karthus",
+  },
+  "31": {
+    name: "초가스",
+    icon: "Chogath",
+  },
+  "32": {
+    name: "아무무",
+    icon: "Amumu",
+  },
+  "33": {
+    name: "람머스",
+    icon: "Rammus",
+  },
+  "34": {
+    name: "애니비아",
+    icon: "Anivia",
+  },
+  "35": {
+    name: "샤코",
+    icon: "Shaco",
+  },
+  "36": {
+    name: "문도 박사",
+    icon: "DrMundo",
+  },
+  "37": {
+    name: "소나",
+    icon: "Sona",
+  },
+  "38": {
+    name: "카사딘",
+    icon: "Kassadin",
+  },
+  "39": {
+    name: "이렐리아",
+    icon: "Irelia",
+  },
+  "40": {
+    name: "잔나",
+    icon: "Janna",
+  },
+  "41": {
+    name: "갱플랭크",
+    icon: "Gangplank",
+  },
+  "42": {
+    name: "코르키",
+    icon: "Corki",
+  },
+  "43": {
+    name: "카르마",
+    icon: "Karma",
+  },
+  "44": {
+    name: "타릭",
+    icon: "Taric",
+  },
+  "45": {
+    name: "베이가",
+    icon: "Veigar",
+  },
+  "48": {
+    name: "트런들",
+    icon: "Trundle",
+  },
+  "50": {
+    name: "스웨인",
+    icon: "Swain",
+  },
+  "51": {
+    name: "케이틀린",
+    icon: "Caitlyn",
+  },
+  "53": {
+    name: "블리츠크랭크",
+    icon: "Blitzcrank",
+  },
+  "54": {
+    name: "말파이트",
+    icon: "Malphite",
+  },
+  "55": {
+    name: "카타리나",
+    icon: "Katarina",
+  },
+  "56": {
+    name: "녹턴",
+    icon: "Nocturne",
+  },
+  "57": {
+    name: "마오카이",
+    icon: "Maokai",
+  },
+  "58": {
+    name: "레넥톤",
+    icon: "Renekton",
+  },
+  "59": {
+    name: "자르반 4세",
+    icon: "JarvanIV",
+  },
+  "60": {
+    name: "엘리스",
+    icon: "Elise",
+  },
+  "61": {
+    name: "오리아나",
+    icon: "Orianna",
+  },
+  "62": {
+    name: "오공",
+    icon: "MonkeyKing",
+  },
+  "63": {
+    name: "브랜드",
+    icon: "Brand",
+  },
+  "64": {
+    name: "리 신",
+    icon: "LeeSin",
+  },
+  "67": {
+    name: "베인",
+    icon: "Vayne",
+  },
+  "68": {
+    name: "럼블",
+    icon: "Rumble",
+  },
+  "69": {
+    name: "카시오페아",
+    icon: "Cassiopeia",
+  },
+  "72": {
+    name: "스카너",
+    icon: "Skarner",
+  },
+  "74": {
+    name: "하이머딩거",
+    icon: "Heimerdinger",
+  },
+  "75": {
+    name: "나서스",
+    icon: "Nasus",
+  },
+  "76": {
+    name: "니달리",
+    icon: "Nidalee",
+  },
+  "77": {
+    name: "우디르",
+    icon: "Udyr",
+  },
+  "78": {
+    name: "뽀삐",
+    icon: "Poppy",
+  },
+  "79": {
+    name: "그라가스",
+    icon: "Gragas",
+  },
+  "80": {
+    name: "판테온",
+    icon: "Pantheon",
+  },
+  "81": {
+    name: "이즈리얼",
+    icon: "Ezreal",
+  },
+  "82": {
+    name: "모데카이저",
+    icon: "Mordekaiser",
+  },
+  "83": {
+    name: "요릭",
+    icon: "Yorick",
+  },
+  "84": {
+    name: "아칼리",
+    icon: "Akali",
+  },
+  "85": {
+    name: "케넨",
+    icon: "Kennen",
+  },
+  "86": {
+    name: "가렌",
+    icon: "Garen",
+  },
+  "89": {
+    name: "레오나",
+    icon: "Leona",
+  },
+  "90": {
+    name: "말자하",
+    icon: "Malzahar",
+  },
+  "91": {
+    name: "탈론",
+    icon: "Talon",
+  },
+  "92": {
+    name: "리븐",
+    icon: "Riven",
+  },
+  "96": {
+    name: "코그모",
+    icon: "KogMaw",
+  },
+  "98": {
+    name: "쉔",
+    icon: "Shen",
+  },
+  "99": {
+    name: "럭스",
+    icon: "Lux",
+  },
+  "101": {
+    name: "제라스",
+    icon: "Xerath",
+  },
+  "102": {
+    name: "쉬바나",
+    icon: "Shyvana",
+  },
+  "103": {
+    name: "아리",
+    icon: "Ahri",
+  },
+  "104": {
+    name: "그레이브즈",
+    icon: "Graves",
+  },
+  "105": {
+    name: "피즈",
+    icon: "Fizz",
+  },
+  "106": {
+    name: "볼리베어",
+    icon: "Volibear",
+  },
+  "107": {
+    name: "렝가",
+    icon: "Rengar",
+  },
+  "110": {
+    name: "바루스",
+    icon: "Varus",
+  },
+  "111": {
+    name: "노틸러스",
+    icon: "Nautilus",
+  },
+  "112": {
+    name: "빅토르",
+    icon: "Viktor",
+  },
+  "113": {
+    name: "세주아니",
+    icon: "Sejuani",
+  },
+  "114": {
+    name: "피오라",
+    icon: "Fiora",
+  },
+  "115": {
+    name: "직스",
+    icon: "Ziggs",
+  },
+  "117": {
+    name: "룰루",
+    icon: "Lulu",
+  },
+  "119": {
+    name: "드레이븐",
+    icon: "Draven",
+  },
+  "120": {
+    name: "헤카림",
+    icon: "Hecarim",
+  },
+  "121": {
+    name: "카직스",
+    icon: "Khazix",
+  },
+  "122": {
+    name: "다리우스",
+    icon: "Darius",
+  },
+  "126": {
+    name: "제이스",
+    icon: "Jayce",
+  },
+  "127": {
+    name: "리산드라",
+    icon: "Lissandra",
+  },
+  "131": {
+    name: "다이애나",
+    icon: "Diana",
+  },
+  "133": {
+    name: "퀸",
+    icon: "Quinn",
+  },
+  "134": {
+    name: "신드라",
+    icon: "Syndra",
+  },
+  "136": {
+    name: "아우렐리온 솔",
+    icon: "AurelionSol",
+  },
+  "141": {
+    name: "케인",
+    icon: "Kayn",
+  },
+  "142": {
+    name: "조이",
+    icon: "Zoe",
+  },
+  "143": {
+    name: "자이라",
+    icon: "Zyra",
+  },
+  "145": {
+    name: "카이사",
+    icon: "Kaisa",
+  },
+  "147": {
+    name: "세라핀",
+    icon: "Seraphine",
+  },
+  "150": {
+    name: "나르",
+    icon: "Gnar",
+  },
+  "154": {
+    name: "자크",
+    icon: "Zac",
+  },
+  "157": {
+    name: "야스오",
+    icon: "Yasuo",
+  },
+  "161": {
+    name: "벨코즈",
+    icon: "Velkoz",
+  },
+  "163": {
+    name: "탈리야",
+    icon: "Taliyah",
+  },
+  "164": {
+    name: "카밀",
+    icon: "Camille",
+  },
+  "166": {
+    name: "아크샨",
+    icon: "Akshan",
+  },
+  "200": {
+    name: "벨베스",
+    icon: "Belveth",
+  },
+  "201": {
+    name: "브라움",
+    icon: "Braum",
+  },
+  "202": {
+    name: "진",
+    icon: "Jhin",
+  },
+  "203": {
+    name: "킨드레드",
+    icon: "Kindred",
+  },
+  "221": {
+    name: "제리",
+    icon: "Zeri",
+  },
+  "222": {
+    name: "징크스",
+    icon: "Jinx",
+  },
+  "223": {
+    name: "탐 켄치",
+    icon: "TahmKench",
+  },
+  "233": {
+    name: "브라이어",
+    icon: "Briar",
+  },
+  "234": {
+    name: "비에고",
+    icon: "Viego",
+  },
+  "235": {
+    name: "세나",
+    icon: "Senna",
+  },
+  "236": {
+    name: "루시안",
+    icon: "Lucian",
+  },
+  "238": {
+    name: "제드",
+    icon: "Zed",
+  },
+  "240": {
+    name: "클레드",
+    icon: "Kled",
+  },
+  "245": {
+    name: "에코",
+    icon: "Ekko",
+  },
+  "246": {
+    name: "키아나",
+    icon: "Qiyana",
+  },
+  "254": {
+    name: "바이",
+    icon: "Vi",
+  },
+  "266": {
+    name: "아트록스",
+    icon: "Aatrox",
+  },
+  "267": {
+    name: "나미",
+    icon: "Nami",
+  },
+  "268": {
+    name: "아지르",
+    icon: "Azir",
+  },
+  "350": {
+    name: "유미",
+    icon: "Yuumi",
+  },
+  "360": {
+    name: "사미라",
+    icon: "Samira",
+  },
+  "412": {
+    name: "쓰레쉬",
+    icon: "Thresh",
+  },
+  "420": {
+    name: "일라오이",
+    icon: "Illaoi",
+  },
+  "421": {
+    name: "렉사이",
+    icon: "RekSai",
+  },
+  "427": {
+    name: "아이번",
+    icon: "Ivern",
+  },
+  "429": {
+    name: "칼리스타",
+    icon: "Kalista",
+  },
+  "432": {
+    name: "바드",
+    icon: "Bard",
+  },
+  "497": {
+    name: "라칸",
+    icon: "Rakan",
+  },
+  "498": {
+    name: "자야",
+    icon: "Xayah",
+  },
+  "516": {
+    name: "오른",
+    icon: "Ornn",
+  },
+  "517": {
+    name: "사일러스",
+    icon: "Sylas",
+  },
+  "518": {
+    name: "니코",
+    icon: "Neeko",
+  },
+  "523": {
+    name: "아펠리오스",
+    icon: "Aphelios",
+  },
+  "526": {
+    name: "렐",
+    icon: "Rell",
+  },
+  "555": {
+    name: "파이크",
+    icon: "Pyke",
+  },
+  "711": {
+    name: "벡스",
+    icon: "Vex",
+  },
+  "777": {
+    name: "요네",
+    icon: "Yone",
+  },
+  "875": {
+    name: "세트",
+    icon: "Sett",
+  },
+  "876": {
+    name: "릴리아",
+    icon: "Lillia",
+  },
+  "887": {
+    name: "그웬",
+    icon: "Gwen",
+  },
+  "888": {
+    name: "레나타 글라스크",
+    icon: "Renata",
+  },
+  "895": {
+    name: "닐라",
+    icon: "Nilah",
+  },
+  "897": {
+    name: "크산테",
+    icon: "KSante",
+  },
+  "902": {
+    name: "밀리오",
+    icon: "Milio",
+  },
+  "910": {
+    name: "흐웨이",
+    icon: "Hwei",
+  },
+  "950": {
+    name: "나피리",
+    icon: "Naafiri",
+  },
 };
 
 // https://ddragon.leagueoflegends.com/cdn/13.24.1/data/ko_KR/summoner.json
-// Object.fromEntries(Object.values(summoner.data).map(s => [s.key, {name: s.name, icon: s.image.full}]))
+// Object.fromEntries(Object.values(summoner.data).map(s => [s.key, {name: s.name, icon: s.image.full.replace(/\.png$/, "")}]))
 export const SPELLS: Record<number, Item> = {
   "1": {
     name: "정화",
-    icon: "SummonerBoost.png",
+    icon: "SummonerBoost",
   },
   "3": {
     name: "탈진",
-    icon: "SummonerExhaust.png",
+    icon: "SummonerExhaust",
   },
   "4": {
     name: "점멸",
-    icon: "SummonerFlash.png",
+    icon: "SummonerFlash",
   },
   "6": {
     name: "유체화",
-    icon: "SummonerHaste.png",
+    icon: "SummonerHaste",
   },
   "7": {
     name: "회복",
-    icon: "SummonerHeal.png",
+    icon: "SummonerHeal",
   },
   "11": {
     name: "강타",
-    icon: "SummonerSmite.png",
+    icon: "SummonerSmite",
   },
   "12": {
     name: "순간이동",
-    icon: "SummonerTeleport.png",
+    icon: "SummonerTeleport",
   },
   "13": {
     name: "총명",
-    icon: "SummonerMana.png",
+    icon: "SummonerMana",
   },
   "14": {
     name: "점화",
-    icon: "SummonerDot.png",
+    icon: "SummonerDot",
   },
   "21": {
     name: "방어막",
-    icon: "SummonerBarrier.png",
+    icon: "SummonerBarrier",
   },
   "30": {
     name: "왕을 향해!",
-    icon: "SummonerPoroRecall.png",
+    icon: "SummonerPoroRecall",
   },
   "31": {
     name: "포로 던지기",
-    icon: "SummonerPoroThrow.png",
+    icon: "SummonerPoroThrow",
   },
   "32": {
     name: "표식",
-    icon: "SummonerSnowball.png",
+    icon: "SummonerSnowball",
   },
   "39": {
     name: "표식",
-    icon: "SummonerSnowURFSnowball_Mark.png",
+    icon: "SummonerSnowURFSnowball_Mark",
   },
   "54": {
     name: "게임 시작 후 결정",
-    icon: "Summoner_UltBookPlaceholder.png",
+    icon: "Summoner_UltBookPlaceholder",
   },
   "55": {
     name: "TBD 및 공격-강타",
-    icon: "Summoner_UltBookSmitePlaceholder.png",
+    icon: "Summoner_UltBookSmitePlaceholder",
   },
   "2201": {
     name: "도주",
-    icon: "SummonerCherryHold.png",
+    icon: "SummonerCherryHold",
   },
   "2202": {
     name: "점멸",
-    icon: "SummonerCherryFlash.png",
+    icon: "SummonerCherryFlash",
   },
 };
 
 // https://ddragon.leagueoflegends.com/cdn/13.24.1/data/ko_KR/runesReforged.json
 // Object.fromEntries(runesReforged.map(r => [r.id, {name: r.name, icon: r.icon}])
 //   .concat(runesReforged.map(p => p.slots).flat().map(s => s.runes).flat()
-//     .map(r => [r.id, {name: r.name, icon: r.icon}])))
+//     .map(r => [r.id, {name: r.name, icon: r.icon.replace(/perk-images\/(.*)\.png$/, "$1")}])))
 export const PERKS: Record<number, Item> = {
   "8000": {
     name: "정밀",
-    icon: "perk-images/Styles/7201_Precision.png",
+    icon: "Styles/7201_Precision",
   },
   "8005": {
     name: "집중 공격",
-    icon: "perk-images/Styles/Precision/PressTheAttack/PressTheAttack.png",
+    icon: "Styles/Precision/PressTheAttack/PressTheAttack",
   },
   "8008": {
     name: "치명적 속도",
-    icon: "perk-images/Styles/Precision/LethalTempo/LethalTempoTemp.png",
+    icon: "Styles/Precision/LethalTempo/LethalTempoTemp",
   },
   "8009": {
     name: "침착",
-    icon: "perk-images/Styles/Precision/PresenceOfMind/PresenceOfMind.png",
+    icon: "Styles/Precision/PresenceOfMind/PresenceOfMind",
   },
   "8010": {
     name: "정복자",
-    icon: "perk-images/Styles/Precision/Conqueror/Conqueror.png",
+    icon: "Styles/Precision/Conqueror/Conqueror",
   },
   "8014": {
     name: "최후의 일격",
-    icon: "perk-images/Styles/Precision/CoupDeGrace/CoupDeGrace.png",
+    icon: "Styles/Precision/CoupDeGrace/CoupDeGrace",
   },
   "8017": {
     name: "체력차 극복",
-    icon: "perk-images/Styles/Precision/CutDown/CutDown.png",
+    icon: "Styles/Precision/CutDown/CutDown",
   },
   "8021": {
     name: "기민한 발놀림",
-    icon: "perk-images/Styles/Precision/FleetFootwork/FleetFootwork.png",
+    icon: "Styles/Precision/FleetFootwork/FleetFootwork",
   },
   "8100": {
     name: "지배",
-    icon: "perk-images/Styles/7200_Domination.png",
+    icon: "Styles/7200_Domination",
   },
   "8105": {
     name: "끈질긴 사냥꾼",
-    icon: "perk-images/Styles/Domination/RelentlessHunter/RelentlessHunter.png",
+    icon: "Styles/Domination/RelentlessHunter/RelentlessHunter",
   },
   "8106": {
     name: "궁극의 사냥꾼",
-    icon: "perk-images/Styles/Domination/UltimateHunter/UltimateHunter.png",
+    icon: "Styles/Domination/UltimateHunter/UltimateHunter",
   },
   "8112": {
     name: "감전",
-    icon: "perk-images/Styles/Domination/Electrocute/Electrocute.png",
+    icon: "Styles/Domination/Electrocute/Electrocute",
   },
   "8120": {
     name: "유령 포로",
-    icon: "perk-images/Styles/Domination/GhostPoro/GhostPoro.png",
+    icon: "Styles/Domination/GhostPoro/GhostPoro",
   },
   "8124": {
     name: "포식자",
-    icon: "perk-images/Styles/Domination/Predator/Predator.png",
+    icon: "Styles/Domination/Predator/Predator",
   },
   "8126": {
     name: "비열한 한 방",
-    icon: "perk-images/Styles/Domination/CheapShot/CheapShot.png",
+    icon: "Styles/Domination/CheapShot/CheapShot",
   },
   "8128": {
     name: "어둠의 수확",
-    icon: "perk-images/Styles/Domination/DarkHarvest/DarkHarvest.png",
+    icon: "Styles/Domination/DarkHarvest/DarkHarvest",
   },
   "8134": {
     name: "영리한 사냥꾼",
-    icon: "perk-images/Styles/Domination/IngeniousHunter/IngeniousHunter.png",
+    icon: "Styles/Domination/IngeniousHunter/IngeniousHunter",
   },
   "8135": {
     name: "보물 사냥꾼",
-    icon: "perk-images/Styles/Domination/TreasureHunter/TreasureHunter.png",
+    icon: "Styles/Domination/TreasureHunter/TreasureHunter",
   },
   "8136": {
     name: "좀비 와드",
-    icon: "perk-images/Styles/Domination/ZombieWard/ZombieWard.png",
+    icon: "Styles/Domination/ZombieWard/ZombieWard",
   },
   "8138": {
     name: "사냥의 증표",
-    icon: "perk-images/Styles/Domination/EyeballCollection/EyeballCollection.png",
+    icon: "Styles/Domination/EyeballCollection/EyeballCollection",
   },
   "8139": {
     name: "피의 맛",
-    icon: "perk-images/Styles/Domination/TasteOfBlood/GreenTerror_TasteOfBlood.png",
+    icon: "Styles/Domination/TasteOfBlood/GreenTerror_TasteOfBlood",
   },
   "8143": {
     name: "돌발 일격",
-    icon: "perk-images/Styles/Domination/SuddenImpact/SuddenImpact.png",
+    icon: "Styles/Domination/SuddenImpact/SuddenImpact",
   },
   "8200": {
     name: "마법",
-    icon: "perk-images/Styles/7202_Sorcery.png",
+    icon: "Styles/7202_Sorcery",
   },
   "8210": {
     name: "깨달음",
-    icon: "perk-images/Styles/Sorcery/Transcendence/Transcendence.png",
+    icon: "Styles/Sorcery/Transcendence/Transcendence",
   },
   "8214": {
     name: "콩콩이 소환",
-    icon: "perk-images/Styles/Sorcery/SummonAery/SummonAery.png",
+    icon: "Styles/Sorcery/SummonAery/SummonAery",
   },
   "8224": {
     name: "무효화 구체",
-    icon: "perk-images/Styles/Sorcery/NullifyingOrb/Pokeshield.png",
+    icon: "Styles/Sorcery/NullifyingOrb/Pokeshield",
   },
   "8226": {
     name: "마나순환 팔찌",
-    icon: "perk-images/Styles/Sorcery/ManaflowBand/ManaflowBand.png",
+    icon: "Styles/Sorcery/ManaflowBand/ManaflowBand",
   },
   "8229": {
     name: "신비로운 유성",
-    icon: "perk-images/Styles/Sorcery/ArcaneComet/ArcaneComet.png",
+    icon: "Styles/Sorcery/ArcaneComet/ArcaneComet",
   },
   "8230": {
     name: "난입",
-    icon: "perk-images/Styles/Sorcery/PhaseRush/PhaseRush.png",
+    icon: "Styles/Sorcery/PhaseRush/PhaseRush",
   },
   "8232": {
     name: "물 위를 걷는 자",
-    icon: "perk-images/Styles/Sorcery/Waterwalking/Waterwalking.png",
+    icon: "Styles/Sorcery/Waterwalking/Waterwalking",
   },
   "8233": {
     name: "절대 집중",
-    icon: "perk-images/Styles/Sorcery/AbsoluteFocus/AbsoluteFocus.png",
+    icon: "Styles/Sorcery/AbsoluteFocus/AbsoluteFocus",
   },
   "8234": {
     name: "기민함",
-    icon: "perk-images/Styles/Sorcery/Celerity/CelerityTemp.png",
+    icon: "Styles/Sorcery/Celerity/CelerityTemp",
   },
   "8236": {
     name: "폭풍의 결집",
-    icon: "perk-images/Styles/Sorcery/GatheringStorm/GatheringStorm.png",
+    icon: "Styles/Sorcery/GatheringStorm/GatheringStorm",
   },
   "8237": {
     name: "주문 작열",
-    icon: "perk-images/Styles/Sorcery/Scorch/Scorch.png",
+    icon: "Styles/Sorcery/Scorch/Scorch",
   },
   "8242": {
     name: "불굴의 의지",
-    icon: "perk-images/Styles/Sorcery/Unflinching/Unflinching.png",
+    icon: "Styles/Sorcery/Unflinching/Unflinching",
   },
   "8275": {
     name: "빛의 망토",
-    icon: "perk-images/Styles/Sorcery/NimbusCloak/6361.png",
+    icon: "Styles/Sorcery/NimbusCloak/6361",
   },
   "8299": {
     name: "최후의 저항",
-    icon: "perk-images/Styles/Sorcery/LastStand/LastStand.png",
+    icon: "Styles/Sorcery/LastStand/LastStand",
   },
   "8300": {
     name: "영감",
-    icon: "perk-images/Styles/7203_Whimsy.png",
+    icon: "Styles/7203_Whimsy",
   },
   "8304": {
     name: "마법의 신발",
-    icon: "perk-images/Styles/Inspiration/MagicalFootwear/MagicalFootwear.png",
+    icon: "Styles/Inspiration/MagicalFootwear/MagicalFootwear",
   },
   "8306": {
     name: "마법공학 점멸기",
-    icon: "perk-images/Styles/Inspiration/HextechFlashtraption/HextechFlashtraption.png",
+    icon: "Styles/Inspiration/HextechFlashtraption/HextechFlashtraption",
   },
   "8313": {
     name: "완벽한 타이밍",
-    icon: "perk-images/Styles/Inspiration/PerfectTiming/PerfectTiming.png",
+    icon: "Styles/Inspiration/PerfectTiming/PerfectTiming",
   },
   "8316": {
     name: "미니언 해체분석기",
-    icon: "perk-images/Styles/Inspiration/MinionDematerializer/MinionDematerializer.png",
+    icon: "Styles/Inspiration/MinionDematerializer/MinionDematerializer",
   },
   "8321": {
     name: "외상",
-    icon: "perk-images/Styles/Inspiration/FuturesMarket/FuturesMarket.png",
+    icon: "Styles/Inspiration/FuturesMarket/FuturesMarket",
   },
   "8345": {
     name: "비스킷 배달",
-    icon: "perk-images/Styles/Inspiration/BiscuitDelivery/BiscuitDelivery.png",
+    icon: "Styles/Inspiration/BiscuitDelivery/BiscuitDelivery",
   },
   "8347": {
     name: "우주적 통찰력",
-    icon: "perk-images/Styles/Inspiration/CosmicInsight/CosmicInsight.png",
+    icon: "Styles/Inspiration/CosmicInsight/CosmicInsight",
   },
   "8351": {
     name: "빙결 강화",
-    icon: "perk-images/Styles/Inspiration/GlacialAugment/GlacialAugment.png",
+    icon: "Styles/Inspiration/GlacialAugment/GlacialAugment",
   },
   "8352": {
     name: "시간 왜곡 물약",
-    icon: "perk-images/Styles/Inspiration/TimeWarpTonic/TimeWarpTonic.png",
+    icon: "Styles/Inspiration/TimeWarpTonic/TimeWarpTonic",
   },
   "8360": {
     name: "봉인 풀린 주문서",
-    icon: "perk-images/Styles/Inspiration/UnsealedSpellbook/UnsealedSpellbook.png",
+    icon: "Styles/Inspiration/UnsealedSpellbook/UnsealedSpellbook",
   },
   "8369": {
     name: "선제공격",
-    icon: "perk-images/Styles/Inspiration/FirstStrike/FirstStrike.png",
+    icon: "Styles/Inspiration/FirstStrike/FirstStrike",
   },
   "8400": {
     name: "결의",
-    icon: "perk-images/Styles/7204_Resolve.png",
+    icon: "Styles/7204_Resolve",
   },
   "8401": {
     name: "보호막 강타",
-    icon: "perk-images/Styles/Resolve/MirrorShell/MirrorShell.png",
+    icon: "Styles/Resolve/MirrorShell/MirrorShell",
   },
   "8410": {
     name: "쾌속 접근",
-    icon: "perk-images/Styles/Resolve/ApproachVelocity/ApproachVelocity.png",
+    icon: "Styles/Resolve/ApproachVelocity/ApproachVelocity",
   },
   "8429": {
     name: "사전 준비",
-    icon: "perk-images/Styles/Resolve/Conditioning/Conditioning.png",
+    icon: "Styles/Resolve/Conditioning/Conditioning",
   },
   "8437": {
     name: "착취의 손아귀",
-    icon: "perk-images/Styles/Resolve/GraspOfTheUndying/GraspOfTheUndying.png",
+    icon: "Styles/Resolve/GraspOfTheUndying/GraspOfTheUndying",
   },
   "8439": {
     name: "여진",
-    icon: "perk-images/Styles/Resolve/VeteranAftershock/VeteranAftershock.png",
+    icon: "Styles/Resolve/VeteranAftershock/VeteranAftershock",
   },
   "8444": {
     name: "재생의 바람",
-    icon: "perk-images/Styles/Resolve/SecondWind/SecondWind.png",
+    icon: "Styles/Resolve/SecondWind/SecondWind",
   },
   "8446": {
     name: "철거",
-    icon: "perk-images/Styles/Resolve/Demolish/Demolish.png",
+    icon: "Styles/Resolve/Demolish/Demolish",
   },
   "8451": {
     name: "과잉성장",
-    icon: "perk-images/Styles/Resolve/Overgrowth/Overgrowth.png",
+    icon: "Styles/Resolve/Overgrowth/Overgrowth",
   },
   "8453": {
     name: "소생",
-    icon: "perk-images/Styles/Resolve/Revitalize/Revitalize.png",
+    icon: "Styles/Resolve/Revitalize/Revitalize",
   },
   "8463": {
     name: "생명의 샘",
-    icon: "perk-images/Styles/Resolve/FontOfLife/FontOfLife.png",
+    icon: "Styles/Resolve/FontOfLife/FontOfLife",
   },
   "8465": {
     name: "수호자",
-    icon: "perk-images/Styles/Resolve/Guardian/Guardian.png",
+    icon: "Styles/Resolve/Guardian/Guardian",
   },
   "8473": {
     name: "뼈 방패",
-    icon: "perk-images/Styles/Resolve/BonePlating/BonePlating.png",
+    icon: "Styles/Resolve/BonePlating/BonePlating",
   },
   "9101": {
     name: "과다치유",
-    icon: "perk-images/Styles/Precision/Overheal.png",
+    icon: "Styles/Precision/Overheal",
   },
   "9103": {
     name: "전설: 핏빛 길",
-    icon: "perk-images/Styles/Precision/LegendBloodline/LegendBloodline.png",
+    icon: "Styles/Precision/LegendBloodline/LegendBloodline",
   },
   "9104": {
     name: "전설: 민첩함",
-    icon: "perk-images/Styles/Precision/LegendAlacrity/LegendAlacrity.png",
+    icon: "Styles/Precision/LegendAlacrity/LegendAlacrity",
   },
   "9105": {
     name: "전설: 강인함",
-    icon: "perk-images/Styles/Precision/LegendTenacity/LegendTenacity.png",
+    icon: "Styles/Precision/LegendTenacity/LegendTenacity",
   },
   "9111": {
     name: "승전보",
-    icon: "perk-images/Styles/Precision/Triumph.png",
+    icon: "Styles/Precision/Triumph",
   },
   "9923": {
     name: "칼날비",
-    icon: "perk-images/Styles/Domination/HailOfBlades/HailOfBlades.png",
+    icon: "Styles/Domination/HailOfBlades/HailOfBlades",
   },
 };
 
@@ -591,17 +1091,9 @@ export function getTierIcon(rank: string | null, pos: number) {
   if (rank) {
     tier = rank.split(",")[0];
   }
-  return `/images/${tier}_${POSITION[pos - 1]}.png`;
+  return `/images/${LOL_VERSION}/ranked-positions/${tier}_${POSITION[pos - 1]}.png`;
 }
 
-export function getPerkIcon(perk: Item) {
-  return `https://ddragon.leagueoflegends.com/cdn/img/${perk.icon}`;
-}
-
-export function getChampionIcon(id: number) {
-  return `https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/${id}.png`;
-}
-
-export function getSpellIcon(spell: Item) {
-  return `https://ddragon.leagueoflegends.com/cdn/13.24.1/img/spell/${spell.icon}`;
+export function getIcon(type: string, item: Item) {
+  return `/images/${LOL_VERSION}/${type}/${item.icon}.png`;
 }
