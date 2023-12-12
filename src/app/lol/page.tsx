@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { CHAMPIONS, PERKS, SPELLS } from "@/utils/lol";
+import { getTierIcon } from "@/utils/lol-tier-icon";
 
 export default function LolPage() {
   return (
@@ -59,6 +60,22 @@ export default function LolPage() {
             alt={perk.name}
           />
         ))}
+      </div>
+      <div>
+        <h2 className="text-lg font-semibold">티어</h2>
+        {["SILVER", "GOLD", "PLATINUM", "EMERALD"].map((tier) =>
+          [1, 2, 3, 4, 5].map((pos) => (
+            <Image
+              key={tier + pos}
+              className="inline-block"
+              width={16}
+              height={16}
+              src={getTierIcon(tier, pos)}
+              title={tier + pos}
+              alt={tier + pos}
+            />
+          )),
+        )}
       </div>
     </div>
   );

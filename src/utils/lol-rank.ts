@@ -30,11 +30,3 @@ export function getPoint(rank: string | null) {
   const parts = rank.split(",");
   return `${parts[2]} LP`;
 }
-
-export function getTierIcon(rank: string | null, pos: number) {
-  let tier = "GOLD";
-  if (rank) {
-    tier = rank.split(",")[0];
-  }
-  return `/images/ranked-positions/${tier}_${POSITION[pos - 1]}.png`;
-}

@@ -2,12 +2,14 @@
 
 import { Switch } from "@headlessui/react";
 import { useContext, useMemo, useState } from "react";
-import { getRank, getTierIcon } from "@/utils/lol-rank";
+import { getRank } from "@/utils/lol-rank";
+import { getTierIcon } from "@/utils/lol-tier-icon";
 import { Player } from "@/utils/supabase";
 import { getChannelUrl } from "@/utils/twitch";
 import { classNames } from "@/utils/util";
 import { StreamContext } from "./stream-provider";
 import Thumbnail from "./thumbnail";
+import Image from "next/image";
 
 export default function StreamList({ streams }: { streams: Player[] }) {
   const { selected, setSelected } = useContext(StreamContext);
@@ -130,13 +132,14 @@ export default function StreamList({ streams }: { streams: Player[] }) {
                     {s.title}
                   </div>
                   <div className="text-gray-700 dark:text-gray-300">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      className="inline align-middle w-4 h-4"
+                    <Image
+                      className="inline align-middle"
+                      width={16}
+                      height={16}
                       src={getTierIcon(s.lol_rank, s.pos)}
                       alt={getRank(s.lol_rank)}
                       title={getRank(s.lol_rank)}
-                    ></img>{" "}
+                    />{" "}
                     {s.name}
                   </div>
                   <div className="text-sm text-gray-600 dark:text-gray-400">
