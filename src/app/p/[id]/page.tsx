@@ -1,7 +1,8 @@
 import Links from "@/components/links";
 import Nick from "@/components/nick";
 import Thumbnail from "@/components/thumbnail";
-import { STATS_SITE, getPoint, getRank } from "@/utils/lol";
+import { STATS_SITE } from "@/utils/lol";
+import { getPoint, getRank } from "@/utils/lol-rank";
 import { getPlayer, getPlayers } from "@/utils/supabase";
 import { getChannelUrl } from "@/utils/twitch";
 

@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useContext, useMemo } from "react";
-import { POSITION, getPoint, getRank, getShortRank } from "@/utils/lol";
+import { POSITION, getPoint, getRank, getShortRank } from "@/utils/lol-rank";
 import { Player } from "@/utils/supabase";
 import { classNames } from "@/utils/util";
 import Links from "../links";

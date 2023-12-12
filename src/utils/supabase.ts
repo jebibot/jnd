@@ -1,3 +1,5 @@
+import "server-only";
+
 import type { CurrentGameInfoDTO } from "twisted/dist/models-dto/spectator/current-game-info.dto";
 
 export type Player = {

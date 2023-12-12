@@ -1,13 +1,8 @@
+import "server-only";
+
 type Item = { name: string; icon: string };
 
 const LOL_VERSION = "13.24";
-
-const RANK: Record<string, number> = {
-  I: 1,
-  II: 2,
-  III: 3,
-  IV: 4,
-};
 
 // https://ddragon.leagueoflegends.com/cdn/13.24.1/data/ko_KR/champion.json
 // Object.fromEntries(Object.values(champion.data).map(c => [c.key, {name: c.name, icon: c.id}]))
@@ -1041,8 +1036,6 @@ export const QUEUES: Record<number, string> = {
   "440": "자유랭크",
 };
 
-export const POSITION = ["TOP", "JUG", "MID", "ADC", "SUP"];
-
 export const STATS_SITE = {
   "op.gg": (nick: string) =>
     `https://www.op.gg/summoners/kr/${encodeURIComponent(
@@ -1061,38 +1054,6 @@ export const STATS_SITE = {
   "your.gg": (nick: string) =>
     `https://your.gg/ko/kr/profile/${encodeURIComponent(nick)}`,
 };
-
-export function getShortRank(rank: string | null) {
-  if (!rank) {
-    return "U";
-  }
-  const parts = rank.split(",");
-  return `${parts[0][0]}${RANK[parts[1]]}`;
-}
-
-export function getRank(rank: string | null) {
-  if (!rank) {
-    return "Unranked";
-  }
-  const parts = rank.split(",");
-  return `${parts[0][0]}${parts[0].slice(1).toLowerCase()} ${parts[1]}`;
-}
-
-export function getPoint(rank: string | null) {
-  if (!rank) {
-    return "";
-  }
-  const parts = rank.split(",");
-  return `${parts[2]} LP`;
-}
-
-export function getTierIcon(rank: string | null, pos: number) {
-  let tier = "GOLD";
-  if (rank) {
-    tier = rank.split(",")[0];
-  }
-  return `/images/${LOL_VERSION}/ranked-positions/${tier}_${POSITION[pos - 1]}.png`;
-}
 
 export function getIcon(type: string, item: Item) {
   return `/images/${LOL_VERSION}/${type}/${item.icon}.png`;

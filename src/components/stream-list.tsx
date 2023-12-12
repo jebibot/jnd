@@ -2,7 +2,7 @@
 
 import { Switch } from "@headlessui/react";
 import { useContext, useMemo, useState } from "react";
-import { getRank, getTierIcon } from "@/utils/lol";
+import { getRank, getTierIcon } from "@/utils/lol-rank";
 import { Player } from "@/utils/supabase";
 import { getChannelUrl } from "@/utils/twitch";
 import { classNames } from "@/utils/util";
