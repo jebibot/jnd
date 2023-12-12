@@ -28,6 +28,7 @@ export default async function Page({ params }: { params: { id: string } }) {
       <div className="flex flex-wrap items-center gap-x-2 gap-y-4">
         {p.profile && (
           <a href={getChannelUrl(p.twitch)} target="_blank">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               className="w-48 h-48 rounded-full"
               src={p.profile}

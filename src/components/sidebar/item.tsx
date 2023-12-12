@@ -22,6 +22,7 @@ export default function SidebarItem({ player }: { player: Player }) {
     <>
       {player.profile && (
         <div className="relative h-8 w-8 mr-1">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             className={classNames(
               "h-8 w-8 rounded-full border-2",

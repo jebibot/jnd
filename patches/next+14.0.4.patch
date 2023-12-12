@@ -1,0 +1,24 @@
+diff --git a/node_modules/next/dist/build/webpack/loaders/next-image-loader/index.js b/node_modules/next/dist/build/webpack/loaders/next-image-loader/index.js
+index cca54f4..ddab21f 100644
+--- a/node_modules/next/dist/build/webpack/loaders/next-image-loader/index.js
++++ b/node_modules/next/dist/build/webpack/loaders/next-image-loader/index.js
+@@ -52,19 +52,10 @@ function nextImageLoader(content) {
+             err.name = "InvalidImageFormatError";
+             throw err;
+         }
+-        const { dataURL: blurDataURL, width: blurWidth, height: blurHeight } = await (0, _blur.getBlurImage)(content, extension, imageSize, {
+-            basePath,
+-            outputPath,
+-            isDev,
+-            tracing: imageLoaderSpan.traceChild.bind(imageLoaderSpan)
+-        });
+         const stringifiedData = imageLoaderSpan.traceChild("image-data-stringify").traceFn(()=>JSON.stringify({
+                 src: outputPath,
+                 height: imageSize.height,
+                 width: imageSize.width,
+-                blurDataURL,
+-                blurWidth,
+-                blurHeight
+             }));
+         if (compilerType === "client") {
+             this.emitFile(interpolatedName, content, null);

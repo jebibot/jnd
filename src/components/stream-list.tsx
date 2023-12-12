@@ -118,6 +118,7 @@ export default function StreamList({ streams }: { streams: Player[] }) {
                 target="_blank"
               >
                 {s.profile && (
+                  // eslint-disable-next-line @next/next/no-img-element
                   <img
                     className="w-12 h-12 rounded-full mr-2"
                     src={s.profile.replace("300x300", "50x50")}
@@ -129,6 +130,7 @@ export default function StreamList({ streams }: { streams: Player[] }) {
                     {s.title}
                   </div>
                   <div className="text-gray-700 dark:text-gray-300">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       className="inline align-middle w-4 h-4"
                       src={getTierIcon(s.lol_rank, s.pos)}

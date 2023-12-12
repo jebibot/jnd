@@ -1,4 +1,5 @@
-import { CHAMPIONS, PERKS, QUEUES, SPELLS, getIcon } from "@/utils/lol";
+import Image from "next/image";
+import { CHAMPIONS, PERKS, QUEUES, SPELLS } from "@/utils/lol";
 import { getLiveMatches } from "@/utils/supabase";
 import { classNames } from "@/utils/util";
 import Nick from "./nick";
@@ -47,40 +48,53 @@ export default async function LiveMatches() {
                     const spell2 = SPELLS[p.spell2Id];
 
                     return (
-                      <div key={p.summonerName} className="flex items-center">
-                        <img
-                          className="w-8 h-8 rounded-full inline-block mr-1"
-                          src={getIcon("champion", champion)}
+                      <div
+                        key={p.summonerName}
+                        className="flex items-center gap-1"
+                      >
+                        <Image
+                          className="rounded-full inline-block"
+                          width={32}
+                          height={32}
+                          src={champion.icon}
                           title={champion.name}
                           alt={champion.name}
                         />
                         <div className="flex flex-col items-center gap-1">
-                          <img
-                            className="w-4 h-4 rounded-full inline-block mr-1"
-                            src={getIcon("spell", spell1)}
+                          <Image
+                            className="rounded-full inline-block"
+                            width={16}
+                            height={16}
+                            src={spell1.icon}
                             title={spell1.name}
                             alt={spell1.name}
                             loading="lazy"
                           />
-                          <img
-                            className="w-4 h-4 rounded-full inline-block mr-1"
-                            src={getIcon("spell", spell2)}
+                          <Image
+                            className="rounded-full inline-block"
+                            width={16}
+                            height={16}
+                            src={spell2.icon}
                             title={spell2.name}
                             alt={spell2.name}
                             loading="lazy"
                           />
                         </div>
                         <div className="flex flex-col items-center">
-                          <img
-                            className="w-6 h-6 inline-block mr-1"
-                            src={getIcon("perk", mainPerk)}
+                          <Image
+                            className="inline-block"
+                            width={20}
+                            height={20}
+                            src={mainPerk.icon}
                             title={mainPerk.name}
                             alt={mainPerk.name}
                             loading="lazy"
                           />
-                          <img
-                            className="w-4 h-4 inline-block mr-1"
-                            src={getIcon("perk", subPerk)}
+                          <Image
+                            className="inline-block"
+                            width={16}
+                            height={16}
+                            src={subPerk.icon}
                             title={subPerk.name}
                             alt={subPerk.name}
                             loading="lazy"

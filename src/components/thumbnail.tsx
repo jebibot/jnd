@@ -17,6 +17,7 @@ export default function Thumbnail({
       )}
       {...props}
     >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         className="w-full"
         srcSet={[80, 276, 414, 552, 828, 1242, 1656]
