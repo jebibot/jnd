@@ -18,8 +18,11 @@ export default async function Home() {
           />
         </div>
         <div>
-          <h2 className="pb-3 text-lg font-semibold text-gray-900 dark:text-gray-200">
-            진행 중인 게임
+          <h2 className="text-gray-900 dark:text-gray-200">
+            <span className="text-lg font-semibold">진행 중인 게임</span>{" "}
+            <span className="text-sm">
+              사용자 설정 게임은 관전이 전체 허용된 게임만 표시됩니다.
+            </span>
           </h2>
           <Suspense fallback={<div>로딩 중...</div>}>
             <LiveMatches />
