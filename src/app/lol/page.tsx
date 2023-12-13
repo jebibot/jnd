@@ -63,7 +63,7 @@ export default function LolPage() {
       </div>
       <div>
         <h2 className="text-lg font-semibold">티어</h2>
-        {["SILVER", "GOLD", "PLATINUM", "EMERALD"].map((tier) =>
+        {["SILVER", "GOLD", "PLATINUM", "EMERALD", "DIAMOND"].map((tier) =>
           [1, 2, 3, 4, 5].map((pos) => (
             <Image
               key={tier + pos}

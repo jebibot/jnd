@@ -20,12 +20,18 @@ import EmeraldJug from "../../public/images/ranked-positions/EMERALD_JUG.png";
 import EmeraldMid from "../../public/images/ranked-positions/EMERALD_MID.png";
 import EmeraldAdc from "../../public/images/ranked-positions/EMERALD_ADC.png";
 import EmeraldSup from "../../public/images/ranked-positions/EMERALD_SUP.png";
+import DiamondTop from "../../public/images/ranked-positions/DIAMOND_TOP.png";
+import DiamondJug from "../../public/images/ranked-positions/DIAMOND_JUG.png";
+import DiamondMid from "../../public/images/ranked-positions/DIAMOND_MID.png";
+import DiamondAdc from "../../public/images/ranked-positions/DIAMOND_ADC.png";
+import DiamondSup from "../../public/images/ranked-positions/DIAMOND_SUP.png";
 
 const TIER: Record<string, StaticImageData[]> = {
   SILVER: [SilverTop, SilverJug, SilverMid, SilverAdc, SilverSup],
   GOLD: [GoldTop, GoldJug, GoldMid, GoldAdc, GoldSup],
   PLATINUM: [PlatinumTop, PlatinumJug, PlatinumMid, PlatinumAdc, PlatinumSup],
   EMERALD: [EmeraldTop, EmeraldJug, EmeraldMid, EmeraldAdc, EmeraldSup],
+  DIAMOND: [DiamondTop, DiamondJug, DiamondMid, DiamondAdc, DiamondSup],
 };
 
 export function getTierIcon(rank: string | null, pos: number) {
