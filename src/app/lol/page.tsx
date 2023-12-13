@@ -4,9 +4,9 @@ import { getTierIcon } from "@/utils/lol-tier-icon";
 
 export default function LolPage() {
   return (
-    <div>
-      <div>
-        <h2 className="text-lg font-semibold">챔피언</h2>
+    <div className="flex flex-col gap-2">
+      <h2 className="text-lg font-semibold">챔피언</h2>
+      <div className="flex flex-wrap gap-1">
         {Object.values(CHAMPIONS).map((champion) => (
           <Image
             key={champion.name}
@@ -19,8 +19,8 @@ export default function LolPage() {
           />
         ))}
       </div>
-      <div>
-        <h2 className="text-lg font-semibold">주문</h2>
+      <h2 className="text-lg font-semibold">주문</h2>
+      <div className="flex flex-wrap gap-1">
         {Object.values(SPELLS).map((spell) => (
           <Image
             key={spell.name}
@@ -33,8 +33,8 @@ export default function LolPage() {
           />
         ))}
       </div>
-      <div>
-        <h2 className="text-lg font-semibold">룬</h2>
+      <h2 className="text-lg font-semibold">룬</h2>
+      <div className="flex flex-wrap gap-1">
         {Object.values(PERKS).map((perk) => (
           <Image
             key={perk.name}
@@ -47,8 +47,8 @@ export default function LolPage() {
           />
         ))}
       </div>
-      <div>
-        <h2 className="text-lg font-semibold">룬</h2>
+      <h2 className="text-lg font-semibold">룬</h2>
+      <div className="flex flex-wrap gap-1">
         {Object.values(PERKS).map((perk) => (
           <Image
             key={perk.name}
@@ -61,8 +61,8 @@ export default function LolPage() {
           />
         ))}
       </div>
-      <div>
-        <h2 className="text-lg font-semibold">티어</h2>
+      <h2 className="text-lg font-semibold">티어</h2>
+      <div className="flex flex-wrap gap-1">
         {["SILVER", "GOLD", "PLATINUM", "EMERALD", "DIAMOND"].map((tier) =>
           [1, 2, 3, 4, 5].map((pos) => (
             <Image
