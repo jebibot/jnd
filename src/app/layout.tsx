@@ -78,7 +78,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
             <main className="py-4" id="content">
               {children}
             </main>
-            <footer className="text-sm text-gray-400 dark:text-gray-600">
+            <footer className="text-sm text-gray-400 dark:text-gray-500">
               <a href="https://github.com/jebibot/jnd" target="_blank">
                 GitHub
               </a>{" "}
