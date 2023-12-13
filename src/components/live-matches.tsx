@@ -103,12 +103,22 @@ export default async function LiveMatches() {
                           {player &&
                             (player.stream_start ? (
                               <PlayerCheckbox twitch={player.twitch}>
-                                {player.name}
+                                <span className="underline decoration-4 underline-offset-2 decoration-purple-300 dark:decoration-purple-900">
+                                  {player.name}
+                                </span>
                               </PlayerCheckbox>
                             ) : (
-                              <>{player.name}</>
+                              <span className="underline decoration-4 underline-offset-2 decoration-purple-300 dark:decoration-purple-900">
+                                {player.name}
+                              </span>
                             ))}
-                          <Nick className={player && "text-xs"} nick={nick} />
+                          <Nick
+                            className={classNames(
+                              "text-gray-700 dark:text-gray-300",
+                              player && "text-xs",
+                            )}
+                            nick={nick}
+                          />
                         </div>
                       </div>
                     );
