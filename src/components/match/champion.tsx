@@ -15,8 +15,8 @@ export default function Champion({
   mediumSize: number;
   smallSize: number;
 }) {
-  const mainPerk = PERKS[player.perks?.perkIds[0] || 8000];
-  const subPerk = PERKS[player.perks?.perkSubStyle || 8000];
+  const mainPerk = PERKS[player.perks?.perkIds[0]];
+  const subPerk = PERKS[player.perks?.perkSubStyle];
   const champion = CHAMPIONS[player.championId];
   const spell1 = SPELLS[player.spell1Id];
   const spell2 = SPELLS[player.spell2Id];
@@ -57,26 +57,28 @@ export default function Champion({
           loading="lazy"
         />
       </div>
-      <div className="flex flex-col items-center">
-        <Image
-          className="rounded-full"
-          width={mediumSize}
-          height={mediumSize}
-          src={mainPerk.icon}
-          title={mainPerk.name}
-          alt={mainPerk.name}
-          loading="lazy"
-        />
-        <Image
-          className="rounded-full"
-          width={smallSize}
-          height={smallSize}
-          src={subPerk.icon}
-          title={subPerk.name}
-          alt={subPerk.name}
-          loading="lazy"
-        />
-      </div>
+      {player.perks != null && (
+        <div className="flex flex-col items-center">
+          <Image
+            className="rounded-full"
+            width={mediumSize}
+            height={mediumSize}
+            src={mainPerk.icon}
+            title={mainPerk.name}
+            alt={mainPerk.name}
+            loading="lazy"
+          />
+          <Image
+            className="rounded-full"
+            width={smallSize}
+            height={smallSize}
+            src={subPerk.icon}
+            title={subPerk.name}
+            alt={subPerk.name}
+            loading="lazy"
+          />
+        </div>
+      )}
     </div>
   );
 }
