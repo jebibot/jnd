@@ -2,7 +2,7 @@
 
 import { createColumnHelper } from "@tanstack/react-table";
 import { getCSPerMinute, getKDA } from "@/utils/stats";
-import { ChampionsColumn, getNumberCell, getPercentCell } from "@/utils/table";
+import { ChampionColumn, getNumberCell, getPercentCell } from "@/utils/table";
 import Table from "../table";
 
 export type PlayerChampionsStatT = { championId: number } & Record<
@@ -21,7 +21,7 @@ export default function PlayerChampionsStat({
     <Table
       data={championsStat}
       columns={[
-        ChampionsColumn,
+        ChampionColumn,
         columnHelper.accessor((row) => row.WIN / row.games, {
           header: "승률",
           cell: getPercentCell,

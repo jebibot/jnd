@@ -5,7 +5,7 @@ import { formatNumber } from "./util";
 
 const collator = new Intl.Collator("ko-KR");
 
-export const ChampionsColumn = createColumnHelper<{
+export const ChampionColumn = createColumnHelper<{
   championId: number;
 }>().accessor("championId", {
   header: "챔피언",
@@ -20,7 +20,7 @@ export const ChampionsColumn = createColumnHelper<{
             height={32}
             src={champion.icon}
             title={champion.name}
-            alt={champion.name}
+            alt=""
           />
         </div>
         {champion.name}

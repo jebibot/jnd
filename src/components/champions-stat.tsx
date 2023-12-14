@@ -1,7 +1,7 @@
 "use client";
 
 import { createColumnHelper } from "@tanstack/react-table";
-import { ChampionsColumn, getPercentCell } from "@/utils/table";
+import { ChampionColumn, getPercentCell } from "@/utils/table";
 import Table from "./table";
 
 export type ChampionsStatT = {
@@ -24,7 +24,7 @@ export default function ChampionsStat({
     <Table
       data={championsStat}
       columns={[
-        ChampionsColumn,
+        ChampionColumn,
         columnHelper.accessor((row) => row.picked || 0, {
           header: "게임 수",
         }),
