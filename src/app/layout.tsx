@@ -16,6 +16,8 @@ import SidebarProvider from "@/components/sidebar/provider";
 import Sidebar from "@/components/sidebar/sidebar";
 import { getPlayers } from "@/utils/supabase";
 
+export const preferredRegion = "icn1";
+
 export const metadata: Metadata = {
   title: {
     default: "2023 자낳대 시즌 2 팬사이트",
