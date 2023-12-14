@@ -15,8 +15,8 @@ export default function Champion({
   mediumSize: number;
   smallSize: number;
 }) {
-  const mainPerk = PERKS[player.perks.perkIds[0]];
-  const subPerk = PERKS[player.perks.perkSubStyle];
+  const mainPerk = PERKS[player.perks?.perkIds[0] || 8000];
+  const subPerk = PERKS[player.perks?.perkSubStyle || 8000];
   const champion = CHAMPIONS[player.championId];
   const spell1 = SPELLS[player.spell1Id];
   const spell2 = SPELLS[player.spell2Id];
@@ -31,9 +31,9 @@ export default function Champion({
           title={champion.name}
           alt={champion.name}
         />
-        {player.statistics && (
+        {player.stats && (
           <div className="absolute bottom-0 right-0 p-1 rounded-full bg-gray-800 text-sm font-medium text-white leading-none">
-            {player.statistics.LEVEL}
+            {player.stats.LEVEL}
           </div>
         )}
       </div>
