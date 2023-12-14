@@ -67,8 +67,12 @@ export default function MatchHistory({ match }: { match: PlayerMatch }) {
                       className={classNames(
                         "space-y-2 border-l-2 pl-2",
                         teamId === 100
-                          ? "border-blue-500 dark:border-blue-600"
-                          : "border-red-500 dark:border-red-600",
+                          ? p === match.player
+                            ? "border-blue-500"
+                            : "border-blue-300 dark:border-blue-800"
+                          : p === match.player
+                            ? "border-red-500"
+                            : "border-red-300 dark:border-red-800",
                       )}
                     >
                       <td className="px-2 py-1">
