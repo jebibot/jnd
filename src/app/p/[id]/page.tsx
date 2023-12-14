@@ -112,7 +112,7 @@ export default async function Page({ params }: { params: { id: string } }) {
           팀 구성 전에는 관전이 전체 허용된 게임만 수집됩니다.
         </span>
       </div>
-      <Stats player={p} />
+      {/* <Stats player={p} /> */}
     </div>
   );
 }
