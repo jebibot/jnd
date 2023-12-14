@@ -15,3 +15,26 @@ export function formatTimestamp(t: number) {
     ? `${h}:${padNumber(m, 2)}:${padNumber(s, 2)}`
     : `${m}:${padNumber(s, 2)}`;
 }
+
+const numberFormatter = new Intl.NumberFormat("ko-KR", {
+  maximumFractionDigits: 1,
+});
+export function formatNumber(n: number) {
+  return numberFormatter.format(n);
+}
+
+const dateFormatter = new Intl.DateTimeFormat("ko-KR", {
+  month: "long",
+  day: "numeric",
+});
+export function formatDate(d: Date) {
+  return dateFormatter.format(d);
+}
+
+const timeFormatter = new Intl.DateTimeFormat("ko-KR", {
+  hour: "numeric",
+  minute: "numeric",
+});
+export function formatTime(d: Date) {
+  return timeFormatter.format(d);
+}

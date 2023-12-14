@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { CHAMPIONS, PERKS, SPELLS } from "@/utils/lol";
+import { CHAMPIONS, ITEMS, PERKS, SPELLS } from "@/utils/lol";
 import { getTierIcon } from "@/utils/lol-tier-icon";
 
 export default function LolPage() {
@@ -10,7 +10,21 @@ export default function LolPage() {
         {Object.values(CHAMPIONS).map((champion) => (
           <Image
             key={champion.name}
-            className="rounded-full inline-block"
+            className="rounded-full"
+            width={56}
+            height={56}
+            src={champion.icon}
+            title={champion.name}
+            alt={champion.name}
+          />
+        ))}
+      </div>
+      <h2 className="text-lg font-semibold">챔피언</h2>
+      <div className="flex flex-wrap gap-1">
+        {Object.values(CHAMPIONS).map((champion) => (
+          <Image
+            key={champion.name}
+            className="rounded-full"
             width={32}
             height={32}
             src={champion.icon}
@@ -21,10 +35,10 @@ export default function LolPage() {
       </div>
       <h2 className="text-lg font-semibold">주문</h2>
       <div className="flex flex-wrap gap-1">
-        {Object.values(SPELLS).map((spell) => (
+        {Object.entries(SPELLS).map(([id, spell]) => (
           <Image
-            key={spell.name}
-            className="rounded-full inline-block"
+            key={id}
+            className="rounded-full"
             width={16}
             height={16}
             src={spell.icon}
@@ -38,7 +52,7 @@ export default function LolPage() {
         {Object.values(PERKS).map((perk) => (
           <Image
             key={perk.name}
-            className="rounded-full inline-block"
+            className="rounded-full"
             width={20}
             height={20}
             src={perk.icon}
@@ -52,7 +66,7 @@ export default function LolPage() {
         {Object.values(PERKS).map((perk) => (
           <Image
             key={perk.name}
-            className="rounded-full inline-block"
+            className="rounded-full"
             width={16}
             height={16}
             src={perk.icon}
@@ -67,7 +81,6 @@ export default function LolPage() {
           [1, 2, 3, 4, 5].map((pos) => (
             <Image
               key={tier + pos}
-              className="inline-block"
               width={16}
               height={16}
               src={getTierIcon(tier, pos)}
@@ -76,6 +89,20 @@ export default function LolPage() {
             />
           )),
         )}
+      </div>
+      <h2 className="text-lg font-semibold">아이템</h2>
+      <div className="flex flex-wrap gap-1">
+        {Object.entries(ITEMS).map(([id, item]) => (
+          <Image
+            key={id}
+            className="rounded-md"
+            width={20}
+            height={20}
+            src={item.icon}
+            title={item.name}
+            alt={item.name}
+          />
+        ))}
       </div>
     </div>
   );

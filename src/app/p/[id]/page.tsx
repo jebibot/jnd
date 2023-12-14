@@ -2,6 +2,7 @@ import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import Links from "@/components/links";
+import Stats from "@/components/match/stats";
 import Nick from "@/components/nick";
 import Thumbnail from "@/components/thumbnail";
 import { STATS_SITE } from "@/utils/lol";
@@ -111,6 +112,7 @@ export default async function Page({ params }: { params: { id: string } }) {
           팀 구성 전에는 관전이 전체 허용된 게임만 수집됩니다.
         </span>
       </div>
+      <Stats player={p} />
     </div>
   );
 }
