@@ -1,5 +1,6 @@
 User-Agent: *
 Allow: /
+Disallow: /lol
 Disallow: /api/
 
 Sitemap: https://jnd.twitchgg.tv/sitemap.xml
