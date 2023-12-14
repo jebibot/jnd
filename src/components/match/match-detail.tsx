@@ -21,7 +21,6 @@ export default function MatchDetail({ match }: { match: Match }) {
           {match.game.participants
             .filter((p) => p.teamId === teamId)
             .map((p) => {
-              // @ts-expect-error
               const nick = p.riotId || p.summonerName;
               const player = match.players.find(
                 (player) =>

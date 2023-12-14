@@ -19,11 +19,16 @@ export default function DisclosureWrapper({
       {({ open }) => (
         <>
           <Disclosure.Button>
-            <div className={classNames("flex", buttonClassName)}>
-              <div className="flex-1">{button}</div>
-              <div className="flex flex-col justify-end">
+            <div
+              className={classNames(
+                "relative overflow-hidden",
+                buttonClassName,
+              )}
+            >
+              {button}
+              <div className="absolute bottom-0 right-0">
                 <FontAwesomeIcon
-                  className="p-3"
+                  className="mr-2 sm:mr-3 mb-1 sm:mb-2"
                   icon={open ? faChevronUp : faChevronDown}
                 />
               </div>
@@ -38,7 +43,9 @@ export default function DisclosureWrapper({
             leaveFrom="transform scale-100 opacity-100"
             leaveTo="transform scale-95 opacity-0"
           >
-            <Disclosure.Panel static>{children}</Disclosure.Panel>
+            <Disclosure.Panel static className="overflow-x-auto">
+              {children}
+            </Disclosure.Panel>
           </Transition>
         </>
       )}

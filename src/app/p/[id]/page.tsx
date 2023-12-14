@@ -1,13 +1,12 @@
-import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import Links from "@/components/links";
+import Callout from "@/components/match/callout";
 import Stats from "@/components/match/stats";
 import Nick from "@/components/nick";
 import Thumbnail from "@/components/thumbnail";
-import { STATS_SITE } from "@/utils/lol";
-import { getPoint, getRank } from "@/utils/lol-rank";
-import { getTierIcon } from "@/utils/lol-tier-icon";
+import { STATS_SITE } from "@/utils/lol/lol";
+import { getPoint, getRank } from "@/utils/lol/rank";
+import { getTierIcon } from "@/utils/lol/tier-icon";
 import { getPlayer, getPlayers } from "@/utils/supabase";
 import { getChannelUrl } from "@/utils/twitch";
 
@@ -103,16 +102,8 @@ export default async function Page({ params }: { params: { id: string } }) {
           </div>
         </a>
       </div>
-      <div className="p-4 border-l-4 border-blue-400 dark:border-blue-600 bg-blue-50 dark:bg-blue-950">
-        <FontAwesomeIcon
-          className="text-blue-400 dark:text-blue-600"
-          icon={faCircleInfo}
-        />
-        <span className="ml-3 font-medium text-blue-800 dark:text-blue-200">
-          팀 구성 전에는 관전이 전체 허용된 게임만 수집됩니다.
-        </span>
-      </div>
-      {/* <Stats player={p} /> */}
+      <Callout />
+      <Stats player={p} />
     </div>
   );
 }

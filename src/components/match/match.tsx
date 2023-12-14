@@ -1,3 +1,7 @@
+import Image from "next/image";
+import { CHAMPIONS } from "@/utils/lol/champions";
+import { getKDA, getKDAString, getKillParticipation } from "@/utils/stats";
+import { PlayerMatch } from "@/utils/supabase";
 import {
   formatDate,
   formatNumber,
@@ -6,22 +10,24 @@ import {
 } from "@/utils/util";
 import Champion from "./champion";
 import Item from "./item";
-import Image from "next/image";
-import { CHAMPIONS } from "@/utils/lol";
 
 const multiKill = [, , "더블킬", "트리플킬", "쿼드라킬", "펜타킬"];
 
-export default function Match({ participant }: { participant: any }) {
-  const match = participant.matches;
-  const p = participant.player;
+export default function Match({ match }: { match: PlayerMatch }) {
+  const p = match.player!;
+  const stats = p.stats;
+  const teamStats = match.game.teamStats?.[p.teamId];
+  if (stats == null || teamStats == null) {
+    return null;
+  }
   return (
     <div className="flex px-2 sm:px-4 py-1.5 items-center gap-4">
-      <div>
+      <div className="whitespace-nowrap">
         <div className="font-semibold text-sm sm:text-base">
-          {p.statistics.WIN ? "승리" : "패배"}
+          {stats.WIN ? "승리" : "패배"}
         </div>
         <div className="text-sm sm:text-base">
-          {formatTimestamp(match.stats.gameLength * 1000)}
+          {formatTimestamp(match.game.gameLength * 1000)}
         </div>
         <div className="mt-2 text-xs sm:text-sm">
           {formatDate(new Date(match.start))}
@@ -34,36 +40,26 @@ export default function Match({ participant }: { participant: any }) {
         <div className="flex items-center gap-4">
           <Champion player={p} largeSize={56} mediumSize={32} smallSize={24} />
           <div>
-            <div className="text-lg font-semibold leading-6">
-              {p.statistics.CHAMPIONS_KILLED} / {p.statistics.NUM_DEATHS} /{" "}
-              {p.statistics.ASSISTS}
+            <div className="sm:text-lg font-semibold leading-6">
+              {getKDAString(stats)}
             </div>
             <div>
-              {formatNumber(
-                (p.statistics.CHAMPIONS_KILLED + p.statistics.ASSISTS) /
-                  p.statistics.NUM_DEATHS,
-              )}{" "}
-              (
-              {formatNumber(
-                ((p.statistics.CHAMPIONS_KILLED + p.statistics.ASSISTS) /
-                  match.stats.teamStats[p.teamId].CHAMPIONS_KILLED) *
-                  100,
-              )}
-              %)
+              {formatNumber(getKDA(stats))} (
+              {formatNumber(getKillParticipation(stats, teamStats))}%)
             </div>
           </div>
         </div>
         <div className="flex gap-1 items-center">
-          <Item className="rounded-md" item={p.statistics.ITEM0} />
-          <Item className="rounded-md" item={p.statistics.ITEM1} />
-          <Item className="rounded-md" item={p.statistics.ITEM2} />
-          <Item className="rounded-md" item={p.statistics.ITEM3} />
-          <Item className="rounded-md" item={p.statistics.ITEM4} />
-          <Item className="rounded-md" item={p.statistics.ITEM5} />
-          <Item className="rounded-full" item={p.statistics.ITEM6} />
-          {multiKill[p.statistics.LARGEST_MULTI_KILL] && (
+          <Item className="rounded-md" item={stats.ITEM0} />
+          <Item className="rounded-md" item={stats.ITEM1} />
+          <Item className="rounded-md" item={stats.ITEM2} />
+          <Item className="rounded-md" item={stats.ITEM3} />
+          <Item className="rounded-md" item={stats.ITEM4} />
+          <Item className="rounded-md" item={stats.ITEM5} />
+          <Item className="rounded-full" item={stats.ITEM6} />
+          {multiKill[stats.LARGEST_MULTI_KILL] && (
             <div className="px-2 py-1 ml-2 rounded-md bg-red-100 dark:bg-red-800 text-xs font-medium text-red-600 dark:text-red-200 leading-none">
-              {multiKill[p.statistics.LARGEST_MULTI_KILL]}
+              {multiKill[stats.LARGEST_MULTI_KILL]}
             </div>
           )}
         </div>
@@ -72,8 +68,8 @@ export default function Match({ participant }: { participant: any }) {
         {[100, 200].map((teamId) => (
           <div key={teamId} className="flex-1 space-y-0.5 w-8 text-sm">
             {match.game.participants
-              .filter((p: any) => p.teamId === teamId)
-              .map((p: any) => {
+              .filter((p) => p.teamId === teamId)
+              .map((p) => {
                 return (
                   <div key={p.riotId} className="flex items-center gap-1">
                     <div className="w-5 h-5 shrink-0 rounded-md overflow-hidden">

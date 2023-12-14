@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ITEMS } from "@/utils/lol";
+import { ITEMS } from "@/utils/lol/lol";
 import { classNames } from "@/utils/util";
 
 export default function Item({

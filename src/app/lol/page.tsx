@@ -1,6 +1,7 @@
 import Image from "next/image";
-import { CHAMPIONS, ITEMS, PERKS, SPELLS } from "@/utils/lol";
-import { getTierIcon } from "@/utils/lol-tier-icon";
+import { CHAMPIONS } from "@/utils/lol/champions";
+import { ITEMS, PERKS, SPELLS } from "@/utils/lol/lol";
+import { getTierIcon } from "@/utils/lol/tier-icon";
 
 export default function LolPage() {
   return (

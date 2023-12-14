@@ -1,4 +1,4 @@
-import { QUEUES } from "@/utils/lol";
+import { QUEUES } from "@/utils/lol/lol";
 import { getLiveMatches } from "@/utils/supabase";
 import MatchDetail from "./match-detail";
 import Timer from "../timer";

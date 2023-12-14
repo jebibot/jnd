@@ -1,5 +1,7 @@
 import Image from "next/image";
-import { CHAMPIONS, PERKS, SPELLS } from "@/utils/lol";
+import { CHAMPIONS } from "@/utils/lol/champions";
+import { PERKS, SPELLS } from "@/utils/lol/lol";
+import { Participant } from "@/utils/supabase";
 import { classNames } from "@/utils/util";
 
 export default function Champion({
@@ -9,7 +11,7 @@ export default function Champion({
   mediumSize,
   smallSize,
 }: {
-  player: any;
+  player: Participant;
   className?: string;
   largeSize: number;
   mediumSize: number;
@@ -32,7 +34,14 @@ export default function Champion({
           alt={champion.name}
         />
         {player.stats && (
-          <div className="absolute bottom-0 right-0 p-1 rounded-full bg-gray-800 text-sm font-medium text-white leading-none">
+          <div
+            className={classNames(
+              "absolute rounded-full bg-gray-800 font-medium text-white leading-none",
+              largeSize < 48
+                ? "-bottom-0.5 -right-0.5 p-0.5 text-xs"
+                : "bottom-0 right-0 p-1 text-sm",
+            )}
+          >
             {player.stats.LEVEL}
           </div>
         )}

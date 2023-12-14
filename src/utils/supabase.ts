@@ -1,6 +1,9 @@
 import "server-only";
 
-import type { CurrentGameInfoDTO } from "twisted/dist/models-dto/spectator/current-game-info.dto";
+import {
+  CurrentGameInfoDTO,
+  CurrentGameParticipantDTO,
+} from "twisted/dist/models-dto";
 
 export type Player = {
   id: number;
@@ -22,10 +25,34 @@ export type Player = {
   lol_secondary_rank: string | null;
 };
 
+export type PlayerWithMatches = Player & { matches: PlayerMatch[] };
+
+export type Participant = CurrentGameParticipantDTO & {
+  riotId: string;
+  stats?: Record<string, number>;
+  player?: Player;
+};
+
+export type PlayerMatch = {
+  id: number;
+  start: string;
+  game: Omit<CurrentGameInfoDTO, "participants"> & {
+    teamStats?: Record<number, Record<string, number>>;
+    participants: Participant[];
+  };
+  participants: {
+    uptime: number;
+    players: Player;
+  }[];
+  player?: Participant;
+};
+
 export type Match = {
   id: number;
   start: string;
-  game: CurrentGameInfoDTO;
+  game: Omit<CurrentGameInfoDTO, "participants"> & {
+    participants: Participant[];
+  };
   players: Player[];
 };
 
@@ -52,9 +79,9 @@ export async function getPlayers(): Promise<Player[]> {
 
 export async function getPlayer(
   id: string | number,
-): Promise<Player & { participants: any[] }> {
+): Promise<PlayerWithMatches> {
   return fetchSupabase(
-    `players?select=id,name,pos,twitch,profile,title,game,stream_start,youtube,youtube_secondary,community,lol,lol_nick,lol_rank,lol_secondary,lol_secondary_nick,lol_secondary_rank,participants(uptime,matches(start,game,stats,players(name,twitch,lol,lol_secondary)))&id=eq.${id}`,
+    `players?select=id,name,pos,twitch,profile,title,game,stream_start,youtube,youtube_secondary,community,lol,lol_nick,lol_rank,lol_secondary,lol_secondary_nick,lol_secondary_rank,matches(id,start,game,participants(uptime,players(name,twitch,lol,lol_secondary)))&id=eq.${id}`,
     ["players"],
     true,
   );
@@ -65,4 +92,8 @@ export async function getLiveMatches(): Promise<Match[]> {
     `matches?select=id,start,game,players(name,twitch,stream_start,lol,lol_secondary)&stats=is.null&order=id.desc`,
     ["matches", "players"],
   );
+}
+
+export async function getMatches(): Promise<Match[]> {
+  return fetchSupabase(`matches?select=game&stats=neq.null`, ["matches"]);
 }
