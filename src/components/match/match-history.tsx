@@ -18,6 +18,15 @@ export default function MatchHistory({ match }: { match: PlayerMatch }) {
   if (teamStats == null) {
     return null;
   }
+  const maxDamage = Math.max(
+    teamStats[100].TOTAL_DAMAGE_DEALT_TO_CHAMPIONS,
+    teamStats[200].TOTAL_DAMAGE_DEALT_TO_CHAMPIONS,
+  );
+  const maxDamageTaken = Math.max(
+    teamStats[100].TOTAL_DAMAGE_TAKEN,
+    teamStats[200].TOTAL_DAMAGE_TAKEN,
+  );
+
   return (
     <table className="table-auto mx-auto rounded-md text-center text-sm md:text-base whitespace-nowrap overflow-hidden">
       <thead className="text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-slate-800">
@@ -112,8 +121,7 @@ export default function MatchHistory({ match }: { match: PlayerMatch }) {
                             style={{
                               width: `${(
                                 (stats.TOTAL_DAMAGE_DEALT_TO_CHAMPIONS /
-                                  teamStats[teamId]
-                                    .TOTAL_DAMAGE_DEALT_TO_CHAMPIONS) *
+                                  maxDamage) *
                                 100
                               ).toFixed(1)}%`,
                             }}
@@ -127,8 +135,7 @@ export default function MatchHistory({ match }: { match: PlayerMatch }) {
                             className="h-2 rounded-full bg-gray-600 dark:bg-gray-500"
                             style={{
                               width: `${(
-                                (stats.TOTAL_DAMAGE_TAKEN /
-                                  teamStats[teamId].TOTAL_DAMAGE_TAKEN) *
+                                (stats.TOTAL_DAMAGE_TAKEN / maxDamageTaken) *
                                 100
                               ).toFixed(1)}%`,
                             }}
