@@ -34,7 +34,10 @@ export default async function StatsPage() {
         챔피언 통계
       </h2>
       <div className="mx-auto max-w-full overflow-x-auto">
-        <ChampionsStat championsStat={Object.values(championsStat)} />
+        <ChampionsStat
+          championsStat={Object.values(championsStat)}
+          numMatches={matches.length}
+        />
       </div>
     </div>
   );
