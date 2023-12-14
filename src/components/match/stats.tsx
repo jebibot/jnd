@@ -10,7 +10,7 @@ import DisclosureWrapper from "../disclosure";
 export default function Stats({ player }: { player: PlayerWithMatches }) {
   const matches = player.matches
     .filter((p) => p.game.teamStats != null)
-    .sort((a, b) => new Date(b.start).getTime() - new Date(a.start).getTime());
+    .sort((a, b) => b.game.gameId - a.game.gameId);
   const championsStat: Record<number, Record<string, number>> = {};
   for (const match of matches) {
     for (const p of match.game.participants) {
