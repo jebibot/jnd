@@ -47,9 +47,12 @@ export const metadata: Metadata = {
 export default async function RootLayout({ children }: PropsWithChildren) {
   const players = await getPlayers();
   return (
-    <html lang="ko" className="bg-gray-50 dark:bg-slate-950 dark:text-gray-50">
-      <body>
-        <a href="#content" className="sr-only">
+    <html lang="ko">
+      <body className="bg-gray-50 dark:bg-slate-950 dark:text-gray-50">
+        <a
+          href="#content"
+          className="sr-only focus:not-sr-only focus:fixed focus:z-50"
+        >
           내용으로 건너뛰기
         </a>
         <SidebarProvider>
@@ -63,13 +66,16 @@ export default async function RootLayout({ children }: PropsWithChildren) {
             />
           </SidebarContainer>
 
-          <div className="sticky top-0 z-40 flex items-center px-4 py-4 sm:px-6 bg-white dark:bg-gray-900 shadow-sm lg:hidden">
+          <div className="sticky top-0 z-30 flex items-center gap-x-6 px-4 py-4 sm:px-6 bg-white dark:bg-gray-900 shadow-sm lg:hidden">
             <SidebarButton
               className="-m-2.5 p-2.5 text-gray-700 dark:text-gray-300 lg:hidden"
               open={true}
             >
               <FontAwesomeIcon icon={faBars} size="lg" />
             </SidebarButton>
+            <div className="flex-1 text-sm font-semibold dark:text-white">
+              2023 자낳대 시즌 2 팬사이트
+            </div>
           </div>
         </SidebarProvider>
 
@@ -78,7 +84,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
             <main className="py-4" id="content">
               {children}
             </main>
-            <footer className="text-sm text-gray-400 dark:text-gray-500">
+            <footer className="text-xs text-gray-400 dark:text-gray-500">
               <a href="https://github.com/jebibot/jnd" target="_blank">
                 GitHub
               </a>{" "}

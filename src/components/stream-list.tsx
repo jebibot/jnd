@@ -24,7 +24,7 @@ export default function StreamList({ streams }: { streams: Player[] }) {
   );
   return (
     <div>
-      <div className="flex mb-2">
+      <div className="flex gap-2 items-center mb-2">
         <div className="flex flex-1 flex-wrap gap-2">
           {["multitwitch.tv", "multistre.am"].map((site) => {
             const enabled =
@@ -53,16 +53,16 @@ export default function StreamList({ streams }: { streams: Player[] }) {
             );
           })}
         </div>
-        <Switch.Group as="div" className="flex items-center">
+        <Switch.Group as="div">
           <Switch
             checked={showOnlyLol}
             onChange={setShowOnlyLol}
             className={classNames(
               showOnlyLol ? "bg-purple-600" : "bg-gray-200 dark:bg-gray-700",
-              "inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent focus:border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-black",
+              "inline-block h-6 w-11 cursor-pointer rounded-full border-2 border-transparent align-middle transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-black",
             )}
           >
-            <span
+            <div
               aria-hidden="true"
               className={classNames(
                 showOnlyLol ? "translate-x-5" : "translate-x-0",

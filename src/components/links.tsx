@@ -13,7 +13,7 @@ export default function Links({
   className?: string;
 }) {
   return (
-    <div className={classNames("flex gap-1", className)}>
+    <div className={classNames("space-x-1", className)}>
       {player.twitch && (
         <a
           href={getChannelUrl(player.twitch)}

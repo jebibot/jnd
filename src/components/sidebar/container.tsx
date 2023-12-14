@@ -9,7 +9,7 @@ export default function SidebarContainer({ children }: PropsWithChildren) {
   return (
     <div
       className={classNames(
-        "hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:flex-col",
+        "hidden lg:fixed lg:inset-y-0 lg:z-40 lg:flex lg:flex-col",
         detailed ? "lg:w-[28rem]" : "lg:w-48",
       )}
     >

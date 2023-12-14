@@ -1,3 +1,7 @@
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Player } from "@/utils/supabase";
 import { classNames } from "@/utils/util";
 
@@ -17,9 +21,25 @@ export function getTierBorder(rank: string | null) {
   return TIER_BORDER[parts[0]];
 }
 
-export default function SidebarItem({ player }: { player: Player }) {
+export default function SidebarItem({
+  player,
+  activeClassName,
+  inactiveClassName,
+}: {
+  player: Player;
+  activeClassName?: string;
+  inactiveClassName?: string;
+}) {
+  const pathname = usePathname();
   return (
-    <>
+    <Link
+      href={`/p/${player.id}`}
+      className={classNames(
+        "flex items-center gap-x-2",
+        pathname === `/p/${player.id}` ? activeClassName : inactiveClassName,
+      )}
+      prefetch={false}
+    >
       {player.profile && (
         <div className="relative h-8 w-8 mr-1">
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -32,17 +52,17 @@ export default function SidebarItem({ player }: { player: Player }) {
             alt=""
           />
           {player.stream_start && (
-            <span
-              className="flex absolute bottom-0 right-0 h-2 w-2 -mt-0.5 -mr-0.5"
+            <div
+              className="absolute bottom-0 right-0 h-2 w-2 -mt-0.5 -mr-0.5"
               aria-label="방송 중"
             >
-              <span className="absolute h-full w-full rounded-full bg-red-400 dark:bg-red-500 opacity-75 animate-ping"></span>
-              <span className="relative h-2 w-2 rounded-full bg-red-500 dark:bg-red-600"></span>
-            </span>
+              <div className="absolute h-full w-full rounded-full bg-red-400 dark:bg-red-500 opacity-75 animate-ping"></div>
+              <div className="relative h-2 w-2 rounded-full bg-red-500 dark:bg-red-600"></div>
+            </div>
           )}
         </div>
       )}
-      <span className="break-keep">{player.name}</span>
-    </>
+      <span className="whitespace-nowrap">{player.name}</span>
+    </Link>
   );
 }

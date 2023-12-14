@@ -14,10 +14,10 @@ export default function PlayerCheckbox({
   const isSelected = selected.has(twitch);
 
   return (
-    <label className="flex items-center">
+    <label>
       <input
         type="checkbox"
-        className="h-3 w-3 rounded border-gray-300 bg-transparent text-purple-600 focus:ring-1 focus:ring-purple-600 focus:ring-offset-white dark:focus:ring-offset-black"
+        className="inline-block align-baseline h-3 w-3 mr-1 rounded border-gray-300 bg-transparent text-purple-600 focus:ring-1 focus:ring-purple-600 focus:ring-offset-white dark:focus:ring-offset-black"
         checked={isSelected}
         onChange={(e) => {
           const checked = e.target.checked;
@@ -30,7 +30,7 @@ export default function PlayerCheckbox({
           setSelected(newSet);
         }}
       />
-      <div className="ml-1">{children}</div>
+      {children}
       <a
         className="ml-2 text-sm text-gray-500"
         href={getChannelUrl(twitch)}

@@ -39,7 +39,7 @@ export default function SidebarMenu({
   return (
     <SimpleBarWrapper className={classNames("grow max-h-full", className)}>
       <nav className="px-3 py-4 overflow-x-hidden bg-white dark:bg-gray-900">
-        <ul role="list" className="flex flex-col gap-y-4">
+        <ul role="list" className="space-y-4">
           <li className="flex items-center gap-2">
             <Link
               href="/"
@@ -73,20 +73,14 @@ export default function SidebarMenu({
               <div className="text-sm font-semibold text-gray-400">{p}</div>
               <ul role="list" className="space-y-0.5 mt-1">
                 {playersList[i].map((p) => (
-                  <li key={p.name}>
+                  <li key={p.name} className="font-semibold">
                     {detailed ? (
-                      <div className="flex items-center gap-x-2 p-1 font-semibold text-gray-800 dark:text-gray-300">
-                        <Link
-                          href={`/p/${p.id}`}
-                          className="flex items-center gap-x-2"
-                          prefetch={false}
-                        >
-                          <SidebarItem player={p} />
-                        </Link>
+                      <div className="flex items-center gap-x-2 p-1 text-gray-800 dark:text-gray-300">
+                        <SidebarItem player={p} />
                         {p.lol_nick && (
                           <Nick
-                            nick={p.lol_nick}
                             className="text-sm text-gray-600 dark:text-gray-400"
+                            nick={p.lol_nick}
                           />
                         )}
                         <span
@@ -98,23 +92,16 @@ export default function SidebarMenu({
                           {getShortRank(p.lol_rank)}
                         </span>
                         <Links
-                          player={p}
                           className="text-sm text-gray-400 dark:text-gray-600"
+                          player={p}
                         />
                       </div>
                     ) : (
-                      <Link
-                        href={`/p/${p.id}`}
-                        className={classNames(
-                          pathname === `/p/${p.id}`
-                            ? "text-purple-600 dark:text-white bg-gray-50 dark:bg-gray-800"
-                            : "text-gray-700 dark:text-gray-400 hover:text-purple-600 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800",
-                          "flex items-center gap-x-2 p-1 rounded-md font-semibold",
-                        )}
-                        prefetch={false}
-                      >
-                        <SidebarItem player={p} />
-                      </Link>
+                      <SidebarItem
+                        player={p}
+                        activeClassName="p-1 rounded-md text-purple-600 dark:text-white bg-gray-50 dark:bg-gray-800"
+                        inactiveClassName="p-1 rounded-md text-gray-700 dark:text-gray-400 hover:text-purple-600 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800"
+                      />
                     )}
                   </li>
                 ))}
