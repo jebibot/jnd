@@ -50,7 +50,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
   const players = await getPlayers();
   return (
     <html lang="ko">
-      <body className="bg-gray-50 dark:bg-slate-950 dark:text-gray-50">
+      <body className="bg-gray-50 dark:bg-slate-950 dark:text-gray-100">
         <a
           href="#content"
           className="sr-only focus:not-sr-only focus:fixed focus:z-50"
@@ -75,7 +75,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
             >
               <FontAwesomeIcon icon={faBars} size="lg" />
             </SidebarButton>
-            <div className="flex-1 text-sm font-semibold dark:text-white">
+            <div className="flex-1 text-sm font-semibold">
               2023 자낳대 시즌 2 팬사이트
             </div>
           </div>

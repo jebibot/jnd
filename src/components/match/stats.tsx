@@ -56,10 +56,10 @@ export default function Stats({ player }: { player: PlayerWithMatches }) {
         <DisclosureWrapper
           key={match.game.gameId}
           buttonClassName={classNames(
-            "rounded-md",
+            "rounded-lg",
             match.player?.stats?.WIN
-              ? "bg-sky-50 dark:bg-sky-900"
-              : "bg-red-50 dark:bg-red-900",
+              ? "bg-sky-50 dark:bg-sky-900/20"
+              : "bg-red-50 dark:bg-red-900/20",
           )}
           button={<Match match={match} />}
         >
