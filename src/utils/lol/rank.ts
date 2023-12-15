@@ -5,7 +5,7 @@ const RANK: Record<string, number> = {
   IV: 4,
 };
 
-export const POSITION = ["TOP", "JUG", "MID", "ADC", "SUP"];
+export const POSITION = ["TOP", "JUG", "MID", "ADC", "SUP", "COACH"];
 
 export function getShortRank(rank: string | null) {
   if (!rank) {
@@ -20,7 +20,7 @@ export function getRank(rank: string | null) {
     return "Unranked";
   }
   const parts = rank.split(",");
-  return `${parts[0][0]}${parts[0].slice(1).toLowerCase()} ${parts[1]}`;
+  return `${parts[0][0]}${parts[0].slice(1).toLowerCase()} ${parts[1] || ""}`;
 }
 
 export function getPoint(rank: string | null) {

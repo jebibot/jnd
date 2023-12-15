@@ -1,12 +1,11 @@
-import Image from "next/image";
 import Links from "@/components/links";
 import Callout from "@/components/match/callout";
 import Stats from "@/components/match/stats";
 import Nick from "@/components/nick";
 import Thumbnail from "@/components/thumbnail";
+import TierIcon from "@/components/tier-icon";
 import { STATS_SITE } from "@/utils/lol/lol";
 import { getPoint, getRank } from "@/utils/lol/rank";
-import { getTierIcon } from "@/utils/lol/tier-icon";
 import { getPlayer, getPlayers } from "@/utils/supabase";
 import { getChannelUrl } from "@/utils/twitch";
 
@@ -56,18 +55,20 @@ export default async function Page({ params }: { params: { id: string } }) {
               />
             )}
           </div>
-          <div className="flex flex-wrap gap-x-2 items-baseline">
-            <Image
-              className="self-center"
-              width={20}
-              height={20}
-              src={getTierIcon(p.lol_rank, p.pos)}
-              alt=""
-            />
-            <span className="font-semibold text-xl">{getRank(p.lol_rank)}</span>
-            {getPoint(p.lol_rank)}
-            {p.lol_nick &&
-              Object.entries(STATS_SITE).map(([name, getLink]) => (
+          {p.lol_nick && (
+            <div className="flex flex-wrap gap-x-2 items-baseline">
+              <TierIcon
+                className="self-center"
+                rank={p.lol_rank}
+                pos={p.pos}
+                size={20}
+                alt=""
+              />
+              <span className="font-semibold text-xl">
+                {getRank(p.lol_rank)}
+              </span>
+              {getPoint(p.lol_rank)}
+              {Object.entries(STATS_SITE).map(([name, getLink]) => (
                 <a
                   key={name}
                   className="text-blue-500 dark:text-blue-400 hover:text-blue-600 text-sm"
@@ -77,7 +78,8 @@ export default async function Page({ params }: { params: { id: string } }) {
                   {name}
                 </a>
               ))}
-          </div>
+            </div>
+          )}
           <Links player={p} className="text-2xl text-gray-500" />
         </div>
         <a
@@ -102,8 +104,12 @@ export default async function Page({ params }: { params: { id: string } }) {
           </div>
         </a>
       </div>
-      <Callout />
-      <Stats player={p} />
+      {p.lol_nick && (
+        <>
+          <Callout />
+          <Stats player={p} />
+        </>
+      )}
     </div>
   );
 }

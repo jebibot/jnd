@@ -30,7 +30,7 @@ export default function SidebarMenu({
   const { detailed, setDetailed } = useContext(SidebarContext);
 
   const playersList = useMemo(() => {
-    const list: Player[][] = [[], [], [], [], []];
+    const list: Player[][] = [[], [], [], [], [], []];
     players.forEach((p) => {
       list[p.pos - 1].push(p);
     });
@@ -98,19 +98,21 @@ export default function SidebarMenu({
                       <div className="flex items-center gap-x-2 p-1 text-gray-800 dark:text-gray-300">
                         <SidebarItem player={p} />
                         {p.lol_nick && (
-                          <Nick
-                            className="text-sm text-gray-600 dark:text-gray-400"
-                            nick={p.lol_nick}
-                          />
+                          <>
+                            <Nick
+                              className="text-sm text-gray-600 dark:text-gray-400"
+                              nick={p.lol_nick}
+                            />
+                            <span
+                              className="text-sm text-gray-600 dark:text-gray-400"
+                              title={`${getRank(p.lol_rank)} ${getPoint(
+                                p.lol_rank,
+                              )}`}
+                            >
+                              {getShortRank(p.lol_rank)}
+                            </span>
+                          </>
                         )}
-                        <span
-                          className="text-sm text-gray-600 dark:text-gray-400"
-                          title={`${getRank(p.lol_rank)} ${getPoint(
-                            p.lol_rank,
-                          )}`}
-                        >
-                          {getShortRank(p.lol_rank)}
-                        </span>
                         <Links
                           className="text-sm text-gray-400 dark:text-gray-600"
                           player={p}

@@ -1,8 +1,8 @@
 import Image from "next/image";
 import { Fragment } from "react";
+import TierIcon from "@/components/tier-icon";
 import { CHAMPIONS } from "@/utils/lol/champions";
 import { ITEMS, PERKS, SPELLS } from "@/utils/lol/lol";
-import { getTierIcon } from "@/utils/lol/tier-icon";
 
 export default function LolPage() {
   return (
@@ -69,14 +69,7 @@ export default function LolPage() {
           <div className="flex flex-wrap gap-1">
             {["SILVER", "GOLD", "PLATINUM", "EMERALD", "DIAMOND"].map((tier) =>
               [1, 2, 3, 4, 5].map((pos) => (
-                <Image
-                  key={tier + pos}
-                  width={size}
-                  height={size}
-                  src={getTierIcon(tier, pos)}
-                  title={tier + pos}
-                  alt={tier + pos}
-                />
+                <TierIcon key={tier + pos} rank={tier} pos={pos} size={size} />
               )),
             )}
           </div>
