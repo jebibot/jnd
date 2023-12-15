@@ -13,7 +13,7 @@ export default async function Home() {
           <h2 className="pb-2 text-gray-900 dark:text-gray-200">
             <span className="text-lg font-semibold">방송</span>{" "}
             <span className="text-sm">
-              썸네일을 클릭하면 멀티뷰를 위해 선택할 수 있습니다.
+              썸네일을 클릭하면 여러 방송을 선택하여 같이 볼 수 있습니다.
             </span>
           </h2>
           <StreamList
