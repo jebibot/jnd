@@ -10,15 +10,18 @@ export default async function Home() {
       <h1 className="sr-only">홈</h1>
       <StreamProvider>
         <div>
-          <h2 className="pb-3 text-lg font-semibold text-gray-900 dark:text-gray-200">
-            방송
+          <h2 className="pb-2 text-gray-900 dark:text-gray-200">
+            <span className="text-lg font-semibold">방송</span>{" "}
+            <span className="text-sm">
+              썸네일을 클릭하면 멀티뷰를 위해 선택할 수 있습니다.
+            </span>
           </h2>
           <StreamList
             streams={(await getPlayers()).filter((p) => p.stream_start != null)}
           />
         </div>
         <div>
-          <h2 className="pb-3 text-gray-900 dark:text-gray-200">
+          <h2 className="pb-2 text-gray-900 dark:text-gray-200">
             <span className="text-lg font-semibold">진행 중인 게임</span>{" "}
             <span className="text-sm">
               사용자 설정 게임은 관전이 전체 허용된 게임만 표시됩니다.
