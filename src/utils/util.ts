@@ -26,6 +26,7 @@ export function formatNumber(n: number) {
 const dateFormatter = new Intl.DateTimeFormat("ko-KR", {
   month: "long",
   day: "numeric",
+  timeZone: "Asia/Seoul",
 });
 export function formatDate(d: Date) {
   return dateFormatter.format(d);
@@ -34,6 +35,7 @@ export function formatDate(d: Date) {
 const timeFormatter = new Intl.DateTimeFormat("ko-KR", {
   hour: "numeric",
   minute: "numeric",
+  timeZone: "Asia/Seoul",
 });
 export function formatTime(d: Date) {
   return timeFormatter.format(d);
