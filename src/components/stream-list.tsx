@@ -33,7 +33,7 @@ export default function StreamList({ streams }: { streams: Player[] }) {
   }, [streams, showOnlyLol, filter]);
   return (
     <div>
-      <div className="flex flex-wrap gap-2 items-center mb-2">
+      <div className="flex flex-wrap gap-1 items-center mb-2">
         <button
           type="button"
           className={`inline-block px-3 py-1 rounded-full border border-purple-400 dark:border-purple-800 text-xs sm:text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-400 dark:focus-visible:outline-purple-800 ${
