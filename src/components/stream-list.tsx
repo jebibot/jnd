@@ -93,7 +93,7 @@ export default function StreamList({ streams }: { streams: Player[] }) {
           );
         })}
       </div>
-      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
         {streamsList.map((s) => {
           const isSelected = selected.has(s.twitch);
           const toggleSelected = () => {
@@ -117,7 +117,7 @@ export default function StreamList({ streams }: { streams: Player[] }) {
             >
               <Thumbnail
                 className="cursor-pointer"
-                sizes="(max-width: 768px) 46vw, (max-width: 1024px) 30vw, (max-width: 1280px) 26vw, 22vw"
+                sizes="(max-width: 640px) 46vw, (max-width: 1024px) 31vw, (max-width: 1280px) 19vw, 16vw"
                 stream={s}
                 role="checkbox"
                 tabIndex={0}
@@ -142,8 +142,8 @@ export default function StreamList({ streams }: { streams: Player[] }) {
                     alt=""
                   />
                 )}
-                <div className="flex flex-col">
-                  <div className="font-semibold line-clamp-2 md:line-clamp-3 hover:text-purple-600 dark:hover:text-purple-300">
+                <div className="flex flex-col text-sm">
+                  <div className="font-semibold line-clamp-2 hover:text-purple-600 dark:hover:text-purple-300">
                     {s.title}
                   </div>
                   <div className="text-gray-700 dark:text-gray-300">
