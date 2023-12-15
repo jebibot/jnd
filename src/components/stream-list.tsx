@@ -34,19 +34,6 @@ export default function StreamList({ streams }: { streams: Player[] }) {
   return (
     <div>
       <div className="flex flex-wrap gap-1 items-center mb-2">
-        <button
-          type="button"
-          className={`inline-block px-3 py-1 rounded-full border border-purple-400 dark:border-purple-800 text-xs sm:text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-400 dark:focus-visible:outline-purple-800 ${
-            showOnlyLol
-              ? "text-white bg-purple-600 dark:bg-purple-800"
-              : "dark:bg-gray-800 hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-900 dark:hover:text-white"
-          }`}
-          onClick={() => {
-            setShowOnlyLol(!showOnlyLol);
-          }}
-        >
-          LoL
-        </button>
         {POSITION.map((pos, i) => (
           <button
             key={pos}
@@ -65,6 +52,19 @@ export default function StreamList({ streams }: { streams: Player[] }) {
             {pos}
           </button>
         ))}
+        <button
+          type="button"
+          className={`inline-block px-3 py-1 rounded-full border border-purple-400 dark:border-purple-800 text-xs sm:text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-400 dark:focus-visible:outline-purple-800 ${
+            showOnlyLol
+              ? "text-white bg-purple-600 dark:bg-purple-800"
+              : "dark:bg-gray-800 hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-900 dark:hover:text-white"
+          }`}
+          onClick={() => {
+            setShowOnlyLol(!showOnlyLol);
+          }}
+        >
+          LoL
+        </button>
         <div className="flex-1"></div>
         {["multitwitch.tv", "multistre.am"].map((site) => {
           const enabled =
