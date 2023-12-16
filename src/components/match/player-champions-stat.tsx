@@ -32,9 +32,6 @@ export default function PlayerChampionsStat({
         columnHelper.accessor("WIN", {
           header: "승리",
         }),
-        columnHelper.accessor("LOSE", {
-          header: "패배",
-        }),
         columnHelper.accessor(getKDA, {
           header: "KDA",
           cell: getNumberCell,
@@ -60,7 +57,7 @@ export default function PlayerChampionsStat({
           },
         ),
         columnHelper.accessor((row) => getCSPerMinute(row, row.gameLength), {
-          header: "분당",
+          header: "/m",
           cell: getNumberCell,
         }),
         columnHelper.accessor((row) => row.GOLD_EARNED / row.games, {
