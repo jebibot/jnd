@@ -35,7 +35,7 @@ export const ChampionColumn = createColumnHelper<{
   sortDescFirst: false,
 });
 
-export const getPercentCell = (info: CellContext<any, any>) =>
+export const getPercentCell = (info: CellContext<any, number>) =>
   `${formatNumber(info.getValue() * 100)}%`;
-export const getNumberCell = (info: CellContext<any, any>) =>
+export const getNumberCell = (info: CellContext<any, number>) =>
   formatNumber(info.getValue());
