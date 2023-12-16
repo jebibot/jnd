@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import {
   getCS,
   getCSPerMinute,
@@ -9,9 +10,8 @@ import {
 import { PlayerMatch } from "@/utils/supabase";
 import { classNames, formatNumber, formatTimestamp } from "@/utils/util";
 import Champion from "./champion";
-import Nick from "../nick";
-import { Fragment } from "react";
 import Item from "./item";
+import Nick from "../lol/nick";
 
 export default function MatchHistory({ match }: { match: PlayerMatch }) {
   const teamStats = match.game.teamStats;

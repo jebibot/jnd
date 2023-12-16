@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import LiveMatches from "@/components/match/live-matches";
-import StreamList from "@/components/stream-list";
-import StreamProvider from "@/components/stream-provider";
+import StreamList from "@/components/stream/list";
+import StreamProvider from "@/components/stream/provider";
 import { getPlayers } from "@/utils/supabase";
 
 export default async function Home() {

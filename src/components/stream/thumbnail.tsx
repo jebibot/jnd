@@ -2,7 +2,7 @@ import { HTMLAttributes } from "react";
 import { Player } from "@/utils/supabase";
 import { getThumbnailUrl } from "@/utils/twitch";
 import { classNames } from "@/utils/util";
-import Timer from "./timer";
+import Timer from "../timer";
 
 export default function Thumbnail({
   stream,

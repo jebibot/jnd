@@ -1,4 +1,4 @@
-import ChampionsStat, { ChampionsStatT } from "@/components/champions-stat";
+import ChampionsStat, { ChampionsStatT } from "@/components/lol/champions-stat";
 import Callout from "@/components/match/callout";
 import { getMatches } from "@/utils/supabase";
 

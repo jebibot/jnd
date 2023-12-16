@@ -1,12 +1,12 @@
 "use client";
 
 import { useContext, useMemo, useState } from "react";
-import TierIcon from "@/components/tier-icon";
+import TierIcon from "@/components/lol/tier-icon";
 import { POSITION } from "@/utils/lol/rank";
 import { Player } from "@/utils/supabase";
 import { getChannelUrl } from "@/utils/twitch";
 import { classNames } from "@/utils/util";
-import { StreamContext } from "./stream-provider";
+import { StreamContext } from "./provider";
 import Thumbnail from "./thumbnail";
 
 export default function StreamList({ streams }: { streams: Player[] }) {

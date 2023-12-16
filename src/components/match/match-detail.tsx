@@ -1,8 +1,8 @@
 import { Match } from "@/utils/supabase";
 import { classNames } from "@/utils/util";
 import Champion from "./champion";
-import Nick from "../nick";
-import PlayerCheckbox from "../player-checkbox";
+import Nick from "../lol/nick";
+import StreamPlayer from "../stream/player";
 
 export default function MatchDetail({ match }: { match: Match }) {
   return (
@@ -39,11 +39,11 @@ export default function MatchDetail({ match }: { match: Match }) {
                   <div className="font-semibold dark:text-gray-200">
                     {player &&
                       (player.stream_start ? (
-                        <PlayerCheckbox twitch={player.twitch}>
+                        <StreamPlayer twitch={player.twitch}>
                           <span className="underline decoration-4 underline-offset-2 decoration-purple-300 dark:decoration-purple-900">
                             {player.name}
                           </span>
-                        </PlayerCheckbox>
+                        </StreamPlayer>
                       ) : (
                         <span className="underline decoration-4 underline-offset-2 decoration-purple-300 dark:decoration-purple-900">
                           {player.name}

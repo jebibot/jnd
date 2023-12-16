@@ -1,9 +1,9 @@
 import Links from "@/components/links";
+import Nick from "@/components/lol/nick";
+import TierIcon from "@/components/lol/tier-icon";
 import Callout from "@/components/match/callout";
 import Stats from "@/components/match/stats";
-import Nick from "@/components/nick";
-import Thumbnail from "@/components/thumbnail";
-import TierIcon from "@/components/tier-icon";
+import Thumbnail from "@/components/stream/thumbnail";
 import { STATS_SITE } from "@/utils/lol/lol";
 import { getPoint, getRank } from "@/utils/lol/rank";
 import { getPlayer, getPlayers } from "@/utils/supabase";

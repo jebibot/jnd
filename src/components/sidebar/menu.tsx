@@ -14,7 +14,7 @@ import { POSITION, getPoint, getRank, getShortRank } from "@/utils/lol/rank";
 import { Player } from "@/utils/supabase";
 import { classNames } from "@/utils/util";
 import Links from "../links";
-import Nick from "../nick";
+import Nick from "../lol/nick";
 import { SidebarContext } from "./provider";
 import SimpleBarWrapper from "../simple-bar";
 import SidebarItem from "./item";

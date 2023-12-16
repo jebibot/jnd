@@ -2,7 +2,7 @@
 
 import { createColumnHelper } from "@tanstack/react-table";
 import { ChampionColumn, getPercentCell } from "@/utils/table";
-import Table from "./table";
+import Table from "../table";
 
 export type ChampionsStatT = {
   championId: number;

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Fragment } from "react";
-import TierIcon from "@/components/tier-icon";
+import TierIcon from "@/components/lol/tier-icon";
 import { CHAMPIONS } from "@/utils/lol/champions";
 import { ITEMS, PERKS, SPELLS } from "@/utils/lol/lol";
 

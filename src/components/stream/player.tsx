@@ -3,10 +3,10 @@
 import { faArrowUpRightFromSquare } from "@fortawesome/pro-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { PropsWithChildren, useContext } from "react";
-import { StreamContext } from "./stream-provider";
+import { StreamContext } from "./provider";
 import { getChannelUrl } from "@/utils/twitch";
 
-export default function PlayerCheckbox({
+export default function StreamPlayer({
   children,
   twitch,
 }: PropsWithChildren<{ twitch: string }>) {
