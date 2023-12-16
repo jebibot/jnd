@@ -52,7 +52,6 @@ export default function SidebarMenu({
                       : "text-gray-700 dark:text-gray-400 hover:text-purple-600 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800",
                     "flex flex-1 items-center gap-x-3 p-1 rounded-md font-semibold",
                   )}
-                  prefetch={false}
                 >
                   <FontAwesomeIcon icon={faHouse} size="lg" fixedWidth />홈
                 </Link>
@@ -80,7 +79,6 @@ export default function SidebarMenu({
                       : "text-gray-700 dark:text-gray-400 hover:text-purple-600 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800",
                     "flex flex-1 items-center gap-x-3 p-1 rounded-md font-semibold",
                   )}
-                  prefetch={false}
                 >
                   <FontAwesomeIcon icon={faChartSimple} size="lg" fixedWidth />
                   통계

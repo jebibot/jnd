@@ -38,7 +38,6 @@ export default function SidebarItem({
         "flex items-center gap-x-2",
         pathname === `/p/${player.id}` ? activeClassName : inactiveClassName,
       )}
-      prefetch={false}
     >
       {player.profile && (
         <div className="relative h-8 w-8 mr-1">

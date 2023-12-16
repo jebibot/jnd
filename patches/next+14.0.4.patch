@@ -22,3 +22,16 @@ index cca54f4..ddab21f 100644
              }));
          if (compilerType === "client") {
              this.emitFile(interpolatedName, content, null);
+diff --git a/node_modules/next/dist/client/components/router-reducer/get-prefetch-cache-entry-status.js b/node_modules/next/dist/client/components/router-reducer/get-prefetch-cache-entry-status.js
+index d99e5a2..8be2fdb 100644
+--- a/node_modules/next/dist/client/components/router-reducer/get-prefetch-cache-entry-status.js
++++ b/node_modules/next/dist/client/components/router-reducer/get-prefetch-cache-entry-status.js
+@@ -20,7 +20,7 @@ _export(exports, {
+         return getPrefetchEntryCacheStatus;
+     }
+ });
+-const FIVE_MINUTES = 5 * 60 * 1000;
++const FIVE_MINUTES = 60 * 1000;
+ const THIRTY_SECONDS = 30 * 1000;
+ var PrefetchCacheEntryStatus;
+ (function(PrefetchCacheEntryStatus) {
