@@ -17,12 +17,17 @@ export type Player = {
   youtube: string | null;
   youtube_secondary: string | null;
   community: string | null;
-  lol: string | null;
   lol_nick: string | null;
   lol_rank: string | null;
-  lol_secondary: string | null;
   lol_secondary_nick: string | null;
-  lol_secondary_rank: string | null;
+};
+
+export type PlayerParticipant = {
+  name: string;
+  twitch: string;
+  stream_start?: string | null;
+  lol: string | null;
+  lol_secondary: string | null;
 };
 
 export type PlayerWithMatches = Player & { matches: PlayerMatch[] };
@@ -30,7 +35,7 @@ export type PlayerWithMatches = Player & { matches: PlayerMatch[] };
 export type Participant = CurrentGameParticipantDTO & {
   riotId: string;
   stats?: Record<string, number>;
-  player?: Player;
+  player?: PlayerParticipant;
 };
 
 export type PlayerMatch = {
@@ -42,7 +47,7 @@ export type PlayerMatch = {
   };
   participants: {
     uptime: number;
-    players: Player;
+    players: PlayerParticipant;
   }[];
   player?: Participant;
 };
@@ -53,7 +58,7 @@ export type Match = {
   game: Omit<CurrentGameInfoDTO, "participants"> & {
     participants: Participant[];
   };
-  players: Player[];
+  players: PlayerParticipant[];
 };
 
 async function fetchSupabase(path: string, tags: string[], single = false) {
@@ -72,7 +77,7 @@ async function fetchSupabase(path: string, tags: string[], single = false) {
 
 export async function getPlayers(): Promise<Player[]> {
   return fetchSupabase(
-    `players?select=id,name,pos,twitch,profile,title,game,stream_start,youtube,youtube_secondary,community,lol_nick,lol_rank,lol_secondary_nick,lol_secondary_rank&order=name.asc`,
+    `players?select=id,name,pos,twitch,profile,title,game,stream_start,youtube,youtube_secondary,community,lol_nick,lol_rank&order=name.asc`,
     ["players"],
   );
 }
@@ -81,7 +86,7 @@ export async function getPlayer(
   id: string | number,
 ): Promise<PlayerWithMatches> {
   return fetchSupabase(
-    `players?select=id,name,pos,twitch,profile,title,game,stream_start,youtube,youtube_secondary,community,lol,lol_nick,lol_rank,lol_secondary,lol_secondary_nick,lol_secondary_rank,matches(id,start,game,participants(uptime,players(name,twitch,lol,lol_secondary)))&id=eq.${id}`,
+    `players?select=id,name,pos,twitch,profile,title,game,stream_start,youtube,youtube_secondary,community,lol_nick,lol_rank,lol_secondary_nick,matches(id,start,game,participants(uptime,players(name,twitch,lol,lol_secondary)))&id=eq.${id}`,
     ["players"],
     true,
   );
@@ -95,5 +100,5 @@ export async function getLiveMatches(): Promise<Match[]> {
 }
 
 export async function getMatches(): Promise<Match[]> {
-  return fetchSupabase(`matches?select=game&stats=neq.null`, ["matches"]);
+  return fetchSupabase(`matches?select=game&stats=not.is.null`, ["matches"]);
 }
