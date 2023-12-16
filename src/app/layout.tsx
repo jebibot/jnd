@@ -8,6 +8,7 @@ config.autoAddCss = false;
 import { faBars } from "@fortawesome/pro-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import type { Metadata } from "next";
+import Link from "next/link";
 import { PropsWithChildren } from "react";
 import SidebarButton from "@/components/sidebar/button";
 import SidebarContainer from "@/components/sidebar/container";
@@ -75,9 +76,9 @@ export default async function RootLayout({ children }: PropsWithChildren) {
             >
               <FontAwesomeIcon icon={faBars} size="lg" />
             </SidebarButton>
-            <div className="flex-1 text-sm font-semibold">
+            <Link href="/" className="flex-1 text-sm font-semibold">
               2023 자낳대 시즌 2 팬사이트
-            </div>
+            </Link>
           </div>
         </SidebarProvider>
 
