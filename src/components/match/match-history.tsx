@@ -179,7 +179,7 @@ export default function MatchHistory({ match }: { match: PlayerMatch }) {
                       </td>
                       <td className="px-2 py-1">
                         {participant?.uptime &&
-                          formatTimestamp(participant.uptime * 1000)}
+                          formatTimestamp(participant.uptime)}
                       </td>
                     </tr>
                   );

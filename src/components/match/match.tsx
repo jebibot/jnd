@@ -27,7 +27,7 @@ export default function Match({ match }: { match: PlayerMatch }) {
           {stats.WIN ? "승리" : "패배"}
         </div>
         <div className="text-sm sm:text-base">
-          {formatTimestamp(match.game.gameLength * 1000)}
+          {formatTimestamp(match.game.gameLength)}
         </div>
         <div className="mt-2 text-xs sm:text-sm">
           {formatDate(new Date(match.start))}

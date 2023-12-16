@@ -1,7 +1,8 @@
 import { HTMLAttributes } from "react";
 import { Player } from "@/utils/supabase";
 import { getThumbnailUrl } from "@/utils/twitch";
-import { classNames, formatTimestamp } from "@/utils/util";
+import { classNames } from "@/utils/util";
+import Timer from "./timer";
 
 export default function Thumbnail({
   stream,
@@ -28,14 +29,8 @@ export default function Thumbnail({
         alt={`${stream.name}의 방송 썸네일`}
       />
       {stream.stream_start && (
-        <div
-          className="absolute top-0 right-0 m-2 p-1 text-white text-sm leading-none bg-gray-900/80"
-          role="timer"
-          suppressHydrationWarning
-        >
-          {formatTimestamp(
-            Date.now() - new Date(stream.stream_start).getTime(),
-          )}
+        <div className="absolute top-0 right-0 m-2 p-1 text-white text-sm leading-none bg-gray-900/80">
+          <Timer start={new Date(stream.stream_start).getTime()} />
         </div>
       )}
     </div>

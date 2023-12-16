@@ -8,9 +8,9 @@ function padNumber(num: number, length: number) {
 
 export function formatTimestamp(t: number) {
   t = Math.floor(t);
-  const h = Math.floor(t / 3600000);
-  const m = Math.floor(t / 60000) % 60;
-  const s = Math.floor(t / 1000) % 60;
+  const h = Math.floor(t / 3600);
+  const m = Math.floor(t / 60) % 60;
+  const s = t % 60;
   return h
     ? `${h}:${padNumber(m, 2)}:${padNumber(s, 2)}`
     : `${m}:${padNumber(s, 2)}`;

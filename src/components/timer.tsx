@@ -15,9 +15,9 @@ export default function Timer({ start }: { start: number }) {
 
   return seconds != null ? (
     <span role="timer" suppressHydrationWarning>
-      {formatTimestamp(seconds * 1000)}
+      {formatTimestamp(seconds)}
     </span>
   ) : (
-    <div className="inline-block w-12 h-2.5 rounded-full bg-gray-300 dark:bg-gray-600 animate-pulse"></div>
+    <div className="inline-block w-8 h-2 rounded-full bg-gray-300 dark:bg-gray-600 animate-pulse"></div>
   );
 }
