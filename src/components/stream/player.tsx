@@ -3,8 +3,8 @@
 import { faArrowUpRightFromSquare } from "@fortawesome/pro-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { PropsWithChildren, useContext } from "react";
-import { StreamContext } from "./provider";
 import { getChannelUrl } from "@/utils/twitch";
+import { StreamContext } from "./provider";
 
 export default function StreamPlayer({
   children,

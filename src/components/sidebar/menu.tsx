@@ -11,12 +11,12 @@ import { useContext, useMemo } from "react";
 import { POSITION, getPoint, getRank, getShortRank } from "@/utils/lol/rank";
 import { Player } from "@/utils/supabase";
 import { classNames } from "@/utils/util";
+import SidebarItem from "./item";
 import PlayerItem from "./player-item";
 import { SidebarContext } from "./provider";
 import Links from "../links";
 import Nick from "../lol/nick";
 import SimpleBarWrapper from "../simple-bar";
-import SidebarItem from "./item";
 
 export default function SidebarMenu({
   players,
