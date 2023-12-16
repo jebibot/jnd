@@ -1,13 +1,11 @@
 "use client";
 
 import { useContext, useMemo, useState } from "react";
-import TierIcon from "@/components/lol/tier-icon";
 import { POSITION } from "@/utils/lol/rank";
 import { Player } from "@/utils/supabase";
-import { getChannelUrl } from "@/utils/twitch";
 import { classNames } from "@/utils/util";
 import { StreamContext } from "./provider";
-import Thumbnail from "./thumbnail";
+import Stream from "./stream";
 
 export default function StreamList({ streams }: { streams: Player[] }) {
   const { selected, setSelected } = useContext(StreamContext);
@@ -94,75 +92,22 @@ export default function StreamList({ streams }: { streams: Player[] }) {
         })}
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
-        {streamsList.map((s) => {
-          const isSelected = selected.has(s.twitch);
-          const toggleSelected = () => {
-            const newSet = new Set(selected);
-            if (isSelected) {
-              newSet.delete(s.twitch);
-            } else {
-              newSet.add(s.twitch);
-            }
-            setSelected(newSet);
-          };
-          return (
-            <div
-              key={s.twitch}
-              className={classNames(
-                "flex flex-col items-center rounded-md overflow-hidden shadow-md border-2 dark:bg-slate-900",
-                isSelected
-                  ? "border-purple-400 dark:border-purple-700"
-                  : "border-transparent",
-              )}
-            >
-              <Thumbnail
-                className="cursor-pointer"
-                sizes="(max-width: 640px) 46vw, (max-width: 1024px) 31vw, (max-width: 1280px) 19vw, 16vw"
-                stream={s}
-                role="checkbox"
-                tabIndex={0}
-                aria-checked={isSelected}
-                onClick={toggleSelected}
-                onKeyDown={(e) => {
-                  if (e.key === " ") {
-                    toggleSelected();
-                  }
-                }}
-              />
-              <a
-                className="flex w-full items-center p-2"
-                href={getChannelUrl(s.twitch)}
-                target="_blank"
-              >
-                {s.profile && (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    className="w-12 h-12 rounded-full mr-2"
-                    src={s.profile.replace("300x300", "50x50")}
-                    alt=""
-                  />
-                )}
-                <div className="flex flex-col text-sm">
-                  <div className="font-semibold line-clamp-2 hover:text-purple-600 dark:hover:text-purple-300">
-                    {s.title}
-                  </div>
-                  <div className="text-gray-700 dark:text-gray-300">
-                    <TierIcon
-                      className="inline align-middle"
-                      rank={s.lol_rank}
-                      pos={s.pos}
-                      size={16}
-                    />{" "}
-                    {s.name}
-                  </div>
-                  <div className="text-sm text-gray-600 dark:text-gray-400">
-                    {s.game}
-                  </div>
-                </div>
-              </a>
-            </div>
-          );
-        })}
+        {streamsList.map((s) => (
+          <Stream
+            key={s.twitch}
+            isSelected={selected.has(s.twitch)}
+            toggleSelected={() => {
+              const newSet = new Set(selected);
+              if (selected.has(s.twitch)) {
+                newSet.delete(s.twitch);
+              } else {
+                newSet.add(s.twitch);
+              }
+              setSelected(newSet);
+            }}
+            stream={s}
+          />
+        ))}
       </div>
     </div>
   );

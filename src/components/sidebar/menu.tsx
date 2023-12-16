@@ -7,15 +7,14 @@ import {
   faMinimize,
 } from "@fortawesome/pro-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useContext, useMemo } from "react";
 import { POSITION, getPoint, getRank, getShortRank } from "@/utils/lol/rank";
 import { Player } from "@/utils/supabase";
 import { classNames } from "@/utils/util";
+import PlayerItem from "./player-item";
+import { SidebarContext } from "./provider";
 import Links from "../links";
 import Nick from "../lol/nick";
-import { SidebarContext } from "./provider";
 import SimpleBarWrapper from "../simple-bar";
 import SidebarItem from "./item";
 
@@ -26,7 +25,6 @@ export default function SidebarMenu({
   players: Player[];
   className?: string;
 }) {
-  const pathname = usePathname();
   const { detailed, setDetailed } = useContext(SidebarContext);
 
   const playersList = useMemo(() => {
@@ -36,7 +34,6 @@ export default function SidebarMenu({
     });
     return list;
   }, [players]);
-
   return (
     <SimpleBarWrapper className={classNames("grow max-h-full", className)}>
       <nav className="px-3 py-4 overflow-x-hidden bg-white dark:bg-gray-900">
@@ -44,17 +41,9 @@ export default function SidebarMenu({
           <li>
             <ul role="list" className="space-y-2">
               <li className="flex items-center gap-2">
-                <Link
-                  href="/"
-                  className={classNames(
-                    pathname === "/"
-                      ? "text-purple-600 dark:text-white bg-gray-50 dark:bg-gray-800"
-                      : "text-gray-700 dark:text-gray-400 hover:text-purple-600 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800",
-                    "flex flex-1 items-center gap-x-3 p-1 rounded-md font-semibold",
-                  )}
-                >
+                <SidebarItem className="flex-1" href="/">
                   <FontAwesomeIcon icon={faHouse} size="lg" fixedWidth />홈
-                </Link>
+                </SidebarItem>
                 <button
                   type="button"
                   className="p-1 rounded-md text-gray-700 dark:text-gray-400 hover:text-purple-600 dark:hover:text-white"
@@ -70,19 +59,11 @@ export default function SidebarMenu({
                   />
                 </button>
               </li>
-              <li className="flex items-center gap-2">
-                <Link
-                  href="/stats"
-                  className={classNames(
-                    pathname === "/stats"
-                      ? "text-purple-600 dark:text-white bg-gray-50 dark:bg-gray-800"
-                      : "text-gray-700 dark:text-gray-400 hover:text-purple-600 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800",
-                    "flex flex-1 items-center gap-x-3 p-1 rounded-md font-semibold",
-                  )}
-                >
+              <li>
+                <SidebarItem href="/stats">
                   <FontAwesomeIcon icon={faChartSimple} size="lg" fixedWidth />
                   통계
-                </Link>
+                </SidebarItem>
               </li>
             </ul>
           </li>
@@ -94,7 +75,7 @@ export default function SidebarMenu({
                   <li key={p.name} className="font-semibold">
                     {detailed ? (
                       <div className="flex items-center gap-x-2 p-1 text-gray-800 dark:text-gray-300">
-                        <SidebarItem player={p} />
+                        <PlayerItem player={p} />
                         {p.lol_nick && (
                           <>
                             <Nick
@@ -117,11 +98,9 @@ export default function SidebarMenu({
                         />
                       </div>
                     ) : (
-                      <SidebarItem
-                        player={p}
-                        activeClassName="p-1 rounded-md text-purple-600 dark:text-white bg-gray-50 dark:bg-gray-800"
-                        inactiveClassName="p-1 rounded-md text-gray-700 dark:text-gray-400 hover:text-purple-600 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800"
-                      />
+                      <SidebarItem href={`/p/${p.id}`}>
+                        <PlayerItem player={p} />
+                      </SidebarItem>
                     )}
                   </li>
                 ))}
