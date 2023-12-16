@@ -45,6 +45,7 @@ export type PlayerMatch = {
     teamStats?: Record<number, Record<string, number>>;
     participants: Participant[];
   };
+  status: number;
   participants: {
     uptime: number;
     players: PlayerParticipant;
@@ -86,7 +87,7 @@ export async function getPlayer(
   id: string | number,
 ): Promise<PlayerWithMatches> {
   return fetchSupabase(
-    `players?select=id,name,pos,twitch,profile,title,game,stream_start,youtube,youtube_secondary,community,lol_nick,lol_rank,lol_secondary_nick,matches(id,start,game,participants(uptime,players(name,twitch,lol,lol_secondary)))&id=eq.${id}`,
+    `players?select=id,name,pos,twitch,profile,title,game,stream_start,youtube,youtube_secondary,community,lol_nick,lol_rank,lol_secondary_nick,matches(id,start,game,status,participants(uptime,players(name,twitch,lol,lol_secondary)))&id=eq.${id}`,
     ["players"],
     true,
   );
@@ -94,11 +95,11 @@ export async function getPlayer(
 
 export async function getLiveMatches(): Promise<Match[]> {
   return fetchSupabase(
-    `matches?select=id,start,game,players(name,twitch,stream_start,lol,lol_secondary)&stats=is.null&order=id.desc`,
+    `matches?select=id,start,game,players(name,twitch,stream_start,lol,lol_secondary)&status=eq.0&order=id.desc`,
     ["matches", "players"],
   );
 }
 
 export async function getMatches(): Promise<Match[]> {
-  return fetchSupabase(`matches?select=game&stats=not.is.null`, ["matches"]);
+  return fetchSupabase(`matches?select=game&status=eq.1`, ["matches"]);
 }
