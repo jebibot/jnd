@@ -24,11 +24,14 @@ export const metadata: Metadata = {
     default: "2023 자낳대 시즌 2 팬사이트",
     template: "%s | 2023 자낳대 시즌 2 팬사이트",
   },
-  description: "2023 자낳대 시즌 2 방송, 유튜브, 스크림 전적 모아보기",
+  description:
+    "2023 자낳대 시즌 2 스크림 전적, 통계, 방송, 다시보기, 유튜브 모아보기",
   keywords: [
+    "지통실",
     "트위치",
     "Twitch",
     "스트리머",
+    "인플루언서",
     "streamer",
     "멀티뷰",
     "관전",
@@ -40,6 +43,9 @@ export const metadata: Metadata = {
     "LoL",
     "리그 오브 레전드",
     "League of Legends",
+    "e스포츠",
+    "코치",
+    "경매",
   ],
   metadataBase: new URL("https://jnd.twitchgg.tv"),
   alternates: {
