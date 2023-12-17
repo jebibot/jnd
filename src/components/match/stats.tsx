@@ -3,7 +3,7 @@ import { PlayerDetailed } from "@/utils/supabase";
 import { classNames } from "@/utils/util";
 import Match from "./match";
 import MatchHistory from "./match-history";
-import PlayerChampionsStat from "./player-champions-stat";
+import PlayerChampionStats from "./player-champions-stat";
 import DisclosureWrapper from "../disclosure";
 import SimpleBarWrapper from "../simple-bar";
 
@@ -61,7 +61,7 @@ export default function Stats({ player }: { player: PlayerDetailed }) {
         <div className="flex-1 text-center">
           <h2 className="mb-1 text-lg font-semibold">자낳대</h2>
           <SimpleBarWrapper className="w-full overflow-x-auto">
-            <PlayerChampionsStat championsStat={championStats} sort={true} />
+            <PlayerChampionStats championStats={championStats} sort={true} />
           </SimpleBarWrapper>
         </div>
         <div className="flex-1 text-center">
@@ -72,7 +72,7 @@ export default function Stats({ player }: { player: PlayerDetailed }) {
             </span>
           </h2>
           <SimpleBarWrapper className="w-full overflow-x-auto">
-            <PlayerChampionsStat championsStat={player.ranked_stats} />
+            <PlayerChampionStats championStats={player.ranked_stats} />
           </SimpleBarWrapper>
         </div>
       </div>

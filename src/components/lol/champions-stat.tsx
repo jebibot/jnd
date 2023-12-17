@@ -7,19 +7,19 @@ import Table from "../table";
 
 const columnHelper = createColumnHelper<ChampionStat>();
 
-export default function ChampionsStat({
-  championsStat,
+export default function ChampionStats({
+  championStats,
 }: {
-  championsStat: ChampionStat[];
+  championStats: ChampionStat[];
 }) {
   const numMatches =
-    championsStat.reduce((acc, row) => acc + (row.picked || 0), 0) / 10;
+    championStats.reduce((acc, row) => acc + (row.picked || 0), 0) / 10;
   return (
     <Table
       className="text-sm md:text-base"
       headerClassName="p-1"
       cellClassName="px-1 py-0.5 md:px-2 md:py-1"
-      data={championsStat}
+      data={championStats}
       columns={[
         championColumn as ColumnDef<ChampionStat>,
         columnHelper.accessor((row) => row.picked || 0, {

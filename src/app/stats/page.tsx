@@ -1,9 +1,9 @@
-import ChampionsStat from "@/components/lol/champions-stat";
+import ChampionStats from "@/components/lol/champions-stat";
 import Callout from "@/components/match/callout";
-import { getChampionsStat } from "@/utils/supabase";
+import { getChampionStats } from "@/utils/supabase";
 
 export default async function StatsPage() {
-  const championsStat = await getChampionsStat();
+  const championStats = await getChampionStats();
   return (
     <div className="flex flex-col gap-4">
       <Callout />
@@ -12,7 +12,7 @@ export default async function StatsPage() {
         챔피언 통계
       </h2>
       <div className="mx-auto max-w-full overflow-x-auto">
-        <ChampionsStat championsStat={championsStat} />
+        <ChampionStats championStats={championStats} />
       </div>
     </div>
   );

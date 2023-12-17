@@ -121,6 +121,6 @@ export async function getLiveMatches(): Promise<Match[]> {
   );
 }
 
-export async function getChampionsStat(): Promise<ChampionStat[]> {
-  return fetchSupabase(`champions_stat?select=*`, ["matches"]);
+export async function getChampionStats(): Promise<ChampionStat[]> {
+  return fetchSupabase(`champion_stats?select=*`, ["matches"]);
 }

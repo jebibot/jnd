@@ -7,11 +7,11 @@ import Table from "../table";
 
 const columnHelper = createColumnHelper<PlayerChampionStat>();
 
-export default function PlayerChampionsStat({
-  championsStat,
+export default function PlayerChampionStats({
+  championStats,
   sort,
 }: {
-  championsStat: PlayerChampionStat[];
+  championStats: PlayerChampionStat[];
   sort?: boolean;
 }) {
   return (
@@ -19,7 +19,7 @@ export default function PlayerChampionsStat({
       className="text-sm lg:text-base mx-auto"
       headerClassName="p-1"
       cellClassName="px-1 py-0.5 lg:px-2 lg:py-1"
-      data={championsStat}
+      data={championStats}
       columns={[
         championColumn as ColumnDef<PlayerChampionStat>,
         columnHelper.accessor((row) => row.win / row.games, {
