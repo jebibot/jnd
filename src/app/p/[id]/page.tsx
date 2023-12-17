@@ -39,9 +39,9 @@ export default async function Page({ params }: { params: { id: string } }) {
             />
           </a>
         )}
-        <div className="flex-1 p-2 space-y-3">
+        <div className="flex-1 p-2 space-y-2 md:space-y-3">
           <div className="flex flex-col md:flex-row flex-wrap gap-x-2 gap-y-1 md:items-baseline">
-            <h1 className="text-4xl font-bold">{p.name}</h1>
+            <h1 className="text-3xl md:text-4xl font-bold">{p.name}</h1>
             {p.lol_nick && (
               <Nick
                 nick={p.lol_nick}
