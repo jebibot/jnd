@@ -47,17 +47,23 @@ export default function Table<TData extends RowData>({
   return (
     <table
       className={classNames(
-        "table-auto rounded-md text-center whitespace-nowrap overflow-hidden",
+        "table-auto rounded-md text-center whitespace-nowrap",
         className,
       )}
     >
-      <thead className="text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-slate-800">
+      <thead>
         {table.getHeaderGroups().map((headerGroup) => (
-          <tr key={headerGroup.id}>
-            {headerGroup.headers.map((header) => (
+          <tr
+            key={headerGroup.id}
+            className="text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-slate-800"
+          >
+            {headerGroup.headers.map((header, i) => (
               <th
                 key={header.id}
-                className={headerClassName}
+                className={classNames(
+                  headerClassName,
+                  i === 0 && "sticky left-0 bg-inherit",
+                )}
                 aria-sort={
                   header.column.getIsSorted()
                     ? header.column.getIsSorted() === "asc"
@@ -98,9 +104,18 @@ export default function Table<TData extends RowData>({
       </thead>
       <tbody>
         {table.getRowModel().rows.map((row) => (
-          <tr key={row.id} className="even:bg-gray-100 even:dark:bg-slate-900">
-            {row.getVisibleCells().map((cell) => (
-              <td key={cell.id} className={cellClassName}>
+          <tr
+            key={row.id}
+            className="odd:bg-gray-50 odd:dark:bg-slate-950 even:bg-gray-100 even:dark:bg-slate-900"
+          >
+            {row.getVisibleCells().map((cell, i) => (
+              <td
+                key={cell.id}
+                className={classNames(
+                  cellClassName,
+                  i === 0 && "sticky left-0 bg-inherit",
+                )}
+              >
                 {flexRender(cell.column.columnDef.cell, cell.getContext())}
               </td>
             ))}

@@ -28,10 +28,10 @@ export default function MatchHistory({ match }: { match: PlayerMatch }) {
   );
 
   return (
-    <table className="table-auto mx-auto rounded-md text-center text-sm md:text-base whitespace-nowrap overflow-hidden">
-      <thead className="text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-slate-800">
-        <tr>
-          <th className="px-2 py-1">플레이어</th>
+    <table className="table-auto mx-auto rounded-md text-center text-sm md:text-base whitespace-nowrap border-separate border-spacing-0">
+      <thead>
+        <tr className="text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-slate-800">
+          <th className="sticky left-0 px-2 py-1 bg-inherit">플레이어</th>
           <th className="px-2 py-1">KDA</th>
           <th className="px-2 py-1">딜량</th>
           <th className="px-2 py-1">피해량</th>
@@ -71,20 +71,19 @@ export default function MatchHistory({ match }: { match: PlayerMatch }) {
                     return null;
                   }
                   return (
-                    <tr
-                      key={nick}
-                      className={classNames(
-                        "space-y-2 border-l-2 pl-2",
-                        teamId === 100
-                          ? p === match.player
-                            ? "border-blue-500"
-                            : "border-blue-300 dark:border-blue-800"
-                          : p === match.player
-                            ? "border-red-500"
-                            : "border-red-300 dark:border-red-800",
-                      )}
-                    >
-                      <td className="px-2 py-1">
+                    <tr key={nick}>
+                      <td
+                        className={classNames(
+                          "sticky left-0 px-2 py-1 border-l-2 bg-gray-50 dark:bg-slate-950",
+                          teamId === 100
+                            ? p === match.player
+                              ? "border-blue-500"
+                              : "border-blue-300 dark:border-blue-800"
+                            : p === match.player
+                              ? "border-red-500"
+                              : "border-red-300 dark:border-red-800",
+                        )}
+                      >
                         <div className="flex items-center w-max gap-2">
                           <Champion
                             player={p}
@@ -190,7 +189,7 @@ export default function MatchHistory({ match }: { match: PlayerMatch }) {
               key={`${teamId}-stats`}
               className="bg-gray-100 dark:bg-slate-900"
             >
-              <td className="px-2 py-1">
+              <td className="sticky left-0 px-2 py-1 bg-inherit">
                 {match.game.participants.find((p) => p.teamId === teamId)?.stats
                   ?.WIN
                   ? "승리"
