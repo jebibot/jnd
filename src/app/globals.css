@@ -10,7 +10,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-.simplebar-placeholder {
-  width: auto !important;
-}

@@ -5,7 +5,6 @@ import Match from "./match";
 import MatchHistory from "./match-history";
 import PlayerChampionStats from "./player-champions-stat";
 import DisclosureWrapper from "../disclosure";
-import SimpleBarWrapper from "../simple-bar";
 
 export default function Stats({ player }: { player: PlayerDetailed }) {
   const matches = player.matches;
@@ -57,23 +56,23 @@ export default function Stats({ player }: { player: PlayerDetailed }) {
   }));
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex flex-col-reverse md:flex-row gap-2">
-        <div className="flex-1 text-center">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <div className="text-center order-1 md:order-none">
           <h2 className="mb-1 text-lg font-semibold">자낳대</h2>
-          <SimpleBarWrapper className="w-full overflow-x-auto">
+          <div className="w-full overflow-x-auto scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-700 scrollbar-thumb-rounded-full">
             <PlayerChampionStats championStats={championStats} sort={true} />
-          </SimpleBarWrapper>
+          </div>
         </div>
-        <div className="flex-1 text-center">
+        <div className="text-center">
           <h2 className="mb-1 text-lg font-semibold">
             2023 S2 솔로랭크{" "}
             <span className="text-sm text-gray-500">
               MOST 7, 출전 포지션 기준
             </span>
           </h2>
-          <SimpleBarWrapper className="w-full overflow-x-auto">
+          <div className="w-full overflow-x-auto scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-700 scrollbar-thumb-rounded-full">
             <PlayerChampionStats championStats={player.ranked_stats} />
-          </SimpleBarWrapper>
+          </div>
         </div>
       </div>
       {matches.map((match) => (
