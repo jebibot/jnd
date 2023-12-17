@@ -68,7 +68,7 @@ export default function Stats({ player }: { player: PlayerDetailed }) {
           <h2 className="mb-1 text-lg font-semibold">
             2023 S2 솔로랭크{" "}
             <span className="text-sm text-gray-500">
-              TOP 7, 출전 포지션 기준
+              MOST 7, 출전 포지션 기준
             </span>
           </h2>
           <SimpleBarWrapper className="w-full overflow-x-auto">
