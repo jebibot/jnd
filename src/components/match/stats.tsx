@@ -59,7 +59,7 @@ export default function Stats({ player }: { player: PlayerDetailed }) {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         <div className="text-center order-1 md:order-none">
           <h2 className="mb-1 text-lg font-semibold">자낳대</h2>
-          <div className="w-full overflow-x-auto scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-700 scrollbar-thumb-rounded-full">
+          <div className="w-full overflow-x-auto thin-scrollbar">
             <PlayerChampionStats championStats={championStats} sort={true} />
           </div>
         </div>
@@ -70,7 +70,7 @@ export default function Stats({ player }: { player: PlayerDetailed }) {
               MOST 7, 출전 포지션 기준
             </span>
           </h2>
-          <div className="w-full overflow-x-auto scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-700 scrollbar-thumb-rounded-full">
+          <div className="w-full overflow-x-auto thin-scrollbar">
             <PlayerChampionStats championStats={player.ranked_stats} />
           </div>
         </div>

@@ -56,7 +56,7 @@ export const metadata: Metadata = {
 export default async function RootLayout({ children }: PropsWithChildren) {
   const players = await getPlayers();
   return (
-    <html lang="ko">
+    <html lang="ko" className="[scrollbar-gutter:stable]">
       <body className="bg-gray-50 dark:bg-slate-950 dark:text-gray-100">
         <a
           href="#content"

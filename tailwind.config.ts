@@ -1,7 +1,6 @@
 import type { Config } from "tailwindcss";
 import defaultTheme from "tailwindcss/defaultTheme";
 import TailwindForms from "@tailwindcss/forms";
-import TailwindScrollbar from "tailwind-scrollbar";
 
 const config: Config = {
   content: [
@@ -19,9 +18,6 @@ const config: Config = {
       ],
     },
   },
-  plugins: [
-    TailwindForms({ strategy: "base" }),
-    TailwindScrollbar({ nocompatible: true }),
-  ],
+  plugins: [TailwindForms({ strategy: "base" })],
 };
 export default config;

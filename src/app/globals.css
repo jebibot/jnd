@@ -10,3 +10,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.simplebar-placeholder {
+  width: auto !important;
+}
+
+@media (min-width: 768px) {
+  .thin-scrollbar::-webkit-scrollbar {
+    display: block;
+    width: 8px;
+    height: 8px;
+  }
+
+  .thin-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #d1d5db;
+    border-radius: 9999px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .thin-scrollbar::-webkit-scrollbar-thumb {
+      background-color: #374151;
+    }
+  }
+}
