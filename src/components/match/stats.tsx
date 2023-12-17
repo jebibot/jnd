@@ -8,9 +8,7 @@ import PlayerChampionsStat, {
 import DisclosureWrapper from "../disclosure";
 
 export default function Stats({ player }: { player: PlayerWithMatches }) {
-  const matches = player.matches
-    .filter((p) => p.status === 1)
-    .sort((a, b) => b.game.gameId - a.game.gameId);
+  const matches = player.matches;
   const championsStat: Record<number, Record<string, number>> = {};
   for (const match of matches) {
     for (const p of match.game.participants) {

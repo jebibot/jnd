@@ -87,7 +87,7 @@ export async function getPlayer(
   id: string | number,
 ): Promise<PlayerWithMatches> {
   return fetchSupabase(
-    `players?select=id,name,pos,twitch,profile,title,game,stream_start,youtube,youtube_secondary,community,lol_nick,lol_rank,lol_secondary_nick,matches(id,start,game,status,participants(uptime,players(name,twitch,lol,lol_secondary)))&id=eq.${id}`,
+    `players?select=id,name,pos,twitch,profile,title,game,stream_start,youtube,youtube_secondary,community,lol_nick,lol_rank,lol_secondary_nick,matches(id,start,game,status,participants(uptime,players(name,twitch,lol,lol_secondary)))&id=eq.${id}&matches.status=eq.1&matches.order=id.desc`,
     ["players"],
     true,
   );
