@@ -2,7 +2,12 @@
 
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
 import { PlayerChampionStat } from "@/utils/supabase";
-import { championColumn, getIntegerCell, getNumberCell, getPercentCell } from "@/utils/table";
+import {
+  championColumn,
+  getIntegerCell,
+  getNumberCell,
+  getPercentCell,
+} from "@/utils/table";
 import Table from "../table";
 
 const columnHelper = createColumnHelper<PlayerChampionStat>();
