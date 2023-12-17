@@ -5,35 +5,37 @@ import { formatNumber } from "./util";
 
 const collator = new Intl.Collator("ko-KR");
 
-export const ChampionColumn = createColumnHelper<{
-  championId: number;
-}>().accessor("championId", {
-  header: "챔피언",
-  cell: (info) => {
-    const champion = CHAMPIONS[info.getValue()];
-    return (
-      <div className="flex items-center">
-        <div className="w-8 h-8 mr-2 rounded-md overflow-hidden">
-          <Image
-            className="scale-125"
-            width={32}
-            height={32}
-            src={champion.icon}
-            title={champion.name}
-            alt=""
-          />
+export function getChampionColumn<T extends Record<string, number>>(
+  key: keyof T,
+) {
+  return createColumnHelper<T>().accessor<any, number>(key, {
+    header: "챔피언",
+    cell: (info) => {
+      const champion = CHAMPIONS[info.getValue()];
+      return (
+        <div className="flex items-center">
+          <div className="w-8 h-8 mr-2 rounded-md overflow-hidden">
+            <Image
+              className="scale-125"
+              width={32}
+              height={32}
+              src={champion.icon}
+              title={champion.name}
+              alt=""
+            />
+          </div>
+          {champion.name}
         </div>
-        {champion.name}
-      </div>
-    );
-  },
-  sortingFn: (a, b, columnId) => {
-    const championA = CHAMPIONS[a.getValue<number>(columnId)];
-    const championB = CHAMPIONS[b.getValue<number>(columnId)];
-    return collator.compare(championA.name, championB.name);
-  },
-  sortDescFirst: false,
-});
+      );
+    },
+    sortingFn: (a, b, columnId) => {
+      const championA = CHAMPIONS[a.getValue<number>(columnId)];
+      const championB = CHAMPIONS[b.getValue<number>(columnId)];
+      return collator.compare(championA.name, championB.name);
+    },
+    sortDescFirst: false,
+  });
+}
 
 export const getPercentCell = (info: CellContext<any, number>) =>
   `${formatNumber(info.getValue() * 100)}%`;

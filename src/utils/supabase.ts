@@ -62,6 +62,13 @@ export type Match = {
   players: PlayerParticipant[];
 };
 
+export type ChampionStat = {
+  champion_id: number;
+  banned: number;
+  picked: number;
+  win: number;
+};
+
 async function fetchSupabase(path: string, tags: string[], single = false) {
   const res = await fetch(`${process.env.SUPABASE_URL}/rest/v1/${path}`, {
     headers: {
@@ -100,6 +107,6 @@ export async function getLiveMatches(): Promise<Match[]> {
   );
 }
 
-export async function getMatches(): Promise<Match[]> {
-  return fetchSupabase(`matches?select=game&status=eq.1`, ["matches"]);
+export async function getChampionsStat(): Promise<ChampionStat[]> {
+  return fetchSupabase(`champions_stat?select=*`, ["matches"]);
 }

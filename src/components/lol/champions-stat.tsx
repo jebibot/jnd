@@ -1,30 +1,24 @@
 "use client";
 
 import { createColumnHelper } from "@tanstack/react-table";
-import { ChampionColumn, getPercentCell } from "@/utils/table";
+import { ChampionStat } from "@/utils/supabase";
+import { getChampionColumn, getPercentCell } from "@/utils/table";
 import Table from "../table";
 
-export type ChampionsStatT = {
-  championId: number;
-  banned?: number;
-  picked?: number;
-  win?: number;
-};
-
-const columnHelper = createColumnHelper<ChampionsStatT>();
+const columnHelper = createColumnHelper<ChampionStat>();
 
 export default function ChampionsStat({
   championsStat,
-  numMatches,
 }: {
-  championsStat: ChampionsStatT[];
-  numMatches: number;
+  championsStat: ChampionStat[];
 }) {
+  const numMatches =
+    championsStat.reduce((acc, row) => acc + (row.picked || 0), 0) / 10;
   return (
     <Table
       data={championsStat}
       columns={[
-        ChampionColumn,
+        getChampionColumn<ChampionStat>("champion_id"),
         columnHelper.accessor((row) => row.picked || 0, {
           header: "게임 수",
         }),
@@ -44,20 +38,7 @@ export default function ChampionsStat({
           cell: getPercentCell,
         }),
       ]}
-      defaultSorting={[
-        {
-          id: "게임 수",
-          desc: true,
-        },
-        {
-          id: "승률",
-          desc: true,
-        },
-        {
-          id: "밴율",
-          desc: true,
-        },
-      ]}
+      defaultSorting={[]}
     />
   );
 }
