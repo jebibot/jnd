@@ -65,7 +65,7 @@ export default function Stats({ player }: { player: PlayerDetailed }) {
         </div>
         <div className="text-center">
           <h2 className="mb-1 text-lg font-semibold">
-            2023 S2 솔로랭크{" "}
+            S2023-2 솔로랭크{" "}
             <span className="text-sm text-gray-500">
               MOST 7, 출전 포지션 기준
             </span>
