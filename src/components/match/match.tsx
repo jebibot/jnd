@@ -4,6 +4,7 @@ import { getKDA, getKDAString, getKillParticipation } from "@/utils/stats";
 import { PlayerMatch } from "@/utils/supabase";
 import {
   formatDate,
+  formatInteger,
   formatNumber,
   formatTime,
   formatTimestamp,
@@ -45,7 +46,7 @@ export default function Match({ match }: { match: PlayerMatch }) {
             </div>
             <div>
               {formatNumber(getKDA(stats))} (
-              {formatNumber(getKillParticipation(stats, teamStats))}%)
+              {formatInteger(getKillParticipation(stats, teamStats))}%)
             </div>
           </div>
         </div>

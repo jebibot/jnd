@@ -23,6 +23,13 @@ export function formatNumber(n: number) {
   return numberFormatter.format(n);
 }
 
+const integerFormatter = new Intl.NumberFormat("ko-KR", {
+  maximumFractionDigits: 0,
+});
+export function formatInteger(n: number) {
+  return integerFormatter.format(n);
+}
+
 const dateFormatter = new Intl.DateTimeFormat("ko-KR", {
   month: "long",
   day: "numeric",

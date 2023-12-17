@@ -16,12 +16,19 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { useState } from "react";
+import { classNames } from "@/utils/util";
 
 export default function Table<TData extends RowData>({
+  className,
+  headerClassName,
+  cellClassName,
   data,
   columns,
   defaultSorting,
 }: {
+  className?: string;
+  headerClassName?: string;
+  cellClassName?: string;
   data: TData[];
   columns: ColumnDef<TData, any>[];
   defaultSorting: SortingState;
@@ -38,14 +45,19 @@ export default function Table<TData extends RowData>({
     getSortedRowModel: getSortedRowModel(),
   });
   return (
-    <table className="table-auto rounded-md text-center text-sm md:text-base whitespace-nowrap overflow-hidden">
+    <table
+      className={classNames(
+        "table-auto rounded-md text-center whitespace-nowrap overflow-hidden",
+        className,
+      )}
+    >
       <thead className="text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-slate-800">
         {table.getHeaderGroups().map((headerGroup) => (
           <tr key={headerGroup.id}>
             {headerGroup.headers.map((header) => (
               <th
                 key={header.id}
-                className="px-2 py-1"
+                className={headerClassName}
                 aria-sort={
                   header.column.getIsSorted()
                     ? header.column.getIsSorted() === "asc"
@@ -88,7 +100,7 @@ export default function Table<TData extends RowData>({
         {table.getRowModel().rows.map((row) => (
           <tr key={row.id} className="even:bg-gray-100 even:dark:bg-slate-900">
             {row.getVisibleCells().map((cell) => (
-              <td key={cell.id} className="px-2 py-1">
+              <td key={cell.id} className={cellClassName}>
                 {flexRender(cell.column.columnDef.cell, cell.getContext())}
               </td>
             ))}

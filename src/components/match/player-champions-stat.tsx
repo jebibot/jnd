@@ -1,88 +1,84 @@
 "use client";
 
-import { createColumnHelper } from "@tanstack/react-table";
-import { getCSPerMinute, getKDA } from "@/utils/stats";
-import {
-  getChampionColumn,
-  getNumberCell,
-  getPercentCell,
-} from "@/utils/table";
+import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
+import { PlayerChampionStat } from "@/utils/supabase";
+import { championColumn, getIntegerCell, getNumberCell, getPercentCell } from "@/utils/table";
 import Table from "../table";
 
-export type PlayerChampionsStatT = { championId: number } & Record<
-  string,
-  number
->;
-
-const columnHelper = createColumnHelper<PlayerChampionsStatT>();
+const columnHelper = createColumnHelper<PlayerChampionStat>();
 
 export default function PlayerChampionsStat({
   championsStat,
+  sort,
 }: {
-  championsStat: PlayerChampionsStatT[];
+  championsStat: PlayerChampionStat[];
+  sort?: boolean;
 }) {
   return (
     <Table
+      className="text-sm lg:text-base mx-auto"
+      headerClassName="p-1"
+      cellClassName="px-1 py-0.5 lg:px-2 lg:py-1"
       data={championsStat}
       columns={[
-        getChampionColumn<PlayerChampionsStatT>("championId"),
-        columnHelper.accessor((row) => row.WIN / row.games, {
+        championColumn as ColumnDef<PlayerChampionStat>,
+        columnHelper.accessor((row) => row.win / row.games, {
           header: "승률",
           cell: getPercentCell,
         }),
         columnHelper.accessor("games", {
           header: "게임",
         }),
-        columnHelper.accessor("WIN", {
+        columnHelper.accessor("win", {
           header: "승리",
         }),
-        columnHelper.accessor(getKDA, {
+        columnHelper.accessor((row) => row.kda ?? Infinity, {
           header: "KDA",
           cell: getNumberCell,
         }),
-        columnHelper.accessor((row) => row.CHAMPIONS_KILLED / row.games, {
+        columnHelper.accessor("kills", {
           header: "킬",
           cell: getNumberCell,
         }),
-        columnHelper.accessor((row) => row.NUM_DEATHS / row.games, {
+        columnHelper.accessor("deaths", {
           header: "데스",
           cell: getNumberCell,
         }),
-        columnHelper.accessor((row) => row.ASSISTS / row.games, {
+        columnHelper.accessor("assists", {
           header: "어시",
           cell: getNumberCell,
         }),
-        columnHelper.accessor(
-          (row) =>
-            (row.MINIONS_KILLED + row.NEUTRAL_MINIONS_KILLED) / row.games,
-          {
-            header: "CS",
-            cell: getNumberCell,
-          },
-        ),
-        columnHelper.accessor((row) => getCSPerMinute(row, row.gameLength), {
+        columnHelper.accessor("minions", {
+          header: "CS",
+          cell: getIntegerCell,
+        }),
+        columnHelper.accessor("cpm", {
           header: "/m",
           cell: getNumberCell,
         }),
-        columnHelper.accessor((row) => row.GOLD_EARNED / row.games, {
+        columnHelper.accessor("gold", {
           header: "골드",
-          cell: getNumberCell,
+          cell: getIntegerCell,
         }),
       ]}
-      defaultSorting={[
-        {
-          id: "games",
-          desc: true,
-        },
-        {
-          id: "WIN",
-          desc: true,
-        },
-        {
-          id: "KDA",
-          desc: true,
-        },
-      ]}
+      defaultSorting={
+        sort
+          ? [
+              {
+                id: "games",
+                desc: true,
+              },
+              {
+                id: "win",
+                desc: true,
+              },
+              {
+                id: "KDA",
+                desc: true,
+              },
+            ]
+          : []
+      }
     />
   );
 }

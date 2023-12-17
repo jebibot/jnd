@@ -1,8 +1,8 @@
 "use client";
 
-import { createColumnHelper } from "@tanstack/react-table";
+import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
 import { ChampionStat } from "@/utils/supabase";
-import { getChampionColumn, getPercentCell } from "@/utils/table";
+import { championColumn, getPercentCell } from "@/utils/table";
 import Table from "../table";
 
 const columnHelper = createColumnHelper<ChampionStat>();
@@ -16,9 +16,12 @@ export default function ChampionsStat({
     championsStat.reduce((acc, row) => acc + (row.picked || 0), 0) / 10;
   return (
     <Table
+      className="text-sm md:text-base"
+      headerClassName="p-1"
+      cellClassName="px-1 py-0.5 md:px-2 md:py-1"
       data={championsStat}
       columns={[
-        getChampionColumn<ChampionStat>("champion_id"),
+        championColumn as ColumnDef<ChampionStat>,
         columnHelper.accessor((row) => row.picked || 0, {
           header: "게임 수",
         }),

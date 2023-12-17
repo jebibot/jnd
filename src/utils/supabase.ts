@@ -30,7 +30,10 @@ export type PlayerParticipant = {
   lol_secondary: string | null;
 };
 
-export type PlayerWithMatches = Player & { matches: PlayerMatch[] };
+export type PlayerDetailed = Player & {
+  matches: PlayerMatch[];
+  ranked_stats: PlayerChampionStat[];
+};
 
 export type Participant = CurrentGameParticipantDTO & {
   riotId: string;
@@ -69,6 +72,19 @@ export type ChampionStat = {
   win: number;
 };
 
+export type PlayerChampionStat = {
+  champion_id: number;
+  games: number;
+  kda: number | null;
+  win: number;
+  kills: number;
+  deaths: number;
+  assists: number;
+  minions: number;
+  cpm: number;
+  gold: number;
+};
+
 async function fetchSupabase(path: string, tags: string[], single = false) {
   const res = await fetch(`${process.env.SUPABASE_URL}/rest/v1/${path}`, {
     headers: {
@@ -90,11 +106,9 @@ export async function getPlayers(): Promise<Player[]> {
   );
 }
 
-export async function getPlayer(
-  id: string | number,
-): Promise<PlayerWithMatches> {
+export async function getPlayer(id: string | number): Promise<PlayerDetailed> {
   return fetchSupabase(
-    `players?select=id,name,pos,twitch,profile,title,game,stream_start,youtube,youtube_secondary,community,lol_nick,lol_rank,lol_secondary_nick,matches(id,start,game,status,participants(uptime,players(name,twitch,lol,lol_secondary)))&id=eq.${id}&matches.status=eq.1&matches.order=id.desc`,
+    `players?select=id,name,pos,twitch,profile,title,game,stream_start,youtube,youtube_secondary,community,lol_nick,lol_rank,lol_secondary_nick,matches(id,start,game,status,participants(uptime,players(name,twitch,lol,lol_secondary))),ranked_stats(*)&id=eq.${id}&matches.status=eq.1&matches.order=id.desc&ranked_stats.order=games.desc,win.desc&ranked_stats.limit=7`,
     ["players"],
     true,
   );
