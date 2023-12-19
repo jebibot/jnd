@@ -21,15 +21,16 @@ export const preferredRegion = "icn1";
 
 export const metadata: Metadata = {
   title: {
-    default: "2023 자낳대 시즌 2 팬사이트",
-    template: "%s | 2023 자낳대 시즌 2 팬사이트",
+    default: "자낳대 지통실 | 2023 시즌 2",
+    template: "%s | 자낳대 지통실 | 2023 시즌 2",
   },
   description:
-    "2023 자낳대 시즌 2 스크림 전적, 통계, 방송, 다시보기, 유튜브 모아보기",
+    "2023 자낳대 시즌 2 스크림 전적, 통계, 방송, 다시보기, 유튜브 모아보기 팬사이트",
   keywords: [
-    "지통실",
     "트위치",
     "Twitch",
+    "치지직",
+    "CHZZK",
     "스트리머",
     "인플루언서",
     "streamer",
@@ -83,7 +84,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
               <FontAwesomeIcon icon={faBars} size="lg" />
             </SidebarButton>
             <Link href="/" className="flex-1 text-sm font-semibold">
-              2023 자낳대 시즌 2 팬사이트
+              자낳대 지통실 | 2023 시즌 2
             </Link>
           </div>
         </SidebarProvider>
