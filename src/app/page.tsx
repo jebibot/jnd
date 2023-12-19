@@ -17,7 +17,9 @@ export default async function Home() {
             </span>
           </h2>
           <StreamList
-            streams={(await getPlayers()).filter((p) => p.stream_start != null)}
+            streams={(await getPlayers()).filter(
+              (p) => p.stream_start != null || p.chzzk_start != null,
+            )}
           />
         </div>
         <div>

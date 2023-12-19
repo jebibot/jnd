@@ -1,6 +1,10 @@
+import { faTwitch } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { getLiveUrl } from "@/utils/chzzk";
 import { Player } from "@/utils/supabase";
 import { getChannelUrl } from "@/utils/twitch";
 import { classNames } from "@/utils/util";
+import ChzzkIcon from "./chzzk";
 import Thumbnail from "./thumbnail";
 import TierIcon from "../lol/tier-icon";
 
@@ -38,7 +42,11 @@ export default function Stream({
       />
       <a
         className="flex w-full items-center p-2"
-        href={getChannelUrl(stream.twitch)}
+        href={
+          stream.chzzk != null && stream.chzzk_start != null
+            ? getLiveUrl(stream.chzzk)
+            : getChannelUrl(stream.twitch)
+        }
         target="_blank"
       >
         {stream.profile && (
@@ -51,7 +59,7 @@ export default function Stream({
         )}
         <div className="flex flex-col text-sm">
           <div className="font-semibold line-clamp-2 hover:text-purple-600 dark:hover:text-purple-300">
-            {stream.title}
+            {stream.chzzk_title || stream.title}
           </div>
           <div className="text-gray-700 dark:text-gray-300">
             <TierIcon
@@ -62,8 +70,19 @@ export default function Stream({
             />{" "}
             {stream.name}
           </div>
-          <div className="text-sm text-gray-600 dark:text-gray-400">
-            {stream.game}
+          <div className="text-sm text-gray-600 dark:text-gray-400 line-clamp-1">
+            {stream.chzzk_start != null && (
+              <ChzzkIcon className="mr-1" fill="#00FFA3" />
+            )}
+            {stream.stream_start != null && (
+              <FontAwesomeIcon
+                className="mr-1"
+                color="#9146FF"
+                icon={faTwitch}
+                size="sm"
+              />
+            )}
+            {stream.chzzk_game || stream.game}
           </div>
         </div>
       </a>

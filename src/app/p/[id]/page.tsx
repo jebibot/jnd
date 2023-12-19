@@ -4,6 +4,7 @@ import TierIcon from "@/components/lol/tier-icon";
 import Callout from "@/components/match/callout";
 import Stats from "@/components/match/stats";
 import Thumbnail from "@/components/stream/thumbnail";
+import { getLiveUrl } from "@/utils/chzzk";
 import { STATS_SITE } from "@/utils/lol/lol";
 import { getPoint, getRank } from "@/utils/lol/rank";
 import { getPlayer, getPlayers } from "@/utils/supabase";
@@ -84,7 +85,11 @@ export default async function Page({ params }: { params: { id: string } }) {
         </div>
         <a
           className="w-56 mx-auto"
-          href={getChannelUrl(p.twitch)}
+          href={
+            p.chzzk != null && p.chzzk_start != null
+              ? getLiveUrl(p.chzzk)
+              : getChannelUrl(p.twitch)
+          }
           target="_blank"
           title="방송"
         >
@@ -92,15 +97,20 @@ export default async function Page({ params }: { params: { id: string } }) {
           <div className="p-1 line-clamp-4">
             <span
               className={
-                p.stream_start != null
+                p.stream_start != null || p.chzzk_start != null
                   ? "text-red-500 dark:text-red-600"
                   : "text-gray-400 dark:text-gray-600"
               }
-              aria-label={p.stream_start != null ? "방송 중" : "방송 종료"}
+              aria-label={
+                p.stream_start != null || p.chzzk_start != null
+                  ? "방송 중"
+                  : "방송 종료"
+              }
             >
               ●
             </span>{" "}
-            <span className="text-gray-400">{p.game}</span> {p.title}
+            <span className="text-gray-400">{p.chzzk_game || p.game}</span>{" "}
+            {p.chzzk_title || p.title}
           </div>
         </a>
       </div>

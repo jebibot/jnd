@@ -1,9 +1,6 @@
 "use client";
 
-import { faArrowUpRightFromSquare } from "@fortawesome/pro-regular-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { PropsWithChildren, useContext } from "react";
-import { getChannelUrl } from "@/utils/twitch";
 import { StreamContext } from "./provider";
 
 export default function StreamPlayer({
@@ -31,15 +28,6 @@ export default function StreamPlayer({
         }}
       />
       {children}
-      <a
-        className="ml-2 text-sm text-gray-500"
-        href={getChannelUrl(twitch)}
-        target="_blank"
-        title="방송 보기"
-      >
-        <FontAwesomeIcon icon={faArrowUpRightFromSquare} size="2xs" />
-        <span className="sr-only">방송 보기</span>
-      </a>
     </label>
   );
 }

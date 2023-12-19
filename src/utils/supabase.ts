@@ -20,6 +20,11 @@ export type Player = {
   lol_nick: string | null;
   lol_rank: string | null;
   lol_secondary_nick: string | null;
+  chzzk: string | null;
+  chzzk_game: string | null;
+  chzzk_title: string | null;
+  chzzk_thumb: string | null;
+  chzzk_start: string | null;
 };
 
 export type PlayerParticipant = {
@@ -28,6 +33,8 @@ export type PlayerParticipant = {
   stream_start?: string | null;
   lol: string | null;
   lol_secondary: string | null;
+  chzzk?: string | null;
+  chzzk_start?: string | null;
 };
 
 export type PlayerDetailed = Player & {
@@ -101,14 +108,14 @@ async function fetchSupabase(path: string, tags: string[], single = false) {
 
 export async function getPlayers(): Promise<Player[]> {
   return fetchSupabase(
-    `players?select=id,name,pos,twitch,profile,title,game,stream_start,youtube,youtube_secondary,community,lol_nick,lol_rank&order=name.asc`,
+    `players?select=id,name,pos,twitch,profile,title,game,stream_start,youtube,youtube_secondary,community,lol_nick,lol_rank,chzzk,chzzk_game,chzzk_title,chzzk_thumb,chzzk_start&order=name.asc`,
     ["players"],
   );
 }
 
 export async function getPlayer(id: string | number): Promise<PlayerDetailed> {
   return fetchSupabase(
-    `players?select=id,name,pos,twitch,profile,title,game,stream_start,youtube,youtube_secondary,community,lol_nick,lol_rank,lol_secondary_nick,matches(id,start,game,status,participants(uptime,players(name,twitch,lol,lol_secondary))),ranked_stats(*)&id=eq.${id}&matches.status=eq.1&matches.order=id.desc&ranked_stats.order=games.desc,win.desc&ranked_stats.limit=7`,
+    `players?select=id,name,pos,twitch,profile,title,game,stream_start,youtube,youtube_secondary,community,lol_nick,lol_rank,lol_secondary_nick,chzzk,chzzk_game,chzzk_title,chzzk_thumb,chzzk_start,matches(id,start,game,status,participants(uptime,players(name,twitch,lol,lol_secondary))),ranked_stats(*)&id=eq.${id}&matches.status=eq.1&matches.order=id.desc&ranked_stats.order=games.desc,win.desc&ranked_stats.limit=7`,
     ["players"],
     true,
   );
@@ -116,7 +123,7 @@ export async function getPlayer(id: string | number): Promise<PlayerDetailed> {
 
 export async function getLiveMatches(): Promise<Match[]> {
   return fetchSupabase(
-    `matches?select=id,start,game,players(name,twitch,stream_start,lol,lol_secondary)&status=eq.0&order=id.desc`,
+    `matches?select=id,start,game,players(name,twitch,stream_start,lol,lol_secondary,chzzk,chzzk_start)&status=eq.0&order=id.desc`,
     ["matches", "players"],
   );
 }

@@ -1,9 +1,11 @@
 import { faTwitch, faYoutube } from "@fortawesome/free-brands-svg-icons";
 import { faMessages } from "@fortawesome/pro-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { getChannelUrl as getChzzkChannelUrl } from "@/utils/chzzk";
 import { Player } from "@/utils/supabase";
 import { getChannelUrl } from "@/utils/twitch";
 import { classNames } from "@/utils/util";
+import ChzzkIcon from "./stream/chzzk";
 
 export default function Links({
   player,
@@ -14,6 +16,16 @@ export default function Links({
 }) {
   return (
     <div className={classNames("space-x-1", className)}>
+      {player.chzzk && (
+        <a
+          href={getChzzkChannelUrl(player.chzzk)}
+          target="_blank"
+          title="치지직 채널"
+        >
+          <ChzzkIcon fill="currentColor" />
+          <span className="sr-only">치지직 채널</span>
+        </a>
+      )}
       {player.twitch && (
         <a
           href={getChannelUrl(player.twitch)}

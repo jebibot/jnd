@@ -1,6 +1,7 @@
 "use client";
 
 import { useContext, useMemo, useState } from "react";
+import { getLiveUrl } from "@/utils/chzzk";
 import { POSITION } from "@/utils/lol/rank";
 import { Player } from "@/utils/supabase";
 import { classNames } from "@/utils/util";
@@ -22,7 +23,11 @@ export default function StreamList({ streams }: { streams: Player[] }) {
   const streamsList = useMemo(() => {
     let list = streams;
     if (showOnlyLol) {
-      list = list.filter((s) => s.game === "League of Legends");
+      list = list.filter((s) =>
+        s.chzzk_start != null
+          ? s.game === "League of Legends"
+          : s.chzzk_game === "리그 오브 레전드",
+      );
     }
     if (!filter.every((f) => !f)) {
       list = list.filter((s) => filter[s.pos - 1]);
@@ -97,6 +102,10 @@ export default function StreamList({ streams }: { streams: Player[] }) {
             key={s.twitch}
             isSelected={selected.has(s.twitch)}
             toggleSelected={() => {
+              if (s.chzzk != null && s.stream_start == null) {
+                window.open(getLiveUrl(s.chzzk), "_blank");
+                return;
+              }
               const newSet = new Set(selected);
               if (selected.has(s.twitch)) {
                 newSet.delete(s.twitch);

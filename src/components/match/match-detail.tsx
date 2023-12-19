@@ -1,8 +1,12 @@
+import { faArrowUpRightFromSquare } from "@fortawesome/pro-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { getLiveUrl } from "@/utils/chzzk";
 import { Match } from "@/utils/supabase";
 import { classNames } from "@/utils/util";
 import Champion from "./champion";
 import Nick from "../lol/nick";
 import StreamPlayer from "../stream/player";
+import { getChannelUrl } from "@/utils/twitch";
 
 export default function MatchDetail({ match }: { match: Match }) {
   return (
@@ -37,18 +41,41 @@ export default function MatchDetail({ match }: { match: Match }) {
                     smallSize={16}
                   />
                   <div className="font-semibold dark:text-gray-200">
-                    {player &&
-                      (player.stream_start ? (
-                        <StreamPlayer twitch={player.twitch}>
+                    {player && (
+                      <div>
+                        {player.stream_start ? (
+                          <StreamPlayer twitch={player.twitch}>
+                            <span className="underline decoration-4 underline-offset-2 decoration-purple-300 dark:decoration-purple-900">
+                              {player.name}
+                            </span>
+                          </StreamPlayer>
+                        ) : (
                           <span className="underline decoration-4 underline-offset-2 decoration-purple-300 dark:decoration-purple-900">
                             {player.name}
                           </span>
-                        </StreamPlayer>
-                      ) : (
-                        <span className="underline decoration-4 underline-offset-2 decoration-purple-300 dark:decoration-purple-900">
-                          {player.name}
-                        </span>
-                      ))}
+                        )}
+                        {(player.stream_start != null ||
+                          player.chzzk_start != null) && (
+                          <a
+                            className="ml-2 text-sm text-gray-500"
+                            href={
+                              player.chzzk != null && player.chzzk_start != null
+                                ? getLiveUrl(player.chzzk)
+                                : getChannelUrl(player.twitch)
+                            }
+                            target="_blank"
+                            title="방송 보기"
+                          >
+                            <FontAwesomeIcon
+                              icon={faArrowUpRightFromSquare}
+                              size="2xs"
+                            />
+                            <span className="sr-only">방송 보기</span>
+                          </a>
+                        )}
+                      </div>
+                    )}
+
                     <Nick
                       className={classNames(
                         "text-gray-700 dark:text-gray-300",
