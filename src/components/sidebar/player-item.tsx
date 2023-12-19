@@ -33,7 +33,7 @@ export default function PlayerItem({ player }: { player: Player }) {
             src={player.profile.replace("300x300", "50x50")}
             alt=""
           />
-          {player.stream_start && (
+          {(player.chzzk_start != null || player.stream_start != null) && (
             <div
               className="absolute bottom-0 right-0 h-2 w-2 -mt-0.5 -mr-0.5"
               aria-label="방송 중"
