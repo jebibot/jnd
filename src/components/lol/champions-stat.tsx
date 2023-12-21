@@ -40,6 +40,10 @@ export default function ChampionStats({
           header: "밴율",
           cell: getPercentCell,
         }),
+        columnHelper.accessor((row) => ((row.picked || 0) + (row.banned || 0)) / numMatches, {
+          header: "밴픽률",
+          cell: getPercentCell,
+        }),
       ]}
       defaultSorting={[]}
     />
