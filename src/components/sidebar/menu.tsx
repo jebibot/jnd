@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  faBinoculars,
   faChartSimple,
   faHouse,
   faMaximize,
@@ -66,6 +67,12 @@ export default function SidebarMenu({
                 <SidebarItem href="/stats">
                   <FontAwesomeIcon icon={faChartSimple} size="lg" fixedWidth />
                   통계
+                </SidebarItem>
+              </li>
+              <li>
+                <SidebarItem href="https://lol.ps/event">
+                  <FontAwesomeIcon icon={faBinoculars} size="lg" fixedWidth />
+                  LOL.PS 자낳대
                 </SidebarItem>
               </li>
             </ul>
