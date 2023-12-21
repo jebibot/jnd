@@ -21,6 +21,7 @@ export default function Match({ match }: { match: PlayerMatch }) {
   if (stats == null || teamStats == null) {
     return null;
   }
+  const otherTeam = p.teamId === 100 ? match.team2?.name : match.team1?.name;
   return (
     <div className="flex px-2 sm:px-4 py-1.5 items-center gap-4">
       <div className="whitespace-nowrap">
@@ -44,10 +45,15 @@ export default function Match({ match }: { match: PlayerMatch }) {
             <div className="sm:text-lg font-semibold leading-6">
               {getKDAString(stats)}
             </div>
-            <div>
+            <div className="text-sm">
               {formatNumber(getKDA(stats))} (
               {formatInteger(getKillParticipation(stats, teamStats))}%)
             </div>
+            {otherTeam && (
+              <div className="font-semibold text-sm sm:hidden">
+                vs. {otherTeam}
+              </div>
+            )}
           </div>
         </div>
         <div className="flex gap-1 items-center">
@@ -65,9 +71,12 @@ export default function Match({ match }: { match: PlayerMatch }) {
           )}
         </div>
       </div>
-      <div className="hidden sm:flex basis-64">
+      <div className="hidden sm:flex basis-64 items-end">
         {[100, 200].map((teamId) => (
           <div key={teamId} className="flex-1 space-y-0.5 w-8 text-sm">
+            <div className="font-semibold">
+              {teamId === 100 ? match.team1?.name : match.team2?.name}
+            </div>
             {match.game.participants
               .filter((p) => p.teamId === teamId)
               .map((p) => {

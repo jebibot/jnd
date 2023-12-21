@@ -59,6 +59,8 @@ export type PlayerMatch = {
     participants: Participant[];
   };
   status: number;
+  team1: { name: string } | null;
+  team2: { name: string } | null;
   participants: {
     uptime: number;
     players: PlayerParticipant;
@@ -72,6 +74,8 @@ export type Match = {
   game: Omit<CurrentGameInfoDTO, "participants"> & {
     participants: Participant[];
   };
+  team1: { name: string } | null;
+  team2: { name: string } | null;
   players: PlayerParticipant[];
 };
 
@@ -118,7 +122,7 @@ export async function getPlayers(): Promise<Player[]> {
 
 export async function getPlayer(id: string | number): Promise<PlayerDetailed> {
   return fetchSupabase(
-    `players?select=id,name,pos,twitch,profile,title,game,stream_start,youtube,youtube_secondary,community,lol_nick,lol_rank,lol_secondary_nick,chzzk,chzzk_game,chzzk_title,chzzk_thumb,chzzk_start,teams(name),matches(id,start,game,status,participants(uptime,players(name,twitch,lol,lol_secondary))),ranked_stats(*)&id=eq.${id}&matches.status=eq.1&matches.order=id.desc&ranked_stats.order=games.desc,win.desc&ranked_stats.limit=7`,
+    `players?select=id,name,pos,twitch,profile,title,game,stream_start,youtube,youtube_secondary,community,lol_nick,lol_rank,lol_secondary_nick,chzzk,chzzk_game,chzzk_title,chzzk_thumb,chzzk_start,teams(name),matches(id,start,game,status,team1(name),team2(name),participants(uptime,players(name,twitch,lol,lol_secondary))),ranked_stats(*)&id=eq.${id}&matches.status=eq.1&matches.order=id.desc&ranked_stats.order=games.desc,win.desc&ranked_stats.limit=7`,
     ["players"],
     true,
   );
@@ -126,7 +130,7 @@ export async function getPlayer(id: string | number): Promise<PlayerDetailed> {
 
 export async function getLiveMatches(): Promise<Match[]> {
   return fetchSupabase(
-    `matches?select=id,start,game,players(name,twitch,stream_start,lol,lol_secondary,chzzk,chzzk_start)&status=eq.0&order=id.desc`,
+    `matches?select=id,start,game,team1(name),team2(name),players(name,twitch,stream_start,lol,lol_secondary,chzzk,chzzk_start)&status=eq.0&order=id.desc`,
     ["matches", "players"],
   );
 }

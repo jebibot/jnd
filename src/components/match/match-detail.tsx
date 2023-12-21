@@ -15,13 +15,15 @@ export default function MatchDetail({ match }: { match: Match }) {
         <div
           key={teamId}
           className={classNames(
-            "space-y-2 border-l-2 pl-2",
+            "space-y-2 border-l-2 pl-2 mt-auto",
             teamId === 100
               ? "border-blue-500 dark:border-blue-600"
               : "border-red-500 dark:border-red-600",
           )}
         >
-          <div className="sr-only">{teamId === 100 ? "블루팀" : "레드팀"}</div>
+          <div className="font-semibold">
+            {teamId === 100 ? match.team1?.name : match.team2?.name}
+          </div>
           {match.game.participants
             .filter((p) => p.teamId === teamId)
             .map((p) => {
