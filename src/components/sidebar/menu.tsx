@@ -28,9 +28,12 @@ export default function SidebarMenu({
   const { detailed, setDetailed } = useContext(SidebarContext);
 
   const playersList = useMemo(() => {
-    const list: Player[][] = [[], [], [], [], [], []];
+    const list: Record<string, Player[]> = {};
     players.forEach((p) => {
-      list[p.pos - 1].push(p);
+      if (p.teams != null) {
+        list[p.teams.name] ||= [];
+        list[p.teams.name].push(p);
+      }
     });
     return list;
   }, [players]);
@@ -67,11 +70,11 @@ export default function SidebarMenu({
               </li>
             </ul>
           </li>
-          {POSITION.map((p, i) => (
-            <li key={p}>
-              <div className="text-sm font-semibold text-gray-400">{p}</div>
+          {Object.entries(playersList).map(([team, list]) => (
+            <li key={team}>
+              <div className="text-sm font-semibold text-gray-400">{team}</div>
               <ul role="list" className="space-y-0.5 mt-1">
-                {playersList[i].map((p) => (
+                {list.map((p) => (
                   <li key={p.name} className="font-semibold">
                     {detailed ? (
                       <div className="flex items-center gap-x-2 p-1 text-gray-800 dark:text-gray-300">

@@ -10,14 +10,12 @@ import Stream from "./stream";
 export default function StreamList({ streams }: { streams: Player[] }) {
   const { selected, setSelected } = useContext(StreamContext);
   const [showOnlyLol, setShowOnlyLol] = useState(false);
-  const [filter, setFilter] = useState([
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-  ]);
+  const [filter, setFilter] = useState(new Set<string | undefined>());
+
+  const teamList = useMemo(
+    () => [...new Set(streams.map((s) => s.teams?.name))],
+    [streams],
+  );
 
   const streamsList = useMemo(() => {
     let list = streams;
@@ -28,30 +26,35 @@ export default function StreamList({ streams }: { streams: Player[] }) {
           : s.chzzk_game === "리그 오브 레전드",
       );
     }
-    if (!filter.every((f) => !f)) {
-      list = list.filter((s) => filter[s.pos - 1]);
+    if (filter.size > 0) {
+      list = list.filter((s) => filter.has(s.teams?.name));
     }
     return list;
   }, [streams, showOnlyLol, filter]);
   return (
     <div>
       <div className="flex flex-wrap gap-1 items-center mb-2">
-        {POSITION.map((pos, i) => (
+        {teamList.map((team) => (
           <button
-            key={pos}
+            key={team}
             type="button"
-            className={`inline-block px-3 py-1 rounded-full border border-orange-400 dark:border-orange-800 text-xs sm:text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-400 dark:focus-visible:outline-orange-800 ${
-              filter[i]
+            className={classNames(
+              "inline-block px-3 py-1 rounded-full border border-orange-400 dark:border-orange-800 text-xs sm:text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-400 dark:focus-visible:outline-orange-800",
+              filter.has(team)
                 ? "text-white bg-orange-600 dark:bg-orange-800"
-                : "dark:bg-gray-800 hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-900 dark:hover:text-white"
-            }`}
+                : "dark:bg-gray-800 hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-900 dark:hover:text-white",
+            )}
             onClick={() => {
-              const newFilter = [...filter];
-              newFilter[i] = !newFilter[i];
+              const newFilter = new Set(filter);
+              if (filter.has(team)) {
+                newFilter.delete(team);
+              } else {
+                newFilter.add(team);
+              }
               setFilter(newFilter);
             }}
           >
-            {pos}
+            {team || "무소속"}
           </button>
         ))}
         <button

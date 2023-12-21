@@ -40,46 +40,51 @@ export default async function Page({ params }: { params: { id: string } }) {
             />
           </a>
         )}
-        <div className="flex-1 p-2 space-y-2 md:space-y-3">
+        <div className="flex-1 p-2 space-y-2">
           <div className="flex flex-col md:flex-row flex-wrap gap-x-2 gap-y-1 md:items-baseline">
             <h1 className="text-3xl md:text-4xl font-bold">{p.name}</h1>
-            {p.lol_nick && (
-              <Nick
-                nick={p.lol_nick}
-                className="text-xl font-semibold text-gray-700 dark:text-gray-300 whitespace-nowrap"
-              />
-            )}
-            {p.lol_secondary_nick && (
-              <Nick
-                nick={p.lol_secondary_nick}
-                className="text-xl font-semibold text-gray-700 dark:text-gray-300 whitespace-nowrap"
-              />
+            {p.teams && (
+              <h2 className="text-xl font-semibold">{p.teams.name}</h2>
             )}
           </div>
           {p.lol_nick && (
-            <div className="flex flex-wrap gap-x-2 items-baseline">
-              <TierIcon
-                className="self-center"
-                rank={p.lol_rank}
-                pos={p.pos}
-                size={20}
-                alt=""
-              />
-              <span className="font-semibold text-xl">
-                {getRank(p.lol_rank)}
-              </span>
-              {getPoint(p.lol_rank)}
-              {Object.entries(STATS_SITE).map(([name, getLink]) => (
-                <a
-                  key={name}
-                  className="text-blue-500 dark:text-blue-400 hover:text-blue-600 text-sm"
-                  href={getLink(p.lol_nick!)}
-                  target="_blank"
-                >
-                  {name}
-                </a>
-              ))}
-            </div>
+            <>
+              <div className="flex flex-wrap gap-x-2 items-baseline">
+                <TierIcon
+                  className="self-center"
+                  rank={p.lol_rank}
+                  pos={p.pos}
+                  size={20}
+                  alt=""
+                />
+                <span className="font-semibold text-xl">
+                  {getRank(p.lol_rank)}
+                </span>
+                {getPoint(p.lol_rank)}
+                <Nick
+                  nick={p.lol_nick}
+                  className="text-lg font-semibold text-gray-700 dark:text-gray-300 whitespace-nowrap"
+                />
+                {p.lol_secondary_nick && (
+                  <Nick
+                    nick={p.lol_secondary_nick}
+                    className="text-lg font-semibold text-gray-700 dark:text-gray-300 whitespace-nowrap"
+                  />
+                )}
+              </div>
+              <div className="flex flex-wrap gap-x-2">
+                {Object.entries(STATS_SITE).map(([name, getLink]) => (
+                  <a
+                    key={name}
+                    className="text-blue-500 dark:text-blue-400 hover:text-blue-600 text-sm"
+                    href={getLink(p.lol_nick!)}
+                    target="_blank"
+                  >
+                    {name}
+                  </a>
+                ))}
+              </div>
+            </>
           )}
           <Links player={p} className="text-2xl text-gray-500" />
         </div>
