@@ -9,7 +9,7 @@ import {
 } from "@fortawesome/pro-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext, useMemo } from "react";
-import { POSITION, getPoint, getRank, getShortRank } from "@/utils/lol/rank";
+import { getPoint, getRank, getShortRank } from "@/utils/lol/rank";
 import { Player } from "@/utils/supabase";
 import { classNames } from "@/utils/util";
 import SidebarItem from "./item";

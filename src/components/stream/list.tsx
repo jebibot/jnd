@@ -1,7 +1,6 @@
 "use client";
 
 import { useContext, useMemo, useState } from "react";
-import { POSITION } from "@/utils/lol/rank";
 import { Player } from "@/utils/supabase";
 import { classNames } from "@/utils/util";
 import { StreamContext } from "./provider";

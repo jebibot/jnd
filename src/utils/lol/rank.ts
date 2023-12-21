@@ -5,8 +5,6 @@ const RANK: Record<string, number> = {
   IV: 4,
 };
 
-export const POSITION = ["TOP", "JUG", "MID", "ADC", "SUP", "COACH"];
-
 export function getShortRank(rank: string | null) {
   if (!rank) {
     return "U";
