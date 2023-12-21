@@ -43,35 +43,36 @@ export default function MatchDetail({ match }: { match: Match }) {
                   <div className="font-semibold dark:text-gray-200">
                     {player && (
                       <div>
-                        {player.stream_start ? (
-                          <StreamPlayer twitch={player.twitch}>
-                            <span className="underline decoration-4 underline-offset-2 decoration-purple-300 dark:decoration-purple-900">
-                              {player.name}
-                            </span>
-                          </StreamPlayer>
+                        {player.stream_start != null ||
+                        player.chzzk_start != null ? (
+                          <>
+                            <StreamPlayer player={player}>
+                              <span className="underline decoration-4 underline-offset-2 decoration-purple-300 dark:decoration-purple-900">
+                                {player.name}
+                              </span>
+                            </StreamPlayer>
+                            <a
+                              className="ml-2 text-sm text-gray-500"
+                              href={
+                                player.chzzk != null &&
+                                player.chzzk_start != null
+                                  ? getLiveUrl(player.chzzk)
+                                  : getChannelUrl(player.twitch)
+                              }
+                              target="_blank"
+                              title="방송 보기"
+                            >
+                              <FontAwesomeIcon
+                                icon={faArrowUpRightFromSquare}
+                                size="2xs"
+                              />
+                              <span className="sr-only">방송 보기</span>
+                            </a>
+                          </>
                         ) : (
                           <span className="underline decoration-4 underline-offset-2 decoration-purple-300 dark:decoration-purple-900">
                             {player.name}
                           </span>
-                        )}
-                        {(player.stream_start != null ||
-                          player.chzzk_start != null) && (
-                          <a
-                            className="ml-2 text-sm text-gray-500"
-                            href={
-                              player.chzzk != null && player.chzzk_start != null
-                                ? getLiveUrl(player.chzzk)
-                                : getChannelUrl(player.twitch)
-                            }
-                            target="_blank"
-                            title="방송 보기"
-                          >
-                            <FontAwesomeIcon
-                              icon={faArrowUpRightFromSquare}
-                              size="2xs"
-                            />
-                            <span className="sr-only">방송 보기</span>
-                          </a>
                         )}
                       </div>
                     )}

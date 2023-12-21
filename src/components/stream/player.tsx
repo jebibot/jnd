@@ -1,14 +1,17 @@
 "use client";
 
 import { PropsWithChildren, useContext } from "react";
+import { PlayerParticipant } from "@/utils/supabase";
 import { StreamContext } from "./provider";
 
 export default function StreamPlayer({
   children,
-  twitch,
-}: PropsWithChildren<{ twitch: string }>) {
+  player,
+}: PropsWithChildren<{ player: PlayerParticipant }>) {
   const { selected, setSelected } = useContext(StreamContext);
-  const isSelected = selected.has(twitch);
+  const isSelected =
+    (player.chzzk != null && selected.has(player.chzzk)) ||
+    selected.has(player.twitch);
 
   return (
     <label>
@@ -20,9 +23,16 @@ export default function StreamPlayer({
           const checked = e.target.checked;
           const newSet = new Set(selected);
           if (checked) {
-            newSet.add(twitch);
+            newSet.add(
+              player.chzzk != null && player.chzzk_start != null
+                ? player.chzzk
+                : player.twitch,
+            );
           } else {
-            newSet.delete(twitch);
+            if (player.chzzk != null) {
+              newSet.delete(player.chzzk);
+            }
+            newSet.delete(player.twitch);
           }
           setSelected(newSet);
         }}

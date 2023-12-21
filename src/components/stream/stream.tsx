@@ -9,11 +9,11 @@ import Thumbnail from "./thumbnail";
 import TierIcon from "../lol/tier-icon";
 
 export default function Stream({
-  isSelected,
+  className,
   toggleSelected,
   stream,
 }: {
-  isSelected: boolean;
+  className?: string;
   toggleSelected: () => void;
   stream: Player;
 }) {
@@ -21,9 +21,7 @@ export default function Stream({
     <div
       className={classNames(
         "flex flex-col items-center rounded-md overflow-hidden shadow-md border-2 dark:bg-slate-900",
-        isSelected
-          ? "border-purple-400 dark:border-purple-700"
-          : "border-transparent",
+        className || "border-transparent",
       )}
     >
       <Thumbnail
@@ -32,7 +30,7 @@ export default function Stream({
         stream={stream}
         role="checkbox"
         tabIndex={0}
-        aria-checked={isSelected}
+        aria-checked={className != null}
         onClick={toggleSelected}
         onKeyDown={(e) => {
           if (e.key === " ") {

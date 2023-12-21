@@ -1,7 +1,6 @@
 "use client";
 
 import { useContext, useMemo, useState } from "react";
-import { getLiveUrl } from "@/utils/chzzk";
 import { POSITION } from "@/utils/lol/rank";
 import { Player } from "@/utils/supabase";
 import { classNames } from "@/utils/util";
@@ -69,19 +68,31 @@ export default function StreamList({ streams }: { streams: Player[] }) {
           LoL
         </button>
         <div className="flex-1"></div>
-        {["multitwitch.tv", "multistre.am"].map((site) => {
+        {["multichzzk.tv", "multitwitch.tv", "multistre.am"].map((site) => {
+          const streams = [...selected];
+          const hasChzzk = streams.some((s) => s.match(/^[0-9a-f]{32}$/));
           const enabled =
             selected.size > 0 &&
-            (selected.size < 9 || site === "multitwitch.tv");
+            (hasChzzk
+              ? site === "multichzzk.tv"
+              : selected.size < 9 || site !== "multistre.am");
           return (
             <a
               key={site}
-              href={`https://${site}/${[...selected].join("/")}`}
+              href={`https://${site}/${streams.join("/")}`}
               className={classNames(
-                "ml-auto px-3 py-2 text-sm rounded-md shadow-sm font-semibold text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-600",
+                "ml-auto px-3 py-2 text-sm rounded-md shadow-sm font-semibold text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2",
+                site === "multichzzk.tv"
+                  ? "focus-visible:outline-emerald-400"
+                  : "focus-visible:outline-purple-600",
                 enabled
-                  ? "bg-purple-600 dark:bg-purple-700 hover:bg-purple-500 dark:hover:bg-purple-600"
-                  : "dark:text-gray-500 bg-purple-200 dark:bg-purple-950 pointer-events-none",
+                  ? site === "multichzzk.tv"
+                    ? "bg-emerald-400 dark:bg-emerald-500 hover:bg-emerald-300 dark:hover:bg-emerald-400"
+                    : "bg-purple-600 dark:bg-purple-700 hover:bg-purple-500 dark:hover:bg-purple-600"
+                  : site === "multichzzk.tv"
+                    ? "bg-emerald-100 dark:bg-emerald-900"
+                    : "bg-purple-200 dark:bg-purple-950",
+                !enabled && "dark:text-gray-500 pointer-events-none",
               )}
               target="_blank"
               aria-disabled={!enabled}
@@ -100,15 +111,24 @@ export default function StreamList({ streams }: { streams: Player[] }) {
         {streamsList.map((s) => (
           <Stream
             key={s.twitch}
-            isSelected={selected.has(s.twitch)}
+            className={
+              s.chzzk != null && selected.has(s.chzzk)
+                ? "border-emerald-400 dark:border-emerald-700"
+                : selected.has(s.twitch)
+                  ? "border-purple-400 dark:border-purple-700"
+                  : undefined
+            }
             toggleSelected={() => {
-              if (s.chzzk != null && s.stream_start == null) {
-                window.open(getLiveUrl(s.chzzk), "_blank");
-                return;
-              }
               const newSet = new Set(selected);
-              if (selected.has(s.twitch)) {
+              if (s.chzzk != null && selected.has(s.chzzk)) {
+                newSet.delete(s.chzzk);
+                if (s.stream_start != null) {
+                  newSet.add(s.twitch);
+                }
+              } else if (selected.has(s.twitch)) {
                 newSet.delete(s.twitch);
+              } else if (s.chzzk != null && s.chzzk_start != null) {
+                newSet.add(s.chzzk);
               } else {
                 newSet.add(s.twitch);
               }
