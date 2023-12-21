@@ -98,13 +98,13 @@ export default async function RootLayout({ children }: PropsWithChildren) {
               <a href="https://github.com/jebibot/jnd" target="_blank">
                 GitHub
               </a>{" "}
-              • 본 사이트는 Twitch, YouTube, 자낳대, 인챈트 엔터테인먼트와
-              관련이 없으며, 관련 상표는 각 소유자의 자산입니다. jnd.twitchgg.tv
-              isn&apos;t endorsed by Riot Games and doesn&apos;t reflect the
-              views or opinions of Riot Games or anyone officially involved in
-              producing or managing Riot Games properties. Riot Games, and all
-              associated properties are trademarks or registered trademarks of
-              Riot Games, Inc.
+              • 본 사이트는 Twitch, YouTube, 치지직, 자낳대, 인챈트
+              엔터테인먼트와 관련이 없으며, 관련 상표는 각 소유자의 자산입니다.
+              jnd.twitchgg.tv isn&apos;t endorsed by Riot Games and doesn&apos;t
+              reflect the views or opinions of Riot Games or anyone officially
+              involved in producing or managing Riot Games properties. Riot
+              Games, and all associated properties are trademarks or registered
+              trademarks of Riot Games, Inc.
             </footer>
           </div>
         </div>
