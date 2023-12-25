@@ -182,7 +182,7 @@ export default function MatchHistory({ match }: { match: PlayerMatch }) {
                       <td className="px-2 py-1">
                         {participant?.vod_url != null ? (
                           <a href={participant.vod_url} target="_blank">
-                            <ChzzkIcon className="mr-1" />
+                            <ChzzkIcon className="mr-1" fill="currentColor" />
                             {participant.chzzk_start &&
                               formatTimestamp(
                                 (new Date(match.start).getTime() -
