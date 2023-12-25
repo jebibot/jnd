@@ -33,6 +33,7 @@ export type Player = {
 export type PlayerParticipant = {
   name: string;
   twitch: string;
+  youtube_secondary?: string;
   stream_start?: string | null;
   lol: string | null;
   lol_secondary: string | null;
@@ -63,6 +64,8 @@ export type PlayerMatch = {
   team2: { name: string } | null;
   participants: {
     uptime: number;
+    chzzk_start: string | null;
+    vod_url: string | null;
     players: PlayerParticipant;
   }[];
   player?: Participant;
@@ -122,7 +125,7 @@ export async function getPlayers(): Promise<Player[]> {
 
 export async function getPlayer(id: string | number): Promise<PlayerDetailed> {
   return fetchSupabase(
-    `players?select=id,name,pos,twitch,profile,title,game,stream_start,youtube,youtube_secondary,community,lol_nick,lol_rank,lol_secondary_nick,chzzk,chzzk_game,chzzk_title,chzzk_thumb,chzzk_start,teams(name),matches(id,start,game,status,team1(name),team2(name),participants(uptime,players(name,twitch,lol,lol_secondary))),ranked_stats(*)&id=eq.${id}&matches.status=eq.1&matches.order=id.desc&ranked_stats.order=games.desc,win.desc&ranked_stats.limit=7`,
+    `players?select=id,name,pos,twitch,profile,title,game,stream_start,youtube,youtube_secondary,community,lol_nick,lol_rank,lol_secondary_nick,chzzk,chzzk_game,chzzk_title,chzzk_thumb,chzzk_start,teams(name),matches(id,start,game,status,team1(name),team2(name),participants(uptime,chzzk_start,vod_url,players(name,twitch,youtube_secondary,lol,lol_secondary))),ranked_stats(*)&id=eq.${id}&matches.status=eq.1&matches.order=id.desc&ranked_stats.order=games.desc,win.desc&ranked_stats.limit=7`,
     ["players"],
     true,
   );

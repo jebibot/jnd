@@ -1,3 +1,5 @@
+import { faYoutube } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment } from "react";
 import {
   getCS,
@@ -12,6 +14,7 @@ import { classNames, formatNumber, formatTimestamp } from "@/utils/util";
 import Champion from "./champion";
 import Item from "./item";
 import Nick from "../lol/nick";
+import ChzzkIcon from "../stream/chzzk";
 
 export default function MatchHistory({ match }: { match: PlayerMatch }) {
   const teamStats = match.game.teamStats;
@@ -177,8 +180,39 @@ export default function MatchHistory({ match }: { match: PlayerMatch }) {
                         </div>
                       </td>
                       <td className="px-2 py-1">
-                        {participant?.uptime &&
-                          formatTimestamp(participant.uptime)}
+                        {participant?.vod_url != null ? (
+                          <a href={participant.vod_url} target="_blank">
+                            <ChzzkIcon className="mr-1" />
+                            {participant.chzzk_start &&
+                              formatTimestamp(
+                                (new Date(match.start).getTime() -
+                                  new Date(participant.chzzk_start).getTime()) /
+                                  1000,
+                              )}
+                          </a>
+                        ) : (
+                          participant?.uptime &&
+                          (participant.players.youtube_secondary ? (
+                            <a
+                              href={
+                                participant.players.youtube_secondary.startsWith(
+                                  "http",
+                                )
+                                  ? participant.players.youtube_secondary
+                                  : `https://www.youtube.com/channel/${participant.players.youtube_secondary}`
+                              }
+                              target="_blank"
+                            >
+                              <FontAwesomeIcon
+                                className="mr-1"
+                                icon={faYoutube}
+                              />
+                              {formatTimestamp(participant.uptime)}
+                            </a>
+                          ) : (
+                            formatTimestamp(participant.uptime)
+                          ))
+                        )}
                       </td>
                     </tr>
                   );
