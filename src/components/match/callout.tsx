@@ -9,7 +9,7 @@ export default function Callout() {
         icon={faCircleInfo}
       />
       <span className="ml-3 font-medium text-blue-800 dark:text-blue-200">
-        팀 구성 전에는 관전이 전체 허용된 게임만 수집됩니다.
+        관전이 전체 허용된 게임만 수집됩니다.
       </span>
     </div>
   );
