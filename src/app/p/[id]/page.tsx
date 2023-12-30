@@ -8,6 +8,8 @@ import { getPoint, getRank } from "@/utils/lol/rank";
 import { getPlayer, getPlayers } from "@/utils/supabase";
 import { getChannelUrl } from "@/utils/twitch";
 
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   const players = await getPlayers();
   return players.map((p) => ({ id: `${p.id}` }));

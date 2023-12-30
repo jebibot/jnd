@@ -110,7 +110,7 @@ async function fetchSupabase(path: string, tags: string[], single = false) {
       ...(single ? { Accept: "application/vnd.pgrst.object+json" } : {}),
       apikey: process.env.SUPABASE_ANON_KEY!,
     },
-    next: { tags },
+    next: { revalidate: false },
   });
   if (!res.ok) {
     throw new Error(`Failed to fetch ${tags[0]}: ${res.status}`);
