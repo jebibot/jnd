@@ -95,6 +95,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
               {children}
             </main>
             <footer className="text-xs text-gray-400 dark:text-gray-500">
+              최종 업데이트: 2023.12.30 •{" "}
               <a href="https://github.com/jebibot/jnd" target="_blank">
                 GitHub
               </a>{" "}

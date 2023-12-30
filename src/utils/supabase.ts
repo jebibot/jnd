@@ -118,14 +118,14 @@ async function fetchSupabase(path: string, tags: string[], single = false) {
 
 export async function getPlayers(): Promise<Player[]> {
   return fetchSupabase(
-    `players?select=id,name,pos,twitch,profile,title,game,stream_start,youtube,youtube_secondary,community,lol_nick,lol_rank,chzzk,chzzk_game,chzzk_title,chzzk_thumb,chzzk_start,teams(name)&order=team.asc,pos.asc`,
+    `players?select=id,name,pos,twitch,profile,youtube,youtube_secondary,community,lol_nick,lol_rank,chzzk,teams(name)&order=team.asc,pos.asc`,
     ["players"],
   );
 }
 
 export async function getPlayer(id: string | number): Promise<PlayerDetailed> {
   return fetchSupabase(
-    `players?select=id,name,pos,twitch,profile,title,game,stream_start,youtube,youtube_secondary,community,lol_nick,lol_rank,lol_secondary_nick,chzzk,chzzk_game,chzzk_title,chzzk_thumb,chzzk_start,teams(name),matches(id,start,game,status,team1(name),team2(name),participants(uptime,chzzk_start,vod_url,players(name,twitch,youtube_secondary,lol,lol_secondary))),ranked_stats(*)&id=eq.${id}&matches.status=eq.1&matches.order=id.desc&ranked_stats.order=games.desc,win.desc&ranked_stats.limit=7`,
+    `players?select=id,name,pos,twitch,profile,youtube,youtube_secondary,community,lol_nick,lol_rank,lol_secondary_nick,chzzk,teams(name),matches(id,start,game,status,team1(name),team2(name),participants(uptime,chzzk_start,vod_url,players(name,twitch,youtube_secondary,lol,lol_secondary))),ranked_stats(*)&id=eq.${id}&matches.status=eq.1&matches.order=id.desc&ranked_stats.order=games.desc,win.desc&ranked_stats.limit=7`,
     ["players"],
     true,
   );

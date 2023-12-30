@@ -1,39 +1,20 @@
-import { Suspense } from "react";
-import LiveMatches from "@/components/match/live-matches";
-import StreamList from "@/components/stream/list";
-import StreamProvider from "@/components/stream/provider";
-import { getPlayers } from "@/utils/supabase";
+import Image from "next/image";
+import teamLogo from "../../public/images/team3-logo.png";
 
 export default async function Home() {
   return (
     <div className="flex flex-col gap-6">
       <h1 className="sr-only">홈</h1>
-      <StreamProvider>
-        <div>
-          <h2 className="pb-2 text-gray-900 dark:text-gray-200">
-            <span className="text-lg font-semibold">방송</span>{" "}
-            <span className="text-sm">
-              썸네일을 클릭하면 여러 방송을 선택할 수 있습니다.
-            </span>
-          </h2>
-          <StreamList
-            streams={(await getPlayers()).filter(
-              (p) => p.stream_start != null || p.chzzk_start != null,
-            )}
-          />
+      <div className="flex flex-col md:flex-row gap-6 justify-center items-center">
+        <Image
+          className="w-full max-w-[24rem]"
+          src={teamLogo}
+          alt="호종대학교"
+        />
+        <div className="text-4xl font-medium">
+          <span className="font-bold">호종대학교</span>의 우승을 축하드립니다!
         </div>
-        <div>
-          <h2 className="pb-2 text-gray-900 dark:text-gray-200">
-            <span className="text-lg font-semibold">진행 중인 게임</span>{" "}
-            <span className="text-sm">
-              사용자 설정 게임은 관전이 전체 허용된 게임만 표시됩니다.
-            </span>
-          </h2>
-          <Suspense fallback={<div>로딩 중...</div>}>
-            <LiveMatches />
-          </Suspense>
-        </div>
-      </StreamProvider>
+      </div>
     </div>
   );
 }

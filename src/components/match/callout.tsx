@@ -9,7 +9,7 @@ export default function Callout() {
         icon={faCircleInfo}
       />
       <span className="ml-3 font-medium text-blue-800 dark:text-blue-200">
-        관전이 전체 허용된 게임만 수집됩니다.
+        2023년 12월 30일까지 관전이 전체 허용된 게임만 수집되었습니다.
       </span>
     </div>
   );

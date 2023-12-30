@@ -33,15 +33,6 @@ export default function PlayerItem({ player }: { player: Player }) {
             src={player.profile.replace("300x300", "50x50")}
             alt=""
           />
-          {(player.chzzk_start != null || player.stream_start != null) && (
-            <div
-              className="absolute bottom-0 right-0 h-2 w-2 -mt-0.5 -mr-0.5"
-              aria-label="방송 중"
-            >
-              <div className="absolute h-full w-full rounded-full bg-red-400 dark:bg-red-500 opacity-75 animate-ping"></div>
-              <div className="relative h-2 w-2 rounded-full bg-red-500 dark:bg-red-600"></div>
-            </div>
-          )}
         </div>
       )}
       <span className="whitespace-nowrap">{player.name}</span>
