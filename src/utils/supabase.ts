@@ -60,6 +60,8 @@ export type PlayerMatch = {
     participants: Participant[];
   };
   status: number;
+  win?: number;
+  name?: string;
   team1: { name: string } | null;
   team2: { name: string } | null;
   participants: {
@@ -125,9 +127,16 @@ export async function getPlayers(): Promise<Player[]> {
 
 export async function getPlayer(id: string | number): Promise<PlayerDetailed> {
   return fetchSupabase(
-    `players?select=id,name,pos,twitch,profile,youtube,youtube_secondary,community,lol_nick,lol_rank,lol_secondary_nick,chzzk,teams(name),matches(id,start,game,status,team1(name),team2(name),participants(uptime,chzzk_start,vod_url,players(name,twitch,youtube_secondary,lol,lol_secondary))),ranked_stats(*)&id=eq.${id}&matches.status=eq.1&matches.order=id.desc&ranked_stats.order=games.desc,win.desc&ranked_stats.limit=7`,
+    `players?select=id,name,pos,twitch,profile,youtube,youtube_secondary,community,lol_nick,lol_rank,lol_secondary_nick,chzzk,teams(name),matches(id,start,game,status,name,team1(name),team2(name),participants(uptime,chzzk_start,vod_url,players(name,twitch,youtube_secondary,lol,lol_secondary))),ranked_stats(*)&id=eq.${id}&matches.status=eq.1&matches.order=id.desc&ranked_stats.order=games.desc,win.desc&ranked_stats.limit=7`,
     ["players"],
     true,
+  );
+}
+
+export async function getRealMatches(): Promise<PlayerMatch[]> {
+  return fetchSupabase(
+    `matches?select=id,start,game,win,name,team1(name),team2(name),participants(uptime,chzzk_start,vod_url,players(name,twitch,youtube_secondary,lol,lol_secondary))&name=not.is.null&order=id.asc`,
+    ["matches", "players"],
   );
 }
 

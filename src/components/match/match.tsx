@@ -31,7 +31,10 @@ export default function Match({ match }: { match: PlayerMatch }) {
         <div className="text-sm sm:text-base">
           {formatTimestamp(match.game.gameLength)}
         </div>
-        <div className="mt-2 text-xs sm:text-sm">
+        {match.name && (
+          <div className="mt-1 text-sm font-semibold">{match.name}</div>
+        )}
+        <div className="mt-1 text-xs sm:text-sm">
           {formatDate(new Date(match.start))}
         </div>
         <div className="text-xs sm:text-sm">

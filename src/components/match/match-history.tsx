@@ -184,12 +184,15 @@ export default function MatchHistory({ match }: { match: PlayerMatch }) {
                           <a
                             href={`${participant.vod_url}${
                               participant.chzzk_start
-                                ? `?t=${Math.floor(
-                                    (new Date(match.start).getTime() -
-                                      new Date(
-                                        participant.chzzk_start,
-                                      ).getTime()) /
-                                      1000,
+                                ? `?t=${Math.max(
+                                    Math.floor(
+                                      (new Date(match.start).getTime() -
+                                        new Date(
+                                          participant.chzzk_start,
+                                        ).getTime()) /
+                                        1000,
+                                    ),
+                                    0,
                                   )}`
                                 : ""
                             }`}
@@ -198,9 +201,14 @@ export default function MatchHistory({ match }: { match: PlayerMatch }) {
                             <ChzzkIcon className="mr-1" fill="currentColor" />
                             {participant.chzzk_start &&
                               formatTimestamp(
-                                (new Date(match.start).getTime() -
-                                  new Date(participant.chzzk_start).getTime()) /
-                                  1000,
+                                Math.max(
+                                  0,
+                                  (new Date(match.start).getTime() -
+                                    new Date(
+                                      participant.chzzk_start,
+                                    ).getTime()) /
+                                    1000,
+                                ),
                               )}
                           </a>
                         ) : (
